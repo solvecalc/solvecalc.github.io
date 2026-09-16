@@ -3761,6 +3761,22 @@ body .home-article p a, body .article-body p a, body .article-body li a, body .h
 }
 
 
+/* The homepage FAQ sits in a centring flex column, so the list shrank to its
+   content (375px) while every other page rendered it at the full 860px. Width
+   100% pins all of them to the same measure, and the top margin puts air
+   between the heading and the first question. */
+.home-faq-list {
+  width: 100%;
+  max-width: 860px;
+  margin: 1.25rem auto;      /* equal top and bottom, every page */
+}
+
+/* The homepage stacks its sections in a centring flex column, so each section
+   shrank to its own content width: fine for paragraphs, but it squeezed the
+   FAQ list to 375px while every other page showed it at 860px. */
+.calc-section-wrap > .home-section,
+.calc-section-wrap > section.home-section { width: 100%; }
+
 /* ── FAQ bars ──────────────────────────────────────────────────────────────
    The rules above set background: var(--card-bg), which is not a variable this
    build defines, so every FAQ row rendered with no background at all. These
@@ -3787,7 +3803,7 @@ body .home-article p a, body .article-body p a, body .article-body li a, body .h
 /* The FAQ is the last thing inside a tool page's article, and the article's
    bottom padding (42px) plus its margin (51px) plus the next section's top
    padding (48px) left a 94px hole under the last question. */
-.tool-article:has(> .home-faq-list:last-child) { padding-bottom: 1.25rem; margin-bottom: 0; }
+.tool-article:has(> .home-faq-list:last-child) { padding-bottom: 0; margin-bottom: 0; }
 .tool-article + .home-section { padding-top: 1.75rem; }
 /* Fallback for browsers without :has() - the same trim, applied unconditionally
    to tool articles, which are the only place this pattern is used. */
