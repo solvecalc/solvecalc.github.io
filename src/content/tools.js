@@ -190,7 +190,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'base-converter', color: '#0891b2', name: 'Number Base Converter', icon: 'fa-binary',
+    slug: 'base-converter', color: '#0891b2', name: 'Number Base Converter', icon: 'fa-right-left',
     blurb: 'Convert between binary, decimal, octal and hexadecimal.',
     title: 'Number Base Converter - Binary, Hex, Octal, Decimal',
     desc: 'Convert a number between binary, octal, decimal and hexadecimal, and see why hex is grouped in fours. Free browser tool for computing and maths homework.',
