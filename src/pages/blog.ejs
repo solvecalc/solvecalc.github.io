@@ -6,11 +6,12 @@
 </section>
 <div class="page-wrap"><div class="home-layout"><div class="calc-section-wrap" style="width:100%;">
   <section class="home-section">
-    <div class="home-topics-grid">
+    <div class="tools-grid">
 <% posts.forEach(function (b) { %>
-      <a class="home-topic-card" href="/blog/<%= b.slug %>">
-        <span class="home-topic-title"><%= b.name %></span>
-        <span class="home-topic-desc"><%= b.blurb %></span>
+      <a class="tool-card" href="/blog/<%= b.slug %>" style="--tool-color:#0891b2">
+        <div class="tool-name"><%= b.name %></div>
+        <div class="tool-desc"><%= b.blurb %></div>
+        <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
       </a>
 <% }); %>
     </div>

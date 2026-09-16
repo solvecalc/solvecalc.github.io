@@ -4,7 +4,7 @@
     <p class="hero-sub">Arithmetic, trigonometry, roots, powers and logarithms, worked out in the browser tab you already have open. No install, no account, no cost.</p>
     <div class="hero-btns">
       <a class="hero-btn-primary" href="#calc-col"><i class="fa-solid fa-calculator"></i> Use the Calculator</a>
-      <a class="hero-btn-secondary" href="/tools"><i class="fa-solid fa-wrench"></i> Browse the Tools</a>
+      <a class="hero-btn-ghost" href="/tools"><i class="fa-solid fa-wrench"></i> Browse the Tools</a>
     </div>
   </div>
 </section>
@@ -30,12 +30,14 @@
     <section class="home-section">
       <h2>Tools for the Jobs a Keypad Handles Badly</h2>
       <p>Some questions are awkward on a plain calculator. Reducing a fraction, working out which numbers divide evenly into two others, or turning a decimal into a ratio all take several steps and an easy slip. Each of those has its own page here, with the working shown rather than just the answer.</p>
-      <div class="home-topics-grid">
+      <div class="tools-grid">
 <% topTools.forEach(function (t) { %>
-        <a class="home-topic-card" href="/tools/<%= t.slug %>">
-          <span class="home-topic-title"><i class="fa-solid <%= t.icon %>"></i> <%= t.name %></span>
-          <span class="home-topic-desc"><%= t.blurb %></span>
-        </a>
+        <a class="tool-card" href="/tools/<%= t.slug %>" style="--tool-color:<%= t.color %>">
+        <div class="tool-icon-wrap"><i class="fa-solid <%= t.icon %>"></i></div>
+        <div class="tool-name"><%= t.name %></div>
+        <div class="tool-desc"><%= t.blurb %></div>
+        <div class="tool-arrow">Open <i class="fa-solid fa-arrow-right fa-xs"></i></div>
+      </a>
 <% }); %>
       </div>
       <p class="text-center" style="margin-top:16px;"><a href="/tools">See all <%= toolCount %> tools</a></p>

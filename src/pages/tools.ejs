@@ -6,11 +6,13 @@
 </section>
 <div class="page-wrap"><div class="home-layout"><div class="calc-section-wrap" style="width:100%;">
   <section class="home-section">
-    <div class="home-topics-grid">
+    <div class="tools-grid">
 <% tools.forEach(function (t) { %>
-      <a class="home-topic-card" href="/tools/<%= t.slug %>">
-        <span class="home-topic-title"><i class="fa-solid <%= t.icon %>"></i> <%= t.name %></span>
-        <span class="home-topic-desc"><%= t.blurb %></span>
+      <a class="tool-card" href="/tools/<%= t.slug %>" style="--tool-color:<%= t.color %>">
+        <div class="tool-icon-wrap"><i class="fa-solid <%= t.icon %>"></i></div>
+        <div class="tool-name"><%= t.name %></div>
+        <div class="tool-desc"><%= t.blurb %></div>
+        <div class="tool-arrow">Open <i class="fa-solid fa-arrow-right fa-xs"></i></div>
       </a>
 <% }); %>
     </div>

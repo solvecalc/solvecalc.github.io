@@ -3691,3 +3691,71 @@ html.vault-pending-open #vault-fav-btn {
 
 /* Links inside running text are underlined so they are not told apart by color alone (Lighthouse link-in-text-block). */
 body .home-article p a, body .article-body p a, body .article-body li a, body .htopic-row-links a, body .home-topics-intro a { text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+
+/* ── Tool and article cards (inline on solvecalc.net's tools page) ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.tool-card {
+  background: var(--card);
+  border: 0;
+  border-radius: 6px;
+  padding: 1.4rem 1.2rem 1.2rem;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  transition: transform .2s, box-shadow .2s;
+}
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.10);
+}
+.tool-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--tool-color) 15%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--tool-color);
+  flex-shrink: 0;
+}
+.tool-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.tool-desc {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  flex: 1;
+}
+.tool-arrow {
+  font-size: .8rem;
+  color: var(--tool-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  margin-top: .15rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .2s, transform .2s;
+}
+.tool-card:hover .tool-arrow { opacity: 1; transform: translateX(0); }
+@media (max-width: 500px) {
+  .tools-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+  .tool-card { padding: 1.1rem .9rem .9rem; }
+}
+@media (max-width: 340px) {
+  .tools-grid { grid-template-columns: 1fr; }
+}

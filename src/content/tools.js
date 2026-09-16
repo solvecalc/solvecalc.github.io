@@ -5,7 +5,7 @@
  */
 module.exports = [
   {
-    slug: 'fraction-calculator', name: 'Fraction Calculator', icon: 'fa-divide',
+    slug: 'fraction-calculator', color: '#c084fc', name: 'Fraction Calculator', icon: 'fa-divide',
     blurb: 'Add, subtract, multiply and divide fractions with the steps shown.',
     title: 'Fraction Calculator - Add and Simplify Fractions Free',
     desc: 'Work with two fractions at once: add, subtract, multiply or divide them, then read the reduced answer and the working that produced it. Free, no sign-up.',
@@ -30,7 +30,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'percentage-calculator', name: 'Percentage Calculator', icon: 'fa-percent',
+    slug: 'percentage-calculator', color: '#14b8a6', name: 'Percentage Calculator', icon: 'fa-percent',
     blurb: 'Percentage of a number, increase, decrease and reverse percentages.',
     title: 'Percentage Calculator - Increase, Decrease and Change',
     desc: 'Find a percentage of a number, work out a percentage change between two figures, or go backwards from a discounted price to the original. Free in your browser.',
@@ -53,7 +53,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'prime-checker', name: 'Prime Number Checker', icon: 'fa-hashtag',
+    slug: 'prime-checker', color: '#dc2626', name: 'Prime Number Checker', icon: 'fa-hashtag',
     blurb: 'Test whether a number is prime and see its factors if it is not.',
     title: 'Prime Number Checker - Test Any Number Instantly',
     desc: 'Check whether a number is prime and, when it is not, see the factors that prove otherwise. Includes the square root shortcut and why 1 is not counted as prime.',
@@ -76,7 +76,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'gcf-lcm-calculator', name: 'GCF and LCM Calculator', icon: 'fa-layer-group',
+    slug: 'gcf-lcm-calculator', color: '#2563eb', name: 'GCF and LCM Calculator', icon: 'fa-layer-group',
     blurb: 'Greatest common factor and lowest common multiple, with the factors listed.',
     title: 'GCF and LCM Calculator - Factors and Multiples Fast',
     desc: 'Find the greatest common factor and lowest common multiple of two or more numbers, see the factor lists behind both, and stop confusing which one you need.',
@@ -99,7 +99,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'roman-numeral-converter', name: 'Roman Numeral Converter', icon: 'fa-landmark',
+    slug: 'roman-numeral-converter', color: '#64748b', name: 'Roman Numeral Converter', icon: 'fa-landmark',
     blurb: 'Convert numbers to Roman numerals and read numerals back as numbers.',
     title: 'Roman Numeral Converter - Both Directions, Free',
     desc: 'Turn a number into Roman numerals or read a numeral back as a number, with the subtraction rule explained and the limits of the system spelled out.',
@@ -122,7 +122,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'times-table', name: 'Times Table Generator', icon: 'fa-table',
+    slug: 'times-table', color: '#10b981', name: 'Times Table Generator', icon: 'fa-table',
     blurb: 'Print or practise any multiplication table up to whatever range you need.',
     title: 'Times Table Generator - Any Number, Any Range',
     desc: 'Generate a clean multiplication table for any number and range, ready to read on screen or print for practice. Includes the tricks that cut memorisation down.',
@@ -145,7 +145,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'exponent-calculator', name: 'Exponent Calculator', icon: 'fa-superscript',
+    slug: 'exponent-calculator', color: '#f43f5e', name: 'Exponent Calculator', icon: 'fa-superscript',
     blurb: 'Powers, roots and negative or fractional exponents, worked out.',
     title: 'Exponent Calculator - Powers, Roots and Indices',
     desc: 'Raise any number to a power, including negative and fractional exponents, and see what each one means. Covers the index laws and why anything to the zero is 1.',
@@ -168,7 +168,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'ratio-calculator', name: 'Ratio Calculator', icon: 'fa-scale-balanced',
+    slug: 'ratio-calculator', color: '#eab308', name: 'Ratio Calculator', icon: 'fa-scale-balanced',
     blurb: 'Simplify ratios, scale them up or down, and solve for a missing part.',
     title: 'Ratio Calculator - Simplify, Scale and Solve',
     desc: 'Reduce a ratio to its simplest form, scale a recipe or plan up and down, or find the missing number in an equivalent pair. Free, with the working shown.',
@@ -190,7 +190,7 @@ module.exports = [
     ],
   },
   {
-    slug: 'base-converter', name: 'Number Base Converter', icon: 'fa-binary',
+    slug: 'base-converter', color: '#0891b2', name: 'Number Base Converter', icon: 'fa-binary',
     blurb: 'Convert between binary, decimal, octal and hexadecimal.',
     title: 'Number Base Converter - Binary, Hex, Octal, Decimal',
     desc: 'Convert a number between binary, octal, decimal and hexadecimal, and see why hex is grouped in fours. Free browser tool for computing and maths homework.',

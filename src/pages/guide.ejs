@@ -23,11 +23,12 @@
   </div>
   <section class="home-section">
     <h2>More Guides</h2>
-    <div class="home-topics-grid">
+    <div class="tools-grid">
 <% siblings.forEach(function (g) { %>
-      <a class="home-topic-card" href="/guides/<%= g.slug %>">
-        <span class="home-topic-title"><%= g.name %></span>
-        <span class="home-topic-desc"><%= g.blurb %></span>
+      <a class="tool-card" href="/guides/<%= g.slug %>" style="--tool-color:#4f46e5">
+        <div class="tool-name"><%= g.name %></div>
+        <div class="tool-desc"><%= g.blurb %></div>
+        <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
       </a>
 <% }); %>
     </div>
