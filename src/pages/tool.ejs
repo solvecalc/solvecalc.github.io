@@ -1,0 +1,42 @@
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span><%= item.name %></span>
+  </nav>
+  <h1 class="tool-h1"><%= item.name %></h1>
+  <p class="article-intro"><%= item.intro %></p>
+</div>
+
+<%- include('../partials/tools/' + item.slug + '.html') %>
+
+<div class="page-wrap">
+  <section class="tool-article">
+<% item.sections.forEach(function (s) { %>
+    <h2><%= s.h %></h2>
+<% s.p.forEach(function (para) { %>
+    <p><%- para %></p>
+<% }); %>
+<% }); %>
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+<% item.faq.forEach(function (f) { %>
+      <details class="home-faq-item">
+        <summary class="home-faq-q"><%= f.q %></summary>
+        <div class="home-faq-a"><%= f.a %></div>
+      </details>
+<% }); %>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+<% siblings.forEach(function (t) { %>
+      <a class="home-topic-card" href="/tools/<%= t.slug %>">
+        <span class="home-topic-title"><i class="fa-solid <%= t.icon %>"></i> <%= t.name %></span>
+        <span class="home-topic-desc"><%= t.blurb %></span>
+      </a>
+<% }); %>
+    </div>
+  </section>
+</div>

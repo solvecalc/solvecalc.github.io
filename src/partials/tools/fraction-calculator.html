@@ -1,0 +1,266 @@
+<div class="tool-page-layout">
+
+
+<div class="frac-page">
+  <div class="frac-main">
+    <div class="frac-hero">
+      <h1>Fraction Calculator</h1>
+    </div>
+
+    <div class="frac-ops">
+      <button class="op-btn active" data-op="+" title="Add">+</button>
+      <button class="op-btn" data-op="-" title="Subtract">−</button>
+      <button class="op-btn" data-op="*" title="Multiply">×</button>
+      <button class="op-btn" data-op="/" title="Divide">÷</button>
+    </div>
+
+    <div class="frac-inputs">
+      <div class="frac-box">
+        <label>Fraction A</label>
+        <input class="frac-num-input" id="a_num" type="number" value="1" min="-999" max="999" step="1">
+        <div class="frac-line"></div>
+        <input class="frac-num-input" id="a_den" type="number" value="2" min="1" max="999" step="1">
+      </div>
+      <div class="op-display" id="opDisplay">+</div>
+      <div class="frac-box">
+        <label>Fraction B</label>
+        <input class="frac-num-input" id="b_num" type="number" value="1" min="-999" max="999" step="1">
+        <div class="frac-line"></div>
+        <input class="frac-num-input" id="b_den" type="number" value="3" min="1" max="999" step="1">
+      </div>
+    </div>
+
+    <div class="frac-visuals" id="fracVisuals">
+      <div class="pie-wrap">
+        <svg id="pieA" width="110" height="110" viewBox="0 0 110 110"></svg>
+        <div class="pie-label" id="pieALabel">1/2</div>
+      </div>
+      <div class="pie-wrap">
+        <svg id="pieB" width="110" height="110" viewBox="0 0 110 110"></svg>
+        <div class="pie-label" id="pieBLabel">1/3</div>
+      </div>
+    </div>
+
+    <button class="frac-calc-btn" id="calcBtn"><i class="fa-solid fa-equals" style="margin-right:.4rem;"></i>Calculate</button>
+
+    <div class="frac-result" id="fracResult">
+      <div class="result-label">Result</div>
+      <div class="result-fraction">
+        <div class="result-num" id="resNum">0</div>
+        <div class="result-line" id="resLine"></div>
+        <div class="result-num" id="resDen">1</div>
+      </div>
+      <div class="result-mixed" id="resMixed"></div>
+      <div class="steps-box">
+        <div class="widget-title"><i class="fa-solid fa-list-ol" style="margin-right:.3rem;"></i>Step-by-Step</div>
+        <div id="stepsContainer"></div>
+      </div>
+    </div>
+    <div id="confettiContainer" class="confetti-container"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  let currentOp = '+';
+
+  document.querySelectorAll('.op-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.op-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentOp = btn.dataset.op;
+      document.getElementById('opDisplay').textContent =
+        currentOp === '+' ? '+' : currentOp === '-' ? '−' : currentOp === '*' ? '×' : '÷';
+      updatePies();
+    });
+  });
+
+  ['a_num','a_den','b_num','b_den'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updatePies);
+  });
+
+  function gcd(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while(b) { let t = b; b = a % b; a = t; }
+    return a || 1;
+  }
+
+  function simplify(n, d) {
+    if(d === 0) return [n, d];
+    const g = gcd(Math.abs(n), Math.abs(d));
+    let sn = n/g, sd = d/g;
+    if(sd < 0) { sn = -sn; sd = -sd; }
+    return [sn, sd];
+  }
+
+  function drawPie(svgId, num, den, color1, color2) {
+    const svg = document.getElementById(svgId);
+    const cx = 55, cy = 55, r = 48;
+    svg.innerHTML = '';
+    const denom = Math.abs(den) || 1;
+    const numer = Math.min(Math.abs(num), denom);
+    const ratio = numer / denom;
+
+    // Background circle
+    const bgCircle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    bgCircle.setAttribute('cx', cx); bgCircle.setAttribute('cy', cy);
+    bgCircle.setAttribute('r', r); bgCircle.setAttribute('fill', '#e9d5ff');
+    svg.appendChild(bgCircle);
+
+    if(ratio > 0 && ratio <= 1) {
+      const angle = ratio * 2 * Math.PI;
+      const x = cx + r * Math.sin(angle);
+      const y = cy - r * Math.cos(angle);
+      const largeArc = ratio > 0.5 ? 1 : 0;
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      const d = ratio >= 1
+        ? `M ${cx} ${cy-r} A ${r} ${r} 0 1 1 ${cx-0.001} ${cy-r} Z`
+        : `M ${cx} ${cy-r} A ${r} ${r} 0 ${largeArc} 1 ${x} ${y} L ${cx} ${cy} Z`;
+      path.setAttribute('d', d);
+      path.setAttribute('fill', color1);
+      svg.appendChild(path);
+    }
+
+    // Draw dividing lines for equal parts
+    for(let i = 0; i < denom && denom <= 20; i++) {
+      const ang = (i / denom) * 2 * Math.PI;
+      const lx = cx + r * Math.sin(ang);
+      const ly = cy - r * Math.cos(ang);
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+      line.setAttribute('x2', lx); line.setAttribute('y2', ly);
+      line.setAttribute('stroke', '#fff'); line.setAttribute('stroke-width', '1.5');
+      svg.appendChild(line);
+    }
+
+    // Border
+    const border = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    border.setAttribute('cx', cx); border.setAttribute('cy', cy);
+    border.setAttribute('r', r); border.setAttribute('fill', 'none');
+    border.setAttribute('stroke', color2); border.setAttribute('stroke-width', '2.5');
+    svg.appendChild(border);
+  }
+
+  function updatePies() {
+    const an = parseInt(document.getElementById('a_num').value)||0;
+    const ad = parseInt(document.getElementById('a_den').value)||1;
+    const bn = parseInt(document.getElementById('b_num').value)||0;
+    const bd = parseInt(document.getElementById('b_den').value)||1;
+    drawPie('pieA', an, ad, '#c084fc', '#a855f7');
+    drawPie('pieB', bn, bd, '#f0abfc', '#e879f9');
+    document.getElementById('pieALabel').textContent = an + '/' + ad;
+    document.getElementById('pieBLabel').textContent = bn + '/' + bd;
+  }
+
+  document.getElementById('calcBtn').addEventListener('click', calculate);
+
+  function calculate() {
+    const an = parseInt(document.getElementById('a_num').value)||0;
+    const ad = parseInt(document.getElementById('a_den').value)||1;
+    const bn = parseInt(document.getElementById('b_num').value)||0;
+    const bd = parseInt(document.getElementById('b_den').value)||1;
+
+    if(ad === 0 || bd === 0) { alert('Denominator cannot be zero!'); return; }
+    if(currentOp === '/' && bn === 0) { alert('Cannot divide by zero fraction!'); return; }
+
+    let rn, rd;
+    const steps = [];
+
+    if(currentOp === '+') {
+      rn = an*bd + bn*ad; rd = ad*bd;
+      steps.push(`Find common denominator: ${ad} × ${bd} = ${rd}`);
+      steps.push(`Convert: ${an}/${ad} = ${an*bd}/${rd}, ${bn}/${bd} = ${bn*ad}/${rd}`);
+      steps.push(`Add numerators: ${an*bd} + ${bn*ad} = ${rn}`);
+    } else if(currentOp === '-') {
+      rn = an*bd - bn*ad; rd = ad*bd;
+      steps.push(`Find common denominator: ${ad} × ${bd} = ${rd}`);
+      steps.push(`Convert: ${an}/${ad} = ${an*bd}/${rd}, ${bn}/${bd} = ${bn*ad}/${rd}`);
+      steps.push(`Subtract numerators: ${an*bd} − ${bn*ad} = ${rn}`);
+    } else if(currentOp === '*') {
+      rn = an*bn; rd = ad*bd;
+      steps.push(`Multiply numerators: ${an} × ${bn} = ${rn}`);
+      steps.push(`Multiply denominators: ${ad} × ${bd} = ${rd}`);
+    } else {
+      rn = an*bd; rd = ad*bn;
+      steps.push(`Flip the second fraction: ${bn}/${bd} → ${bd}/${bn}`);
+      steps.push(`Multiply: (${an} × ${bd}) / (${ad} × ${bn}) = ${rn}/${rd}`);
+    }
+
+    const [sn, sd] = simplify(rn, rd);
+    const g = gcd(Math.abs(rn), Math.abs(rd));
+    if(g > 1) steps.push(`Simplify by dividing by ${g}: ${rn}/${rd} = ${sn}/${sd}`);
+
+    document.getElementById('resNum').textContent = sn;
+    document.getElementById('resDen').textContent = sd;
+
+    const resLine = document.getElementById('resLine');
+    const resMixed = document.getElementById('resMixed');
+
+    if(sd === 1) {
+      resLine.style.display = 'none';
+      resMixed.textContent = '';
+    } else {
+      resLine.style.display = 'block';
+      if(Math.abs(sn) > sd) {
+        const whole = Math.trunc(sn/sd);
+        const rem = Math.abs(sn % sd);
+        resMixed.textContent = rem > 0 ? `Mixed number: ${whole} ${rem}/${sd}` : '';
+      } else { resMixed.textContent = `= ${(sn/sd).toFixed(4)}`; }
+    }
+
+    const stepsContainer = document.getElementById('stepsContainer');
+    stepsContainer.innerHTML = '';
+    steps.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'step-item';
+      div.innerHTML = `<div class="step-icon">${i+1}</div><span>${s}</span>`;
+      stepsContainer.appendChild(div);
+    });
+
+    const res = document.getElementById('fracResult');
+    res.style.display = 'block';
+    res.style.animation = 'none';
+    res.offsetHeight;
+    res.style.animation = 'popIn .4s cubic-bezier(.175,.885,.32,1.275)';
+
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
+    const colors = ['#c084fc','#a855f7','#f0abfc','#e879f9','#d8b4fe','#fde68a'];
+    for(let i = 0; i < 60; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.cssText = `
+        left: ${Math.random()*100}%;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        width: ${6+Math.random()*8}px;
+        height: ${6+Math.random()*8}px;
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        animation-duration: ${1.5+Math.random()*2}s;
+        animation-delay: ${Math.random()*.5}s;
+      `;
+      container.appendChild(piece);
+    }
+    setTimeout(() => { container.innerHTML = ''; }, 3500);
+  }
+
+  updatePies();
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>

@@ -1,0 +1,221 @@
+<div class="tool-page-layout">
+
+
+<div class="roman-page">
+  <div class="roman-main">
+    <div class="roman-hero">
+      <h1>Roman Numeral Converter</h1>
+    </div>
+
+    <div class="roman-toggle">
+      <button class="toggle-btn active" id="toRomanBtn" onclick="setMode('toRoman')">
+        <i class="fa-solid fa-arrow-right" style="margin-right:.3rem;"></i>Number → Roman
+      </button>
+      <button class="toggle-btn" id="toNumBtn" onclick="setMode('toNum')">
+        <i class="fa-solid fa-arrow-left" style="margin-right:.3rem;"></i>Roman → Number
+      </button>
+    </div>
+
+    <div class="roman-card">
+      <!-- Number to Roman -->
+      <div id="panel-toRoman">
+        <div class="roman-input-group">
+          <label>Enter a Number (1 - 3999)</label>
+          <input class="roman-input" type="number" id="numInput" placeholder="e.g. 2024" min="1" max="3999">
+        </div>
+        <div class="roman-error" id="numError"></div>
+        <button class="roman-btn" onclick="convertToRoman()"><i class="fa-solid fa-landmark" style="margin-right:.4rem;"></i>Convert to Roman</button>
+      </div>
+
+      <!-- Roman to Number -->
+      <div id="panel-toNum" style="display:none;">
+        <div class="roman-input-group">
+          <label>Enter Roman Numerals</label>
+          <input class="roman-input" type="text" id="romanInput" placeholder="e.g. MMXXIV" style="text-transform:uppercase; letter-spacing:.1em; font-family:'Georgia',serif;">
+        </div>
+        <div class="roman-error" id="romanError"></div>
+        <button class="roman-btn" onclick="convertToNum()"><i class="fa-solid fa-hashtag" style="margin-right:.4rem;"></i>Convert to Number</button>
+      </div>
+
+      <div class="parchment" id="parchmentDisplay">
+        <div class="roman-symbols" id="romanSymbols"></div>
+        <div class="parchment-label" id="parchmentLabel">Your result will appear here</div>
+      </div>
+
+      <div class="result-section" id="resultSection">
+        <table class="breakdown-table">
+          <thead>
+            <tr><th>Symbol</th><th>Value</th><th>Count</th><th>Subtotal</th></tr>
+          </thead>
+          <tbody id="breakdownBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reference table -->
+    <div class="roman-card">
+      <div class="widget-title" style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#007aff;margin:0 0 1rem;"><i class="fa-solid fa-table" style="margin-right:.3rem;"></i>Roman Numeral Reference</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+        <table class="breakdown-table" style="width:auto;flex:1;">
+          <thead><tr><th>Symbol</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td class="sym-cell">I</td><td class="val-cell">1</td></tr>
+            <tr><td class="sym-cell">V</td><td class="val-cell">5</td></tr>
+            <tr><td class="sym-cell">X</td><td class="val-cell">10</td></tr>
+            <tr><td class="sym-cell">L</td><td class="val-cell">50</td></tr>
+          </tbody>
+        </table>
+        <table class="breakdown-table" style="width:auto;flex:1;">
+          <thead><tr><th>Symbol</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td class="sym-cell">C</td><td class="val-cell">100</td></tr>
+            <tr><td class="sym-cell">D</td><td class="val-cell">500</td></tr>
+            <tr><td class="sym-cell">M</td><td class="val-cell">1000</td></tr>
+            <tr><td class="sym-cell">IV</td><td class="val-cell">4</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const ROMAN_MAP = [
+    [1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],
+    [100,'C'],[90,'XC'],[50,'L'],[40,'XL'],
+    [10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']
+  ];
+
+  window.setMode = function(mode) {
+    document.getElementById('panel-toRoman').style.display = mode === 'toRoman' ? 'block' : 'none';
+    document.getElementById('panel-toNum').style.display = mode === 'toNum' ? 'block' : 'none';
+    document.getElementById('toRomanBtn').classList.toggle('active', mode === 'toRoman');
+    document.getElementById('toNumBtn').classList.toggle('active', mode === 'toNum');
+    document.getElementById('romanSymbols').innerHTML = '';
+    document.getElementById('parchmentLabel').textContent = 'Your result will appear here';
+    document.getElementById('resultSection').style.display = 'none';
+  };
+
+  function toRoman(num) {
+    let result = '', steps = [];
+    for(const [val, sym] of ROMAN_MAP) {
+      while(num >= val) {
+        result += sym;
+        steps.push({sym, val, num: Math.floor(num/val), subtotal: Math.floor(num/val)*val});
+        num -= val;
+      }
+    }
+    return {result, steps};
+  }
+
+  function fromRoman(str) {
+    const vals = {M:1000, D:500, C:100, L:50, X:10, V:5, I:1};
+    let total = 0, prev = 0;
+    const breakdown = {};
+    for(let i = str.length - 1; i >= 0; i--) {
+      const v = vals[str[i]];
+      if(!v) return null;
+      breakdown[str[i]] = (breakdown[str[i]] || 0) + 1;
+      if(v < prev) total -= v;
+      else total += v;
+      prev = v;
+    }
+    return {total, breakdown};
+  }
+
+  function displaySymbols(roman) {
+    const container = document.getElementById('romanSymbols');
+    container.innerHTML = '';
+    roman.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'roman-sym';
+      span.style.animationDelay = (i * 120) + 'ms';
+      span.textContent = ch;
+      container.appendChild(span);
+    });
+  }
+
+  window.convertToRoman = function() {
+    const num = parseInt(document.getElementById('numInput').value);
+    const errEl = document.getElementById('numError');
+    errEl.style.display = 'none';
+
+    if(isNaN(num) || num < 1 || num > 3999) {
+      errEl.textContent = 'Please enter a number between 1 and 3999.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const {result, steps} = toRoman(num);
+    displaySymbols(result);
+    document.getElementById('parchmentLabel').textContent = num + ' in Roman numerals';
+
+    const body = document.getElementById('breakdownBody');
+    body.innerHTML = '';
+    steps.forEach(s => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="sym-cell">${s.sym}</td><td class="val-cell">${s.val}</td><td>${s.num}</td><td>${s.subtotal}</td>`;
+      body.appendChild(tr);
+    });
+
+    const total = document.createElement('tr');
+    total.innerHTML = `<td colspan="3" style="font-weight:800;color:#007aff;font-size:.9rem;">Total</td><td style="font-weight:900;color:#007aff;">${num}</td>`;
+    body.appendChild(total);
+
+    document.getElementById('resultSection').style.display = 'block';
+  };
+
+  window.convertToNum = function() {
+    const str = document.getElementById('romanInput').value.trim().toUpperCase();
+    const errEl = document.getElementById('romanError');
+    errEl.style.display = 'none';
+
+    if(!str) { errEl.textContent = 'Please enter Roman numerals.'; errEl.style.display = 'block'; return; }
+    if(!/^[MDCLXVI]+$/.test(str)) {
+      errEl.textContent = 'Invalid Roman numerals! Only M, D, C, L, X, V, I are allowed.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const res = fromRoman(str);
+    if(!res) { errEl.textContent = 'Could not parse Roman numerals!'; errEl.style.display = 'block'; return; }
+
+    displaySymbols(str);
+    document.getElementById('parchmentLabel').textContent = str + ' = ' + res.total;
+
+    const body = document.getElementById('breakdownBody');
+    body.innerHTML = '';
+    const vals = {M:1000, D:500, C:100, L:50, X:10, V:5, I:1};
+    Object.entries(res.breakdown).forEach(([sym, count]) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="sym-cell">${sym}</td><td class="val-cell">${vals[sym]}</td><td>${count}</td><td>${vals[sym]*count}</td>`;
+      body.appendChild(tr);
+    });
+
+    const total = document.createElement('tr');
+    total.innerHTML = `<td colspan="3" style="font-weight:800;color:#007aff;">Total</td><td style="font-weight:900;color:#007aff;">${res.total}</td>`;
+    body.appendChild(total);
+
+    document.getElementById('resultSection').style.display = 'block';
+  };
+
+  document.getElementById('numInput').addEventListener('keydown', e => { if(e.key === 'Enter') convertToRoman(); });
+  document.getElementById('romanInput').addEventListener('input', function() { this.value = this.value.toUpperCase(); });
+  document.getElementById('romanInput').addEventListener('keydown', e => { if(e.key === 'Enter') convertToNum(); });
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>

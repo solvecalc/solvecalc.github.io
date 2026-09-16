@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SolveCalc - Free CalcSolver and Scientific Calculator</title>
+  <meta name="description" content="SolveCalc is a free calcsolver: a full scientific calculator that runs in your browser, plus focused math tools and short guides. No download, no account.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/">
+  <meta property="og:title" content="SolveCalc - Free CalcSolver and Scientific Calculator">
+  <meta property="og:description" content="SolveCalc is a free calcsolver: a full scientific calculator that runs in your browser, plus focused math tools and short guides. No download, no account.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SolveCalc - Free CalcSolver and Scientific Calculator">
+  <meta name="twitter:description" content="SolveCalc is a free calcsolver: a full scientific calculator that runs in your browser, plus focused math tools and short guides. No download, no account.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SolveCalc","alternateName":["CalcSolver","Calc Solver","CalcSolve","Solve Calc"],"url":"https://solvecalc.github.io/"}</script>
+
+  <script type="application/ld+json">{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SolveCalc CalcSolver","url":"https://solvecalc.github.io/","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Free online calcsolver and scientific calculator that runs in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is SolveCalc?","acceptedAnswer":{"@type":"Answer","text":"A free scientific calculator that runs entirely in your browser, with a small set of focused math tools and written guides alongside it. No account, no download, no cost. This build is hosted on GitHub Pages and its source is public."}},{"@type":"Question","name":"What does calcsolver mean?","acceptedAnswer":{"@type":"Answer","text":"Calcsolver, calc solver and calcsolve are all names people use for the same thing: an online calculator that works a problem out for you. Whichever spelling you searched for, this is that tool."}},{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. There is no paid tier and no sign-in. Everything on the site is open to anyone who loads the page."}},{"@type":"Question","name":"Does it work on a school Chromebook?","acceptedAnswer":{"@type":"Answer","text":"It is a plain web page, so it loads on any modern browser including managed Chromebooks that block installs. Once loaded it keeps working even if the connection drops."}},{"@type":"Question","name":"Do my calculations get sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Every calculation is performed by JavaScript on your own device. Nothing you type is transmitted, logged or stored on a server."}},{"@type":"Question","name":"How is this different from solvecalc.net?","acceptedAnswer":{"@type":"Answer","text":"Same calculator, much smaller site. This build keeps the calculator, nine tools and a handful of guides, with its own writing. The full project, with far more reference material, is at solvecalc.net."}}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  
+  <link rel="stylesheet" href="/assets/css/vault.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-home">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/" class=&#34;active&#34;>Calculator</a>
+      <a href="/tools">Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-label="Hero">
+  <div class="hero-inner">
+    <h1 class="hero-h1">SolveCalc - Free CalcSolver and Scientific Calculator</h1>
+    <p class="hero-sub">Arithmetic, trigonometry, roots, powers and logarithms, worked out in the browser tab you already have open. No install, no account, no cost.</p>
+    <div class="hero-btns">
+      <a class="hero-btn-primary" href="#calc-col"><i class="fa-solid fa-calculator"></i> Use the Calculator</a>
+      <a class="hero-btn-secondary" href="/tools"><i class="fa-solid fa-wrench"></i> Browse the Tools</a>
+    </div>
+  </div>
+</section>
+
+<div class="page-wrap">
+  <div class="home-layout">
+    <div class="calc-section-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <!-- ── CENTER: Calculator ── -->
+      <div class="calc-col" id="calc-col" data-calc-theme="pastel">
+
+      <div class="device-frame">
+      <div class="calc-widget">
+        <!-- Calculator header: model label left, Code Mode toggle right -->
+        <div class="calc-header">
+          <span class="cs-model">SC-CM-0000</span>
+<label class="code-toggle-wrap" for="vault-toggle">
+            <span class="code-toggle-label">Code Mode</span>
+            <input type="checkbox" id="vault-toggle" class="code-toggle-input">
+            <span class="code-toggle-track"><span class="code-toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <!-- Display -->
+        <div class="calc-display-wrap">
+          <div class="calc-expr" id="calc-expr"></div>
+          <div class="calc-display" id="calc-display">0</div>
+        </div>
+
+        <!-- Physical theme only: modifier pills -->
+        <div class="cs-modifiers">
+          <button class="cs-mod" id="cs-shift-btn" onclick="calcToggleShift()">Shift</button>
+          <button class="cs-mod" onclick="calcAlphaAns()">Alpha</button>
+          <button class="cs-mod cs-replay" onclick="calcReplay()">Replay</button>
+        </div>
+
+        <!-- Physical theme only: scientific function row -->
+        <div class="calc-sci-label">Scientific</div>
+        <div class="calc-sci-panel">
+        <div class="calc-sci-row">
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">sin⁻¹</span><span class="key-hint-alpha">A</span></span><button class="cbtn cbtn-fn" onclick="calcTrig('sin')"><span class="letter">sin</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">cos⁻¹</span><span class="key-hint-alpha">B</span></span><button class="cbtn cbtn-fn" onclick="calcTrig('cos')"><span class="letter">cos</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">tan⁻¹</span><span class="key-hint-alpha">C</span></span><button class="cbtn cbtn-fn" onclick="calcTrig('tan')"><span class="letter">tan</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">√</span><span class="key-hint-alpha">D</span></span><button class="cbtn cbtn-fn" onclick="calcFn('x*x')"><span class="letter">x²</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">x²</span><span class="key-hint-alpha">E</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.sqrt(x)')"><span class="letter">√</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">sin</span><span class="key-hint-alpha">F</span></span><button class="cbtn cbtn-fn2" onclick="calcTrig('asin')"><span class="letter">sin⁻¹</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">cos</span><span class="key-hint-alpha">X</span></span><button class="cbtn cbtn-fn2" onclick="calcTrig('acos')"><span class="letter">cos⁻¹</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">tan</span><span class="key-hint-alpha">Y</span></span><button class="cbtn cbtn-fn2" onclick="calcTrig('atan')"><span class="letter">tan⁻¹</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">∛</span><span class="key-hint-alpha">M</span></span><button class="cbtn cbtn-fn" onclick="calcFn('x*x*x')"><span class="letter">x³</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">x³</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.cbrt(x)')"><span class="letter">∛</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">10ˣ</span><span class="key-hint-alpha">(</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.log10(x)')"><span class="letter">log</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">eˣ</span><span class="key-hint-alpha">)</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.log(x)')"><span class="letter">ln</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">2ˣ</span><span class="key-hint-alpha">,</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.log2(x)')"><span class="letter">log₂</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">nPr</span></span><button class="cbtn cbtn-fn" onclick="calcFn('(function(n){n=Math.round(n);if(n<0)return NaN;let r=1;for(let i=2;i<=n;i++)r*=i;return r;})(x)')"><span class="letter">n!</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">x!</span></span><button class="cbtn cbtn-fn" onclick="calcFn('1/x')"><span class="letter">1/x</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">STO</span></span><button class="cbtn cbtn-const" onclick="calcConst('Math.PI')"><span class="letter">π</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">RCL</span></span><button class="cbtn cbtn-const" onclick="calcConst('e')"><span class="letter">e</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">M+</span></span><button class="cbtn cbtn-paren cbtn-op" onclick="calcParen('(')"><span class="letter">(</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">M-</span></span><button class="cbtn cbtn-paren cbtn-op" onclick="calcParen(')')"><span class="letter">)</span></button></div>
+        </div>
+        </div><!-- /calc-sci-panel -->
+
+        <!-- Buttons -->
+        <div class="calc-grid calc-grid-standard">
+          <!-- Row 1: Scientific -->
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.sin(x*Math.PI/180)')">sin</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.cos(x*Math.PI/180)')">cos</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.tan(x*Math.PI/180)')">tan</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.log10(x)')">log</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.log(x)')">ln</button>
+
+          <!-- Row 2: More scientific -->
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.pow(x,2)')">x²</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.pow(x,3)')">x³</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.sqrt(x)')">√</button>
+          <button class="cbtn cbtn-fn" onclick="calcConst('Math.PI')">π</button>
+          <button class="cbtn cbtn-fn" onclick="calcConst('Math.E')">e</button>
+
+          <!-- Row 3: Controls -->
+          <button class="cbtn cbtn-cl" onclick="calcClear()">AC</button>
+          <button class="cbtn cbtn-cl" onclick="calcBack()">⌫</button>
+          <button class="cbtn cbtn-op" onclick="calcParen('(')"> ( </button>
+          <button class="cbtn cbtn-op" onclick="calcParen(')')"> ) </button>
+          <button class="cbtn cbtn-op" onclick="calcOp('%')">%</button>
+
+          <!-- Row 4 -->
+          <button class="cbtn cbtn-num" onclick="calcDigit('7')">7</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('8')">8</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('9')">9</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('÷')">÷</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('×')">×</button>
+
+          <!-- Row 5 -->
+          <button class="cbtn cbtn-num" onclick="calcDigit('4')">4</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('5')">5</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('6')">6</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('-')">−</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('+')">+</button>
+
+          <!-- Row 6 -->
+          <button class="cbtn cbtn-num" onclick="calcDigit('1')">1</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('2')">2</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('3')">3</button>
+          <button class="cbtn cbtn-num cbtn-wide2" onclick="calcDigit('0')">0</button>
+          <button class="cbtn cbtn-num" onclick="calcDot()">.</button>
+
+          <!-- Row 7: Equals spans full width -->
+          <button class="cbtn cbtn-eq cbtn-wide5" onclick="calcEquals()">=</button>
+        </div><!-- /calc-grid -->
+
+        <!-- Physical theme only: 4-column grid -->
+        <div class="calc-grid-physical">
+          <button class="cbtn cbtn-cl"  onclick="calcClear()"><span class="letter">AC</span></button>
+          <button class="cbtn cbtn-cl"  onclick="calcBack()"><span class="letter">⌫</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('%')"><span class="letter">%</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('÷')"><span class="letter">÷</span></button>
+
+          <button class="cbtn cbtn-num" onclick="calcDigit('7')"><span class="letter">7</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('8')"><span class="letter">8</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('9')"><span class="letter">9</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('×')"><span class="letter">×</span></button>
+
+          <button class="cbtn cbtn-num" onclick="calcDigit('4')"><span class="letter">4</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('5')"><span class="letter">5</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('6')"><span class="letter">6</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('-')"><span class="letter">−</span></button>
+
+          <button class="cbtn cbtn-num" onclick="calcDigit('1')"><span class="letter">1</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('2')"><span class="letter">2</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('3')"><span class="letter">3</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('+')"><span class="letter">+</span></button>
+
+          <button class="cbtn cbtn-num cbtn-wide2" onclick="calcDigit('0')"><span class="letter">0</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDot()"><span class="letter">.</span></button>
+          <button class="cbtn cbtn-eq"  onclick="calcEquals()"><span class="letter">=</span></button>
+        </div><!-- /calc-grid-physical -->
+
+      </div><!-- /calc-widget -->
+      </div><!-- /device-frame -->
+
+    </div><!-- /calc-col -->
+
+    <div class="calc-feat-chips" aria-label="Calculator highlights">
+      <span class="calc-feat-chip"><i class="fa-solid fa-laptop"></i> Chromebook Ready</span>
+      <span class="calc-feat-chip"><i class="fa-solid fa-shield-halved"></i> Client-Side CalcSolver</span>
+      <span class="calc-feat-chip"><i class="fa-solid fa-graduation-cap"></i> Grades 3-12</span>
+      <span class="calc-feat-chip"><i class="fa-solid fa-download"></i> No Install</span>
+      <span class="calc-feat-chip"><i class="fa-solid fa-bolt"></i> Instant Results</span>
+      <span class="calc-feat-chip"><i class="fa-solid fa-user-shield"></i> FERPA &amp; COPPA Friendly</span>
+      <span class="calc-feat-chip"><i class="fa-solid fa-eye-slash"></i> Zero Tracking</span>
+    </div>
+
+
+    <section class="home-section">
+      <h2>A Calcsolver That Answers Immediately</h2>
+      <p>Press a key and the answer is already there. Nothing is sent anywhere to be computed: the arithmetic runs in JavaScript on the machine in front of you, which is why the result appears the same on hotel wifi as it does on fibre.</p>
+      <p>The keypad carries what school maths actually asks for. Brackets and the four operations, powers and roots, sine, cosine and tangent, natural and base-ten logarithms, factorials, percentages, reciprocals, and the constants pi and e. Switch on Code Mode and you can type an expression such as <code>sqrt(225)</code> or <code>log(1000)</code> from the keyboard instead of hunting for the right button.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Calc Solver, CalcSolver, CalcSolve: One Tool, Many Spellings</h2>
+      <p>People arrive here typing the name half a dozen ways. Calcsolver, calc solver, calcsolve, solve calc, solvecalc. They all describe the same idea, a calculator on a web page that solves the problem in front of you, and none of the spellings leads to a different or paid version.</p>
+      <p>This is the GitHub Pages build of that project, kept deliberately small: the calculator, a handful of focused tools, and short written guides. Its source sits in the open on <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>, so anything the page does can be read rather than trusted.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Tools for the Jobs a Keypad Handles Badly</h2>
+      <p>Some questions are awkward on a plain calculator. Reducing a fraction, working out which numbers divide evenly into two others, or turning a decimal into a ratio all take several steps and an easy slip. Each of those has its own page here, with the working shown rather than just the answer.</p>
+      <div class="home-topics-grid">
+
+        <a class="home-topic-card" href="/tools/fraction-calculator">
+          <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+          <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+        </a>
+
+        <a class="home-topic-card" href="/tools/percentage-calculator">
+          <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+          <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+        </a>
+
+        <a class="home-topic-card" href="/tools/prime-checker">
+          <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+          <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+        </a>
+
+        <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+          <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+          <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+        </a>
+
+        <a class="home-topic-card" href="/tools/roman-numeral-converter">
+          <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+          <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+        </a>
+
+        <a class="home-topic-card" href="/tools/times-table">
+          <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+          <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+        </a>
+
+      </div>
+      <p class="text-center" style="margin-top:16px;"><a href="/tools">See all 9 tools</a></p>
+    </section>
+
+    <section class="home-section">
+      <h2>Nothing You Type Is Recorded</h2>
+      <p>Because every calculation happens locally, there is no log of your working anywhere, on this server or any other. The site has no accounts and no sign-in form, and the figures you enter never leave the page you entered them on.</p>
+      <p>It also keeps working on a restricted network. Chromebooks, library machines and school laptops that refuse installs can still open a web page, and a web page is all this is.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Reading Material</h2>
+      <p>The <a href="/guides">guides</a> cover the reasoning behind the buttons: why the order of operations is fixed, what a logarithm is actually asking, how percentages and fractions convert. The <a href="/blog">blog</a> is shorter and more practical, mostly about working accurately under exam conditions.</p>
+    </section>
+
+    <section class="home-section home-faq-section" id="faq">
+      <h2>Questions People Ask</h2>
+      <div class="home-faq-list">
+
+        <details class="home-faq-item">
+          <summary class="home-faq-q">What is SolveCalc?</summary>
+          <div class="home-faq-a">A free scientific calculator that runs entirely in your browser, with a small set of focused math tools and written guides alongside it. No account, no download, no cost. This build is hosted on GitHub Pages and its source is public.</div>
+        </details>
+
+        <details class="home-faq-item">
+          <summary class="home-faq-q">What does calcsolver mean?</summary>
+          <div class="home-faq-a">Calcsolver, calc solver and calcsolve are all names people use for the same thing: an online calculator that works a problem out for you. Whichever spelling you searched for, this is that tool.</div>
+        </details>
+
+        <details class="home-faq-item">
+          <summary class="home-faq-q">Is it really free?</summary>
+          <div class="home-faq-a">Yes. There is no paid tier and no sign-in. Everything on the site is open to anyone who loads the page.</div>
+        </details>
+
+        <details class="home-faq-item">
+          <summary class="home-faq-q">Does it work on a school Chromebook?</summary>
+          <div class="home-faq-a">It is a plain web page, so it loads on any modern browser including managed Chromebooks that block installs. Once loaded it keeps working even if the connection drops.</div>
+        </details>
+
+        <details class="home-faq-item">
+          <summary class="home-faq-q">Do my calculations get sent anywhere?</summary>
+          <div class="home-faq-a">No. Every calculation is performed by JavaScript on your own device. Nothing you type is transmitted, logged or stored on a server.</div>
+        </details>
+
+        <details class="home-faq-item">
+          <summary class="home-faq-q">How is this different from solvecalc.net?</summary>
+          <div class="home-faq-a">Same calculator, much smaller site. This build keeps the calculator, nine tools and a handful of guides, with its own writing. The full project, with far more reference material, is at solvecalc.net.</div>
+        </details>
+
+      </div>
+    </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ VAULT OVERLAY ══ -->
+<div id="vault-overlay" class="vault-overlay" aria-hidden="true">
+
+  <!-- Top bar -->
+  <div class="vault-topbar">
+    <button class="vault-sidebar-toggle" id="vault-sidebar-toggle" title="Toggle sidebar" aria-label="Toggle sidebar">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+    </button>
+    <span class="vault-esc-hint" id="vault-esc-hint"><kbd>Esc</kbd> to exit<button class="vault-esc-close" id="vault-esc-close" aria-label="Dismiss">✕</button></span>
+    <button class="vault-topbar-btn" id="vault-back-btn" title="Back to grid" style="display:none">← Back</button>
+    <div class="vault-topbar-center">
+      <div class="vault-search-wrap">
+        <svg class="vault-search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="vault-search" class="vault-search" placeholder="Search…" autocomplete="off" spellcheck="false">
+        <button id="vault-search-clear" class="vault-search-clear" aria-label="Clear search" style="display:none">✕</button>
+      </div>
+    </div>
+    <button class="vault-topbar-btn vault-fav-topbar-btn" id="vault-fav-btn" title="Favourites"><i class="fa-solid fa-heart"></i><span class="vault-fav-count" id="vault-fav-count" style="display:none">0</span></button>
+<button class="vault-topbar-btn" id="vault-theme-btn" title="Toggle theme">Dark</button>
+    <button class="vault-topbar-btn" id="vault-close-btn" title="Close">✕<span class="vault-close-label">Exit</span></button>
+  </div>
+
+  <!-- Backup Discord bar -->
+  <div class="vault-discord-bar" id="vault-discord-bar">
+    <span class="vault-discord-bar-text"><i class="fa-brands fa-discord"></i> All SolveCalc Links - join our backup Discord server</span>
+    <a href="https://discord.gg/xRVWnzZxuu" target="_blank" rel="noopener noreferrer" class="vault-discord-bar-btn">Join Discord</a>
+    <button class="vault-discord-bar-close" id="vault-discord-bar-close" aria-label="Dismiss">✕</button>
+  </div>
+
+  <!-- Grid view: sidebar + grid -->
+  <div id="vault-grid-view" class="vault-body">
+    <aside class="vault-cat-sidebar">
+      <div class="vault-cat-links">
+        <a class="vault-cat-link vault-gba-link" href="#" id="vault-gba-tab"><i class="fa-solid fa-microchip"></i>GBA Emu<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link active" href="#" data-cat=""><i class="fa-solid fa-gamepad"></i>All</a>
+        <a class="vault-cat-link vault-fav-link" href="#" id="vault-fav-cat" data-cat="__favs__"><i class="fa-solid fa-heart"></i>Favourites<span class="vault-fav-count-side" id="vault-fav-count-side" style="display:none">0</span></a>
+        <a class="vault-cat-link" href="#" data-cat="action"><i class="fa-solid fa-bolt"></i>Action<span class="v-cat-badge v-cat-badge-hot">Hot</span></a>
+        <a class="vault-cat-link" href="#" data-cat="adventure"><i class="fa-solid fa-compass"></i>Adventure</a>
+        <a class="vault-cat-link" href="#" data-cat="apps"><i class="fa-solid fa-table-cells-large"></i>Apps<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link" href="#" data-cat="arcade"><i class="fa-solid fa-dice"></i>Arcade<span class="v-cat-badge v-cat-badge-top">Top</span></a>
+        <a class="vault-cat-link" href="#" data-cat="casual"><i class="fa-solid fa-face-smile"></i>Casual</a>
+        <a class="vault-cat-link" href="#" data-cat="horror"><i class="fa-solid fa-ghost"></i>Horror<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link" href="#" data-cat="idle"><i class="fa-solid fa-clock"></i>Idle</a>
+        <a class="vault-cat-link" href="#" data-cat="io"><i class="fa-solid fa-globe"></i>IO<span class="v-cat-badge v-cat-badge-top">Top</span></a>
+        <a class="vault-cat-link" href="#" data-cat="platformer"><i class="fa-solid fa-person-running"></i>Platformer</a>
+        <a class="vault-cat-link" href="#" data-cat="puzzle"><i class="fa-solid fa-puzzle-piece"></i>Puzzle</a>
+        <a class="vault-cat-link" href="#" data-cat="racing"><i class="fa-solid fa-flag-checkered"></i>Racing<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link" href="#" data-cat="shooter"><i class="fa-solid fa-crosshairs"></i>Shooter<span class="v-cat-badge v-cat-badge-hot">Hot</span></a>
+        <a class="vault-cat-link" href="#" data-cat="sports"><i class="fa-solid fa-futbol"></i>Sports</a>
+        <a class="vault-cat-link" href="#" data-cat="strategy"><i class="fa-solid fa-chess"></i>Strategy</a>
+        <a class="vault-cat-link" href="#" data-cat="open-world"><i class="fa-solid fa-map-location-dot"></i>Open World</a>
+        <a class="vault-cat-link" href="#" data-cat="multiplayer"><i class="fa-solid fa-tower-broadcast"></i>Multiplayer</a>
+        <a class="vault-cat-link vault-codes-link" href="#" id="vault-codes-tab"><i class="fa-solid fa-key"></i>Secret Codes</a>
+      </div>
+      <button class="vault-cat-exit-btn" onclick="closeVault()"><i class="fa-solid fa-right-from-bracket"></i>Exit</button>
+    </aside>
+    <div class="vault-main-area">
+      <div id="vault-grid" class="vault-grid"></div>
+
+      <!-- Secret Codes panel -->
+      <div id="vault-codes-panel" class="vault-codes-panel" style="display:none">
+        <div class="codes-header">
+          <h2 class="codes-title">Secret Codes</h2>
+          <input type="text" id="codes-search" class="codes-search" placeholder="Search activities...">
+        </div>
+        <div id="codes-list" class="codes-list"></div>
+      </div>
+
+      <!-- GBA Emulator panel - click-to-play shelf + bring-your-own-ROM -->
+      <div id="vault-gba-panel" class="vault-codes-panel" style="display:none">
+        <div class="codes-header">
+          <h2 class="codes-title">GBA Emulator</h2>
+        </div>
+
+        <div id="gba-upload-wrap" class="vault-split">
+          <div class="vault-side-left" id="gba-sidebar">
+            <p class="vault-side-label">Browse Titles</p>
+            <div id="gba-side-cards"></div>
+          </div>
+          <div id="gba-upload-box" class="gba-upload-box">
+            <div id="gba-dropzone" class="gba-dropzone">
+              <i class="fa-solid fa-microchip gba-dropzone-icon"></i>
+              <p class="gba-dropzone-title">Load a GBA ROM</p>
+              <p class="gba-dropzone-sub">Choose a <code>.gba</code> file from your own device to play it here. Nothing is uploaded - the file stays in your browser.</p>
+              <label class="gba-file-btn">
+                <i class="fa-solid fa-folder-open"></i> Choose ROM File
+                <input type="file" id="gba-file-input" accept=".gba" hidden>
+              </label>
+            </div>
+
+            <div class="gba-kbd-guide">
+              <div class="gba-kbd-table-wrap">
+                <div class="gba-kbd-heading"><i class="fa-solid fa-keyboard"></i> Keyboard Shortcuts</div>
+                <table>
+                  <tr><th>Key</th><th>What it does</th></tr>
+                  <tr><td><kbd>&uarr;</kbd> <kbd>&darr;</kbd> <kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>D-pad</td></tr>
+                  <tr><td><kbd>X</kbd></td><td>A button</td></tr>
+                  <tr><td><kbd>Z</kbd></td><td>B button</td></tr>
+                  <tr><td><kbd>A</kbd></td><td>L shoulder button</td></tr>
+                  <tr><td><kbd>S</kbd></td><td>R shoulder button</td></tr>
+                  <tr><td><kbd>Enter</kbd></td><td>Start</td></tr>
+                  <tr><td><kbd>Shift</kbd></td><td>Select</td></tr>
+                  <tr><td><kbd>Esc</kbd></td><td>Open the in-emulator menu</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="vault-side-right" id="gba-sidebar-right">
+            <p class="vault-side-label">Popular Picks</p>
+            <div id="gba-side-cards-right"></div>
+          </div>
+        </div>
+
+        <div id="gba-player-wrap" class="gba-player-wrap" style="display:none">
+          <div class="vault-frame-header">
+            <div class="vault-frame-left">
+              <button class="vault-topbar-btn" id="gba-back-btn" title="Back to upload">← Back</button>
+            </div>
+            <div class="vault-frame-center">
+              <span class="vault-play-title" id="gba-play-title"></span>
+            </div>
+            <div class="vault-frame-btns">
+              <button class="vault-fs-btn" id="gba-restart-btn" title="Restart game" aria-label="Restart game"><i class="fa-solid fa-rotate-right"></i></button>
+              <button class="vault-fs-btn vault-fs-btn--wide" id="gba-fs-btn" title="Fullscreen"><span class="vault-fs-glyph" aria-hidden="true">⛶</span><span class="vault-fs-label">Fullscreen</span></button>
+            </div>
+          </div>
+          <div id="game" class="gba-game-host"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Play view -->
+  <div id="vault-play-view" class="vault-play-view" style="display:none">
+    <div class="vault-split">
+      <div class="vault-side-left" id="vault-sidebar">
+        <p class="vault-side-label">More</p>
+        <div id="vault-side-cards"></div>
+      </div>
+      <div class="vault-main-frame" style="position:relative">
+        <div class="vault-frame-header">
+          <div class="vault-frame-left">
+            <button class="vault-topbar-btn" id="vault-frame-back-btn" title="Back to grid">← Back</button>
+          </div>
+          <div class="vault-frame-center">
+            <span id="vault-play-title" class="vault-play-title"></span>
+          </div>
+          <div class="vault-frame-btns">
+            <button class="vault-fs-btn" id="vault-reload-btn" title="Reload activity" aria-label="Reload activity" style="display:none"><i class="fa-solid fa-rotate-right"></i></button>
+            <button class="vault-play-fav-btn" id="vault-play-fav-btn" aria-label="Favourite" title="Favourite"><i class="fa-regular fa-heart"></i></button>
+            <button class="vault-fs-btn vault-fs-btn--wide" id="vault-fs-btn" title="Fullscreen"><span class="vault-fs-glyph" aria-hidden="true">⛶</span><span class="vault-fs-label">Fullscreen</span></button>
+          </div>
+        </div>
+        <!-- Splash screen shown before game load -->
+        <div id="vault-splash" class="vault-splash">
+          <!-- Blurred background: 3 game thumbs -->
+          <div class="vsplash-bg" aria-hidden="true">
+            <img class="vsplash-bg-img" id="vsb-img-1" src="" alt="Game thumbnail background">
+            <img class="vsplash-bg-img" id="vsb-img-2" src="" alt="Game thumbnail background">
+            <img class="vsplash-bg-img" id="vsb-img-3" src="" alt="Game thumbnail background">
+            <div class="vsplash-bg-overlay"></div>
+          </div>
+          <!-- In-content ads on the splash screen, above and below the game
+               card. Neither blocks the Start button: no countdown, no dismiss,
+               no "watch to play". That distinction is what keeps these ordinary
+               display placements rather than incentivised/interstitial ones,
+               which standard AdSense units may not be used for.
+               Border only for now so the positions can be reviewed before any
+               ad code goes in. -->
+          <div class="vault-splash-ad vault-splash-ad-top" id="vault-splash-ad-top"></div>
+
+          <!-- Foreground: absolutely centered over the blurred bg -->
+          <div class="vault-splash-inner">
+            <div class="vault-splash-left">
+              <h2 class="vault-splash-title" id="vault-splash-title">Play Free Browser Games</h2>
+              <p class="vault-splash-desc">Free activities right here in your browser, no downloads needed.</p>
+              <div class="vault-splash-cta">
+                <button class="vault-splash-play-btn" id="vault-splash-play-btn">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  Start
+                </button>
+                <p class="vault-splash-hint">No login required, start your activity right now</p>
+              </div>
+            </div>
+            <div class="vault-splash-right">
+              <div class="vault-splash-stack">
+                <div class="vault-splash-card">
+                  <img id="vault-splash-thumb" src="" alt="Game thumbnail">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vault-splash-ad vault-splash-ad-bottom" id="vault-splash-ad-bottom"></div>
+        </div>
+        <!-- Ad loading overlay -->
+        <div id="vault-ad-loader" class="vault-ad-loader">
+          <div class="vault-ad-spinner"></div>
+        </div>
+        <!-- Pre-game video ad container (IMA renders the player + skip/countdown
+             UI in here). Currently unused - the pre-roll is disabled, see the
+             note by the script tags at the bottom of this file. Left in place
+             so re-enabling is a two-line change. Never visible without the
+             .active class, which only _playPrerollThen() adds. -->
+        <div id="vault-ad-container" class="vault-ad-container"></div>
+        <iframe id="vault-iframe" src="" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" referrerpolicy="strict-origin-when-cross-origin" style="display:none"></iframe>
+
+        <!-- Horizontal ad below the played game. Was already wired in
+             main.js (_pushPlayAd, mounted the first time a game opens) but
+             this container had been removed at some point with the trigger
+             left behind - restored while migrating off AdSense. Sits inside
+             .vault-play-view, which is itself display:none until a game is
+             open, so this is never visible on the grid or splash screens. -->
+        <div class="sc-ad sc-ad-section" id="sc-gam-playad"></div>
+
+      </div>
+      <div class="vault-side-right" id="vault-sidebar-right">
+        <p class="vault-side-label">Up Next</p>
+        <div id="vault-side-cards-right"></div>
+      </div>
+    </div>
+  </div>
+
+
+</div><!-- /vault-overlay -->
+
+<script>
+(function () {
+  var playBtn = document.getElementById('vault-splash-play-btn');
+  if (playBtn) {
+    playBtn.addEventListener('click', function () {
+      playBtn.disabled = true;                       // guard double-clicks
+      if (typeof _hideSplash === 'function') _hideSplash();
+
+      // Show the centered spinner ONLY while we actually wait on an ad. A
+      // frequency-capped user (already watched one in the last 24h) plays no ad
+      // and the game opens directly, so the ad-loader is skipped for them - no
+      // spinner. They still see the game's own top loading bar as it downloads.
+      var _willWaitOnAd = (typeof _prerollSuppressed === 'function') ? !_prerollSuppressed() : true;
+      var adLoaderEl = document.getElementById('vault-ad-loader');
+      if (adLoaderEl && _willWaitOnAd) adLoaderEl.classList.add('active');
+
+      // Start loading the activity in the background NOW, in parallel with the
+      // ad request, so it is ready the instant the ad ends or a no-fill
+      // resolves. It stays hidden until launch reveals it.
+      if (typeof _preloadGameFrame === 'function') _preloadGameFrame();
+
+      var launch = function () {
+        if (typeof _hideSplashAndLaunch === 'function') _hideSplashAndLaunch();
+      };
+
+      // Play the VDO.AI VAST pre-roll, then launch. _playPrerollThen always
+      // calls launch() - on ad success, skip, no-fill, error, or timeout - so
+      // the activity can never be blocked by an ad problem.
+      if (typeof _playPrerollThen === 'function') {
+        _playPrerollThen(launch);
+      } else {
+        launch();
+      }
+    });
+  }
+})();
+</script>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+
+<script src="/assets/js/main.js?v=2"></script>
+
+</body>
+</html>

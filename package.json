@@ -1,0 +1,13 @@
+{
+  "name": "solvecalc-github-pages",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static build of the SolveCalc calcsolver and game vault for GitHub Pages",
+  "scripts": {
+    "build": "node src/build.js"
+  },
+  "devDependencies": {
+    "ejs": "^3.1.10"
+  },
+  "license": "MIT"
+}

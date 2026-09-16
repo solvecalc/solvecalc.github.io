@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Number Base Converter - Binary, Hex, Octal, Decimal</title>
+  <meta name="description" content="Convert a number between binary, octal, decimal and hexadecimal, and see why hex is grouped in fours. Free browser tool for computing and maths homework.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/base-converter">
+  <meta property="og:title" content="Number Base Converter - Binary, Hex, Octal, Decimal">
+  <meta property="og:description" content="Convert a number between binary, octal, decimal and hexadecimal, and see why hex is grouped in fours. Free browser tool for computing and maths homework.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/base-converter">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Number Base Converter - Binary, Hex, Octal, Decimal">
+  <meta name="twitter:description" content="Convert a number between binary, octal, decimal and hexadecimal, and see why hex is grouped in fours. Free browser tool for computing and maths homework.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Number Base Converter","url":"https://solvecalc.github.io/tools/base-converter","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Convert a number between binary, octal, decimal and hexadecimal, and see why hex is grouped in fours. Free browser tool for computing and maths homework.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does hex use letters?","acceptedAnswer":{"@type":"Answer","text":"Base sixteen needs sixteen single-character digits. After 0 to 9 the letters A to F cover the values ten to fifteen."}},{"@type":"Question","name":"How do binary and hex relate?","acceptedAnswer":{"@type":"Answer","text":"One hex digit equals exactly four binary digits, so conversion between them is grouping rather than calculating."}},{"@type":"Question","name":"What is octal used for?","acceptedAnswer":{"@type":"Answer","text":"Base eight groups binary in threes. It survives mainly in Unix file permissions, where 755 and 644 are octal."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"Number Base Converter","item":"https://solvecalc.github.io/tools/base-converter"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>Number Base Converter</span>
+  </nav>
+  <h1 class="tool-h1">Number Base Converter</h1>
+  <p class="article-intro">One number, shown in every base that matters.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="base-page">
+  <div class="base-main">
+    <div class="base-hero">
+      <h1>Number Base Converter</h1>
+    </div>
+
+    <div class="base-input-wrap">
+      <label><i class="fa-solid fa-keyboard" style="margin-right:.3rem;"></i>Enter a Number</label>
+      <div class="base-source-row">
+        <input class="base-input" type="text" id="baseInput" placeholder="e.g. 255" value="42">
+        <select class="base-from-select" id="fromBase">
+          <option value="10">Decimal (Base 10)</option>
+          <option value="2">Binary (Base 2)</option>
+          <option value="8">Octal (Base 8)</option>
+          <option value="16">Hex (Base 16)</option>
+        </select>
+        <button class="base-btn" onclick="doConvert()"><i class="fa-solid fa-bolt" style="margin-right:.3rem;"></i>Convert</button>
+      </div>
+      <div class="base-error" id="baseError"></div>
+    </div>
+
+    <div class="base-grid">
+      <!-- Binary -->
+      <div class="base-card" id="card-bin">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#f5a623;">Binary</span>
+          <span class="base-card-sub">Base 2 (0s and 1s)</span>
+          <button class="copy-badge" onclick="copyVal('binVal')">Copy</button>
+        </div>
+        <div class="base-value" id="binVal" onclick="setFromBase('binVal','2')">-</div>
+        <div class="bit-display" id="bitDisplay"></div>
+      </div>
+
+      <!-- Octal -->
+      <div class="base-card" id="card-oct">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#818cf8;">Octal</span>
+          <span class="base-card-sub">Base 8 (0-7)</span>
+          <button class="copy-badge" onclick="copyVal('octVal')">Copy</button>
+        </div>
+        <div class="base-value" id="octVal" onclick="setFromBase('octVal','8')" style="color:#818cf8;">-</div>
+        <div class="octal-display" id="octDisplay"></div>
+      </div>
+
+      <!-- Decimal -->
+      <div class="base-card" id="card-dec">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#2dd4bf;">Decimal</span>
+          <span class="base-card-sub">Base 10 (0-9)</span>
+          <button class="copy-badge" onclick="copyVal('decVal')">Copy</button>
+        </div>
+        <div class="base-value" id="decVal" onclick="setFromBase('decVal','10')" style="color:#2dd4bf;">-</div>
+        <div class="dec-bar" id="decBar" style="width:0;"></div>
+      </div>
+
+      <!-- Hex -->
+      <div class="base-card" id="card-hex">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#f43f5e;">Hexadecimal</span>
+          <span class="base-card-sub">Base 16 (0-9, A-F)</span>
+          <button class="copy-badge" onclick="copyVal('hexVal')">Copy</button>
+        </div>
+        <div class="base-value" id="hexVal" onclick="setFromBase('hexVal','16')" style="color:#f43f5e;">-</div>
+        <div class="hex-display" id="hexDisplay"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const HEX_COLORS = ['#f43f5e','#f97316','#f5a623','#eab308','#84cc16','#22c55e','#14b8a6','#06b6d4','#3b82f6','#6366f1','#8b5cf6','#a855f7','#ec4899','#f43f5e','#fb923c','#fbbf24'];
+
+  function updateBits(binStr) {
+    const container = document.getElementById('bitDisplay');
+    container.innerHTML = '';
+    const padded = binStr.length < 8 ? binStr.padStart(8, '0') : binStr;
+    padded.split('').forEach((bit, i) => {
+      const span = document.createElement('div');
+      span.className = 'bit ' + (bit === '1' ? 'on' : 'off');
+      span.textContent = bit;
+      span.style.animationDelay = i * 30 + 'ms';
+      container.appendChild(span);
+    });
+  }
+
+  function updateHex(hexStr) {
+    const container = document.getElementById('hexDisplay');
+    container.innerHTML = '';
+    hexStr.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'hex-digit';
+      const v = parseInt(ch, 16);
+      span.style.cssText = `color: ${HEX_COLORS[v] || '#c8d4f0'}; background: ${HEX_COLORS[v]}22; border-radius: 6px; padding: .1rem .3rem;`;
+      span.textContent = ch.toUpperCase();
+      container.appendChild(span);
+    });
+  }
+
+  function updateOctal(octStr) {
+    const container = document.getElementById('octDisplay');
+    container.innerHTML = '';
+    octStr.split('').forEach(ch => {
+      const span = document.createElement('span');
+      span.className = 'octal-digit';
+      span.textContent = ch;
+      container.appendChild(span);
+    });
+  }
+
+  function updateDecBar(val, max) {
+    const bar = document.getElementById('decBar');
+    const pct = Math.min((val / Math.max(max, 1)) * 100, 100);
+    bar.style.width = pct + '%';
+  }
+
+  window.doConvert = function() {
+    const raw = document.getElementById('baseInput').value.trim().toUpperCase();
+    const fromBase = parseInt(document.getElementById('fromBase').value);
+    const errEl = document.getElementById('baseError');
+    errEl.style.display = 'none';
+
+    if(!raw) { errEl.textContent = 'Please enter a number!'; errEl.style.display = 'block'; return; }
+
+    // Validate
+    const validChars = { 2: /^[01]+$/, 8: /^[0-7]+$/, 10: /^\d+$/, 16: /^[0-9A-F]+$/ };
+    if(!validChars[fromBase].test(raw)) {
+      errEl.textContent = `Invalid ${fromBase === 2 ? 'binary' : fromBase === 8 ? 'octal' : fromBase === 10 ? 'decimal' : 'hex'} number!`;
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const decimal = parseInt(raw, fromBase);
+    if(decimal > 2147483647) {
+      errEl.textContent = 'Number too large! Maximum is 2,147,483,647.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const binStr = decimal.toString(2);
+    const octStr = decimal.toString(8);
+    const decStr = decimal.toString(10);
+    const hexStr = decimal.toString(16).toUpperCase();
+
+    // Animate values with transition
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.textContent = val;
+        el.style.opacity = '1';
+        el.style.transition = 'opacity .3s';
+      }, 150);
+    };
+
+    setVal('binVal', binStr);
+    setVal('octVal', octStr);
+    setVal('decVal', decStr);
+    setVal('hexVal', hexStr);
+
+    setTimeout(() => {
+      updateBits(binStr);
+      updateOctal(octStr);
+      updateDecBar(decimal, 65535);
+      updateHex(hexStr);
+    }, 200);
+
+    // Highlight active source base card
+    ['bin','oct','dec','hex'].forEach(b => {
+      document.getElementById('card-' + b).classList.remove('active-base');
+    });
+    const baseMap = { '2':'bin', '8':'oct', '10':'dec', '16':'hex' };
+    if(baseMap[fromBase]) document.getElementById('card-' + baseMap[fromBase]).classList.add('active-base');
+  };
+
+  window.setFromBase = function(valId, base) {
+    const val = document.getElementById(valId).textContent;
+    if(val === '-') return;
+    document.getElementById('baseInput').value = val;
+    document.getElementById('fromBase').value = base;
+    doConvert();
+  };
+
+  window.copyVal = function(id) {
+    const val = document.getElementById(id).textContent;
+    if(val === '-') return;
+    navigator.clipboard.writeText(val).catch(() => {});
+    const el = document.getElementById(id);
+    const rect = el.getBoundingClientRect();
+    const tip = document.createElement('div');
+    tip.className = 'tooltip';
+    tip.textContent = 'Copied!';
+    tip.style.left = (rect.left + window.scrollX) + 'px';
+    tip.style.top = (rect.top + window.scrollY - 30) + 'px';
+    document.body.appendChild(tip);
+    setTimeout(() => tip.remove(), 900);
+  };
+
+  document.getElementById('baseInput').addEventListener('keydown', e => {
+    if(e.key === 'Enter') doConvert();
+  });
+
+  doConvert();
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>What a Base Actually Changes</h2>
+
+    <p>Only the notation. The quantity is identical whichever base you write it in: decimal 255, binary 11111111 and hexadecimal FF all describe the same number of things. What changes is how many symbols are available before you need another column.</p>
+
+
+    <h2>Why Computers Use Binary</h2>
+
+    <p>A circuit is reliably either on or off, and two states map exactly onto two digits. Every larger structure, from an integer to a video frame, is built from those. Binary is unreadable at length for people, though, which is where hexadecimal comes in.</p>
+
+
+    <h2>Hexadecimal Is Compressed Binary</h2>
+
+    <p>Sixteen is two to the fourth, so one hex digit stands in for exactly four binary digits with no arithmetic needed. 1111 becomes F, and 11111111 becomes FF. That is why colour codes, memory addresses and byte dumps are written in hex rather than binary: it is four times shorter and converts back mechanically.</p>
+
+
+    <h2>Converting by Hand</h2>
+
+    <p>To go from decimal, divide repeatedly by the target base and read the remainders bottom to top. To come back, multiply each digit by its place value and add. 1011 in binary is 8 plus 0 plus 2 plus 1, which is 11.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Why does hex use letters?</summary>
+        <div class="home-faq-a">Base sixteen needs sixteen single-character digits. After 0 to 9 the letters A to F cover the values ten to fifteen.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">How do binary and hex relate?</summary>
+        <div class="home-faq-a">One hex digit equals exactly four binary digits, so conversion between them is grouping rather than calculating.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">What is octal used for?</summary>
+        <div class="home-faq-a">Base eight groups binary in threes. It survives mainly in Unix file permissions, where 755 and 644 are octal.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/fraction-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+        <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/prime-checker">
+        <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+        <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+        <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/times-table">
+        <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+        <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

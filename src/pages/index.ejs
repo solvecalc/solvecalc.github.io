@@ -1,0 +1,69 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero-inner">
+    <h1 class="hero-h1">SolveCalc - Free CalcSolver and Scientific Calculator</h1>
+    <p class="hero-sub">Arithmetic, trigonometry, roots, powers and logarithms, worked out in the browser tab you already have open. No install, no account, no cost.</p>
+    <div class="hero-btns">
+      <a class="hero-btn-primary" href="#calc-col"><i class="fa-solid fa-calculator"></i> Use the Calculator</a>
+      <a class="hero-btn-secondary" href="/tools"><i class="fa-solid fa-wrench"></i> Browse the Tools</a>
+    </div>
+  </div>
+</section>
+
+<div class="page-wrap">
+  <div class="home-layout">
+    <div class="calc-section-wrap" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+<%- include('../partials/calculator.html') %>
+<%- include('../partials/chips.html') %>
+
+    <section class="home-section">
+      <h2>A Calcsolver That Answers Immediately</h2>
+      <p>Press a key and the answer is already there. Nothing is sent anywhere to be computed: the arithmetic runs in JavaScript on the machine in front of you, which is why the result appears the same on hotel wifi as it does on fibre.</p>
+      <p>The keypad carries what school maths actually asks for. Brackets and the four operations, powers and roots, sine, cosine and tangent, natural and base-ten logarithms, factorials, percentages, reciprocals, and the constants pi and e. Switch on Code Mode and you can type an expression such as <code>sqrt(225)</code> or <code>log(1000)</code> from the keyboard instead of hunting for the right button.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Calc Solver, CalcSolver, CalcSolve: One Tool, Many Spellings</h2>
+      <p>People arrive here typing the name half a dozen ways. Calcsolver, calc solver, calcsolve, solve calc, solvecalc. They all describe the same idea, a calculator on a web page that solves the problem in front of you, and none of the spellings leads to a different or paid version.</p>
+      <p>This is the GitHub Pages build of that project, kept deliberately small: the calculator, a handful of focused tools, and short written guides. Its source sits in the open on <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>, so anything the page does can be read rather than trusted.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Tools for the Jobs a Keypad Handles Badly</h2>
+      <p>Some questions are awkward on a plain calculator. Reducing a fraction, working out which numbers divide evenly into two others, or turning a decimal into a ratio all take several steps and an easy slip. Each of those has its own page here, with the working shown rather than just the answer.</p>
+      <div class="home-topics-grid">
+<% topTools.forEach(function (t) { %>
+        <a class="home-topic-card" href="/tools/<%= t.slug %>">
+          <span class="home-topic-title"><i class="fa-solid <%= t.icon %>"></i> <%= t.name %></span>
+          <span class="home-topic-desc"><%= t.blurb %></span>
+        </a>
+<% }); %>
+      </div>
+      <p class="text-center" style="margin-top:16px;"><a href="/tools">See all <%= toolCount %> tools</a></p>
+    </section>
+
+    <section class="home-section">
+      <h2>Nothing You Type Is Recorded</h2>
+      <p>Because every calculation happens locally, there is no log of your working anywhere, on this server or any other. The site has no accounts and no sign-in form, and the figures you enter never leave the page you entered them on.</p>
+      <p>It also keeps working on a restricted network. Chromebooks, library machines and school laptops that refuse installs can still open a web page, and a web page is all this is.</p>
+    </section>
+
+    <section class="home-section">
+      <h2>Reading Material</h2>
+      <p>The <a href="/guides">guides</a> cover the reasoning behind the buttons: why the order of operations is fixed, what a logarithm is actually asking, how percentages and fractions convert. The <a href="/blog">blog</a> is shorter and more practical, mostly about working accurately under exam conditions.</p>
+    </section>
+
+    <section class="home-section home-faq-section" id="faq">
+      <h2>Questions People Ask</h2>
+      <div class="home-faq-list">
+<% faq.forEach(function (item) { %>
+        <details class="home-faq-item">
+          <summary class="home-faq-q"><%= item.q %></summary>
+          <div class="home-faq-a"><%- item.a %></div>
+        </details>
+<% }); %>
+      </div>
+    </section>
+
+    </div>
+  </div>
+</div>

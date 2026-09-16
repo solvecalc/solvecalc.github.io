@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ratio Calculator - Simplify, Scale and Solve</title>
+  <meta name="description" content="Reduce a ratio to its simplest form, scale a recipe or plan up and down, or find the missing number in an equivalent pair. Free, with the working shown.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/ratio-calculator">
+  <meta property="og:title" content="Ratio Calculator - Simplify, Scale and Solve">
+  <meta property="og:description" content="Reduce a ratio to its simplest form, scale a recipe or plan up and down, or find the missing number in an equivalent pair. Free, with the working shown.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/ratio-calculator">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ratio Calculator - Simplify, Scale and Solve">
+  <meta name="twitter:description" content="Reduce a ratio to its simplest form, scale a recipe or plan up and down, or find the missing number in an equivalent pair. Free, with the working shown.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ratio Calculator","url":"https://solvecalc.github.io/tools/ratio-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Reduce a ratio to its simplest form, scale a recipe or plan up and down, or find the missing number in an equivalent pair. Free, with the working shown.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I share an amount in a given ratio?","acceptedAnswer":{"@type":"Answer","text":"Add the parts to get the total number of shares, divide the amount by that total, then multiply by each part. For 40 in 2:3, one share is 8, giving 16 and 24."}},{"@type":"Question","name":"Is 2:3 the same as two thirds?","acceptedAnswer":{"@type":"Answer","text":"No. 2:3 means two parts out of five in total, which is two fifths of the whole."}},{"@type":"Question","name":"Can a ratio have three parts?","acceptedAnswer":{"@type":"Answer","text":"Yes. Simplify and scale it exactly the same way, applying every operation to all parts at once."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"Ratio Calculator","item":"https://solvecalc.github.io/tools/ratio-calculator"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>Ratio Calculator</span>
+  </nav>
+  <h1 class="tool-h1">Ratio Calculator</h1>
+  <p class="article-intro">Simplify, scale, or fill in the missing part of a ratio.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="ratio-page">
+  <div class="ratio-main">
+    <div class="ratio-hero">
+      <h1>Ratio Calculator</h1>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-equation">
+        <div class="ratio-pair">
+          <label>A</label>
+          <input class="ratio-input" type="number" id="ratioA" value="3" min="0" step="any">
+        </div>
+        <div class="ratio-colon">:</div>
+        <div class="ratio-pair">
+          <label>B</label>
+          <input class="ratio-input" type="number" id="ratioB" value="4" min="0" step="any">
+        </div>
+        <div class="ratio-equals">=</div>
+        <div class="ratio-pair">
+          <label>C</label>
+          <input class="ratio-input" type="number" id="ratioC" value="9" min="0" step="any">
+        </div>
+        <div class="ratio-colon">:</div>
+        <div class="ratio-pair">
+          <label>D (find)</label>
+          <input class="ratio-unknown" id="ratioD" readonly value="?">
+        </div>
+      </div>
+      <button class="ratio-btn" onclick="calcRatio()"><i class="fa-solid fa-balance-scale" style="margin-right:.4rem;"></i>Solve Proportion</button>
+    </div>
+
+    <div class="scale-wrap">
+      <div class="widget-title"><i class="fa-solid fa-scale-balanced" style="margin-right:.3rem;"></i>Balance Scale</div>
+      <svg id="scaleSvg" height="180" viewBox="0 0 380 180"></svg>
+    </div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-label">Missing Value (D)</div>
+      <div class="result-value" id="resultVal">-</div>
+      <div class="result-formula" id="resultFormula"></div>
+      <div class="balanced-badge" id="balancedBadge"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  let currentTilt = 0;
+
+  function drawScale(tilt) {
+    const svg = document.getElementById('scaleSvg');
+    svg.innerHTML = '';
+    const W = 380, H = 180;
+    const cx = 190, poleTop = 30, poleBot = 100;
+    const beamLen = 130;
+    const angle = Math.max(-25, Math.min(25, tilt));
+    const rad = angle * Math.PI / 180;
+
+    // Pole
+    const pole = document.createElementNS('http://www.w3.org/2000/svg','line');
+    pole.setAttribute('x1', cx); pole.setAttribute('y1', poleTop);
+    pole.setAttribute('x2', cx); pole.setAttribute('y2', poleBot);
+    pole.setAttribute('stroke', '#2dd4bf'); pole.setAttribute('stroke-width', '3');
+    svg.appendChild(pole);
+
+    // Pivot circle
+    const pivot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    pivot.setAttribute('cx', cx); pivot.setAttribute('cy', poleTop);
+    pivot.setAttribute('r', 6); pivot.setAttribute('fill', '#14b8a6');
+    svg.appendChild(pivot);
+
+    // Beam
+    const lx = cx - Math.cos(rad) * beamLen;
+    const ly = poleTop + Math.sin(rad) * beamLen;
+    const rx = cx + Math.cos(rad) * beamLen;
+    const ry = poleTop - Math.sin(rad) * beamLen;
+
+    const beam = document.createElementNS('http://www.w3.org/2000/svg','line');
+    beam.setAttribute('x1', lx); beam.setAttribute('y1', ly);
+    beam.setAttribute('x2', rx); beam.setAttribute('y2', ry);
+    beam.setAttribute('stroke', angle === 0 ? '#4ade80' : '#2dd4bf');
+    beam.setAttribute('stroke-width', '3.5');
+    svg.appendChild(beam);
+
+    // Left pan (hangs from left end)
+    const lPanY = ly + 40;
+    const rPanY = ry + 40;
+    const panW = 70, panH = 12;
+
+    const lString = document.createElementNS('http://www.w3.org/2000/svg','line');
+    lString.setAttribute('x1', lx); lString.setAttribute('y1', ly);
+    lString.setAttribute('x2', lx); lString.setAttribute('y2', lPanY);
+    lString.setAttribute('stroke', '#5eead4'); lString.setAttribute('stroke-width', '1.5');
+    svg.appendChild(lString);
+
+    const rString = document.createElementNS('http://www.w3.org/2000/svg','line');
+    rString.setAttribute('x1', rx); rString.setAttribute('y1', ry);
+    rString.setAttribute('x2', rx); rString.setAttribute('y2', rPanY);
+    rString.setAttribute('stroke', '#5eead4'); rString.setAttribute('stroke-width', '1.5');
+    svg.appendChild(rString);
+
+    const lPan = document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    lPan.setAttribute('cx', lx); lPan.setAttribute('cy', lPanY);
+    lPan.setAttribute('rx', panW/2); lPan.setAttribute('ry', panH/2);
+    lPan.setAttribute('fill', '#122626'); lPan.setAttribute('stroke', '#14b8a6'); lPan.setAttribute('stroke-width', '2');
+    svg.appendChild(lPan);
+
+    const rPan = document.createElementNS('http://www.w3.org/2000/svg','ellipse');
+    rPan.setAttribute('cx', rx); rPan.setAttribute('cy', rPanY);
+    rPan.setAttribute('rx', panW/2); rPan.setAttribute('ry', panH/2);
+    rPan.setAttribute('fill', '#122626'); rPan.setAttribute('stroke', '#14b8a6'); rPan.setAttribute('stroke-width', '2');
+    svg.appendChild(rPan);
+
+    // A:B label on left pan
+    const a = document.getElementById('ratioA').value || '?';
+    const b = document.getElementById('ratioB').value || '?';
+    const lt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lt.setAttribute('x', lx); lt.setAttribute('y', lPanY + 22);
+    lt.setAttribute('text-anchor', 'middle'); lt.setAttribute('font-size', '13');
+    lt.setAttribute('font-weight', '800'); lt.setAttribute('fill', '#2dd4bf');
+    lt.textContent = `${a}:${b}`; svg.appendChild(lt);
+
+    const c = document.getElementById('ratioC').value || '?';
+    const d = document.getElementById('ratioD').value;
+    const rt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    rt.setAttribute('x', rx); rt.setAttribute('y', rPanY + 22);
+    rt.setAttribute('text-anchor', 'middle'); rt.setAttribute('font-size', '13');
+    rt.setAttribute('font-weight', '800'); rt.setAttribute('fill', '#2dd4bf');
+    rt.textContent = `${c}:${d}`; svg.appendChild(rt);
+
+    // Base
+    const base = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    base.setAttribute('x', cx - 15); base.setAttribute('y', poleBot);
+    base.setAttribute('width', 30); base.setAttribute('height', 8);
+    base.setAttribute('fill', '#14b8a6'); base.setAttribute('rx', 3);
+    svg.appendChild(base);
+
+    if(angle === 0) {
+      const balanced = document.createElementNS('http://www.w3.org/2000/svg','text');
+      balanced.setAttribute('x', cx); balanced.setAttribute('y', H - 10);
+      balanced.setAttribute('text-anchor', 'middle'); balanced.setAttribute('font-size', '13');
+      balanced.setAttribute('font-weight', '800'); balanced.setAttribute('fill', '#4ade80');
+      balanced.textContent = '⚖ Balanced!'; svg.appendChild(balanced);
+    }
+  }
+
+  window.calcRatio = function() {
+    const a = parseFloat(document.getElementById('ratioA').value);
+    const b = parseFloat(document.getElementById('ratioB').value);
+    const c = parseFloat(document.getElementById('ratioC').value);
+
+    if(isNaN(a) || isNaN(b) || isNaN(c)) { alert('Please enter values for A, B, and C!'); return; }
+    if(a === 0) { alert('A cannot be zero!'); return; }
+
+    const d = (b * c) / a;
+
+    document.getElementById('ratioD').value = parseFloat(d.toFixed(4));
+
+    // Animate scale to balanced
+    const aRatio = a/b;
+    const cRatio = c/d;
+    const diff = aRatio - cRatio;
+    let tilt = diff * 20;
+    tilt = Math.max(-25, Math.min(25, tilt));
+
+    // First show unbalanced
+    drawScale(tilt);
+    setTimeout(() => {
+      // Then balance
+      let current = tilt;
+      const target = 0;
+      const steps = 30;
+      let step = 0;
+      const interval = setInterval(() => {
+        step++;
+        current = tilt * (1 - step/steps);
+        drawScale(current);
+        if(step >= steps) {
+          clearInterval(interval);
+          drawScale(0);
+        }
+      }, 16);
+    }, 600);
+
+    document.getElementById('resultVal').textContent = parseFloat(d.toFixed(4));
+    document.getElementById('resultFormula').textContent = `${a} : ${b} = ${c} : ${d.toFixed(4)}    →    D = (B × C) ÷ A = (${b} × ${c}) ÷ ${a}`;
+    document.getElementById('balancedBadge').textContent = `⚖ Ratio verified: ${a}/${b} = ${c}/${d.toFixed(4)}`;
+
+    const res = document.getElementById('resultBox');
+    res.style.display = 'block';
+    res.style.animation = 'none';
+    res.offsetHeight;
+    res.style.animation = 'popIn .5s cubic-bezier(.175,.885,.32,1.275)';
+  };
+
+  drawScale(0);
+
+  document.querySelectorAll('.ratio-input').forEach(input => {
+    input.addEventListener('keydown', e => { if(e.key === 'Enter') calcRatio(); });
+  });
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>Simplifying a Ratio</h2>
+
+    <p>Divide every part by their greatest common factor. 12:18 has a GCF of 6, so it reduces to 2:3. A simplified ratio says the same thing with smaller numbers, which makes two ratios far easier to compare.</p>
+
+
+    <h2>Scaling Without Breaking It</h2>
+
+    <p>Whatever you do to one part you do to all of them. Doubling a recipe written 2:3:5 gives 4:6:10, and the proportions are untouched. Adding two to each part instead gives 4:5:7, which is a completely different mixture and the most common ratio mistake there is.</p>
+
+
+    <h2>Ratio Against Fraction</h2>
+
+    <p>A ratio of 2:3 means five parts in total, so the first share is two fifths of the whole, not two thirds. Sharing 40 sweets in a 2:3 ratio gives 16 and 24. Reading a ratio as if it were a fraction is what produces the wrong split.</p>
+
+
+    <h2>Finding a Missing Part</h2>
+
+    <p>Equivalent ratios cross-multiply. If 3:4 equals 9:x, then 3x is 36 and x is 12. That single step handles scale drawings, map distances and unit pricing, which are the same question wearing different clothes.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">How do I share an amount in a given ratio?</summary>
+        <div class="home-faq-a">Add the parts to get the total number of shares, divide the amount by that total, then multiply by each part. For 40 in 2:3, one share is 8, giving 16 and 24.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Is 2:3 the same as two thirds?</summary>
+        <div class="home-faq-a">No. 2:3 means two parts out of five in total, which is two fifths of the whole.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Can a ratio have three parts?</summary>
+        <div class="home-faq-a">Yes. Simplify and scale it exactly the same way, applying every operation to all parts at once.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/fraction-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+        <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/prime-checker">
+        <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+        <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+        <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/times-table">
+        <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+        <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

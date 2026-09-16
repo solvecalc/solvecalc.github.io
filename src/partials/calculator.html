@@ -1,0 +1,133 @@
+      <!-- ── CENTER: Calculator ── -->
+      <div class="calc-col" id="calc-col" data-calc-theme="pastel">
+
+      <div class="device-frame">
+      <div class="calc-widget">
+        <!-- Calculator header: model label left, Code Mode toggle right -->
+        <div class="calc-header">
+          <span class="cs-model">SC-CM-0000</span>
+<label class="code-toggle-wrap" for="vault-toggle">
+            <span class="code-toggle-label">Code Mode</span>
+            <input type="checkbox" id="vault-toggle" class="code-toggle-input">
+            <span class="code-toggle-track"><span class="code-toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <!-- Display -->
+        <div class="calc-display-wrap">
+          <div class="calc-expr" id="calc-expr"></div>
+          <div class="calc-display" id="calc-display">0</div>
+        </div>
+
+        <!-- Physical theme only: modifier pills -->
+        <div class="cs-modifiers">
+          <button class="cs-mod" id="cs-shift-btn" onclick="calcToggleShift()">Shift</button>
+          <button class="cs-mod" onclick="calcAlphaAns()">Alpha</button>
+          <button class="cs-mod cs-replay" onclick="calcReplay()">Replay</button>
+        </div>
+
+        <!-- Physical theme only: scientific function row -->
+        <div class="calc-sci-label">Scientific</div>
+        <div class="calc-sci-panel">
+        <div class="calc-sci-row">
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">sin⁻¹</span><span class="key-hint-alpha">A</span></span><button class="cbtn cbtn-fn" onclick="calcTrig('sin')"><span class="letter">sin</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">cos⁻¹</span><span class="key-hint-alpha">B</span></span><button class="cbtn cbtn-fn" onclick="calcTrig('cos')"><span class="letter">cos</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">tan⁻¹</span><span class="key-hint-alpha">C</span></span><button class="cbtn cbtn-fn" onclick="calcTrig('tan')"><span class="letter">tan</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">√</span><span class="key-hint-alpha">D</span></span><button class="cbtn cbtn-fn" onclick="calcFn('x*x')"><span class="letter">x²</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">x²</span><span class="key-hint-alpha">E</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.sqrt(x)')"><span class="letter">√</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">sin</span><span class="key-hint-alpha">F</span></span><button class="cbtn cbtn-fn2" onclick="calcTrig('asin')"><span class="letter">sin⁻¹</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">cos</span><span class="key-hint-alpha">X</span></span><button class="cbtn cbtn-fn2" onclick="calcTrig('acos')"><span class="letter">cos⁻¹</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">tan</span><span class="key-hint-alpha">Y</span></span><button class="cbtn cbtn-fn2" onclick="calcTrig('atan')"><span class="letter">tan⁻¹</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">∛</span><span class="key-hint-alpha">M</span></span><button class="cbtn cbtn-fn" onclick="calcFn('x*x*x')"><span class="letter">x³</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">x³</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.cbrt(x)')"><span class="letter">∛</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">10ˣ</span><span class="key-hint-alpha">(</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.log10(x)')"><span class="letter">log</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">eˣ</span><span class="key-hint-alpha">)</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.log(x)')"><span class="letter">ln</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">2ˣ</span><span class="key-hint-alpha">,</span></span><button class="cbtn cbtn-fn" onclick="calcFn('Math.log2(x)')"><span class="letter">log₂</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">nPr</span></span><button class="cbtn cbtn-fn" onclick="calcFn('(function(n){n=Math.round(n);if(n<0)return NaN;let r=1;for(let i=2;i<=n;i++)r*=i;return r;})(x)')"><span class="letter">n!</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-shift">x!</span></span><button class="cbtn cbtn-fn" onclick="calcFn('1/x')"><span class="letter">1/x</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">STO</span></span><button class="cbtn cbtn-const" onclick="calcConst('Math.PI')"><span class="letter">π</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">RCL</span></span><button class="cbtn cbtn-const" onclick="calcConst('e')"><span class="letter">e</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">M+</span></span><button class="cbtn cbtn-paren cbtn-op" onclick="calcParen('(')"><span class="letter">(</span></button></div>
+          <div class="key-cell"><span class="key-hint"><span class="key-hint-alpha">M-</span></span><button class="cbtn cbtn-paren cbtn-op" onclick="calcParen(')')"><span class="letter">)</span></button></div>
+        </div>
+        </div><!-- /calc-sci-panel -->
+
+        <!-- Buttons -->
+        <div class="calc-grid calc-grid-standard">
+          <!-- Row 1: Scientific -->
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.sin(x*Math.PI/180)')">sin</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.cos(x*Math.PI/180)')">cos</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.tan(x*Math.PI/180)')">tan</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.log10(x)')">log</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.log(x)')">ln</button>
+
+          <!-- Row 2: More scientific -->
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.pow(x,2)')">x²</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.pow(x,3)')">x³</button>
+          <button class="cbtn cbtn-fn" onclick="calcFn('Math.sqrt(x)')">√</button>
+          <button class="cbtn cbtn-fn" onclick="calcConst('Math.PI')">π</button>
+          <button class="cbtn cbtn-fn" onclick="calcConst('Math.E')">e</button>
+
+          <!-- Row 3: Controls -->
+          <button class="cbtn cbtn-cl" onclick="calcClear()">AC</button>
+          <button class="cbtn cbtn-cl" onclick="calcBack()">⌫</button>
+          <button class="cbtn cbtn-op" onclick="calcParen('(')"> ( </button>
+          <button class="cbtn cbtn-op" onclick="calcParen(')')"> ) </button>
+          <button class="cbtn cbtn-op" onclick="calcOp('%')">%</button>
+
+          <!-- Row 4 -->
+          <button class="cbtn cbtn-num" onclick="calcDigit('7')">7</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('8')">8</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('9')">9</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('÷')">÷</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('×')">×</button>
+
+          <!-- Row 5 -->
+          <button class="cbtn cbtn-num" onclick="calcDigit('4')">4</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('5')">5</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('6')">6</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('-')">−</button>
+          <button class="cbtn cbtn-op" onclick="calcOp('+')">+</button>
+
+          <!-- Row 6 -->
+          <button class="cbtn cbtn-num" onclick="calcDigit('1')">1</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('2')">2</button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('3')">3</button>
+          <button class="cbtn cbtn-num cbtn-wide2" onclick="calcDigit('0')">0</button>
+          <button class="cbtn cbtn-num" onclick="calcDot()">.</button>
+
+          <!-- Row 7: Equals spans full width -->
+          <button class="cbtn cbtn-eq cbtn-wide5" onclick="calcEquals()">=</button>
+        </div><!-- /calc-grid -->
+
+        <!-- Physical theme only: 4-column grid -->
+        <div class="calc-grid-physical">
+          <button class="cbtn cbtn-cl"  onclick="calcClear()"><span class="letter">AC</span></button>
+          <button class="cbtn cbtn-cl"  onclick="calcBack()"><span class="letter">⌫</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('%')"><span class="letter">%</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('÷')"><span class="letter">÷</span></button>
+
+          <button class="cbtn cbtn-num" onclick="calcDigit('7')"><span class="letter">7</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('8')"><span class="letter">8</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('9')"><span class="letter">9</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('×')"><span class="letter">×</span></button>
+
+          <button class="cbtn cbtn-num" onclick="calcDigit('4')"><span class="letter">4</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('5')"><span class="letter">5</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('6')"><span class="letter">6</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('-')"><span class="letter">−</span></button>
+
+          <button class="cbtn cbtn-num" onclick="calcDigit('1')"><span class="letter">1</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('2')"><span class="letter">2</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDigit('3')"><span class="letter">3</span></button>
+          <button class="cbtn cbtn-op"  onclick="calcOp('+')"><span class="letter">+</span></button>
+
+          <button class="cbtn cbtn-num cbtn-wide2" onclick="calcDigit('0')"><span class="letter">0</span></button>
+          <button class="cbtn cbtn-num" onclick="calcDot()"><span class="letter">.</span></button>
+          <button class="cbtn cbtn-eq"  onclick="calcEquals()"><span class="letter">=</span></button>
+        </div><!-- /calc-grid-physical -->
+
+      </div><!-- /calc-widget -->
+      </div><!-- /device-frame -->
+
+    </div><!-- /calc-col -->

@@ -1,0 +1,170 @@
+<div class="tool-page-layout">
+
+
+<div class="prime-page">
+  <div class="prime-main">
+    <div class="prime-hero">
+      <h1>Prime Number Checker</h1>
+    </div>
+
+    <div class="prime-input-row">
+      <input class="prime-input" type="number" id="primeInput" placeholder="Enter number" min="2" max="99999" value="">
+      <button class="prime-check-btn" onclick="checkPrime()"><i class="fa-solid fa-magnifying-glass" style="margin-right:.3rem;"></i>CHECK</button>
+    </div>
+
+    <div class="prime-msg" id="primeMsg">Enter a number and press CHECK!</div>
+
+    <div class="prime-arena" id="primeArena">
+      <div class="prime-circle" id="primeCircle">
+        <div class="prime-number" id="primeNum">?</div>
+        <div class="prime-verdict" id="primeVerdict"></div>
+      </div>
+    </div>
+
+    <div class="factors-list" id="factorsList">
+      <div class="widget-title"><i class="fa-solid fa-list" style="margin-right:.3rem;"></i>All Factors</div>
+      <div class="factor-chips" id="factorChips"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function isPrime(n) {
+    if(n < 2) return false;
+    if(n === 2) return true;
+    if(n % 2 === 0) return false;
+    for(let i = 3; i <= Math.sqrt(n); i += 2) {
+      if(n % i === 0) return false;
+    }
+    return true;
+  }
+
+  function getFactors(n) {
+    const factors = [];
+    for(let i = 1; i <= n; i++) {
+      if(n % i === 0) factors.push(i);
+    }
+    return factors;
+  }
+
+  function getPrimeFactors(n) {
+    const factors = [];
+    let d = 2;
+    while(d * d <= n) {
+      while(n % d === 0) { factors.push(d); n = Math.floor(n/d); }
+      d++;
+    }
+    if(n > 1) factors.push(n);
+    return factors;
+  }
+
+  function clearBubbles() {
+    const arena = document.getElementById('primeArena');
+    arena.querySelectorAll('.factor-bubble, .sparkle').forEach(el => el.remove());
+  }
+
+  function spawnSparkles(cx, cy) {
+    const arena = document.getElementById('primeArena');
+    const emojis = ['✨','⭐','💫','🌟'];
+    for(let i = 0; i < 12; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      const angle = (i / 12) * 2 * Math.PI;
+      const dist = 80 + Math.random() * 60;
+      const sx = Math.cos(angle) * dist;
+      const sy = Math.sin(angle) * dist;
+      s.style.cssText = `left: ${cx}px; top: ${cy}px; --sx: ${sx}px; --sy: ${sy}px; animation-delay: ${Math.random()*.3}s;`;
+      s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      arena.appendChild(s);
+    }
+  }
+
+  function spawnFactorBubbles(factors, cx, cy) {
+    const arena = document.getElementById('primeArena');
+    const displayed = factors.filter(f => f !== 1 && f !== factors[factors.length-1]).slice(0, 10);
+    const compositeFactors = factors.slice(1, -1);
+    const toShow = compositeFactors.slice(0, 8);
+    const total = toShow.length;
+    toShow.forEach((f, i) => {
+      const angle = (i / Math.max(total, 1)) * 2 * Math.PI - Math.PI/2;
+      const dist = 120;
+      const tx = Math.cos(angle) * dist;
+      const ty = Math.sin(angle) * dist;
+      const size = f < 10 ? 44 : f < 100 ? 50 : 58;
+      const bubble = document.createElement('div');
+      bubble.className = 'factor-bubble';
+      bubble.style.cssText = `
+        left: ${cx}px; top: ${cy}px;
+        width: ${size}px; height: ${size}px;
+        font-size: ${f < 100 ? '1rem' : '.8rem'};
+        --tx: calc(${tx}px - 50%);
+        --ty: calc(${ty}px - 50%);
+        animation-delay: ${i * 0.08}s;
+      `;
+      bubble.textContent = f;
+      arena.appendChild(bubble);
+    });
+  }
+
+  window.checkPrime = function() {
+    const val = parseInt(document.getElementById('primeInput').value);
+    if(isNaN(val) || val < 1) { alert('Please enter a valid positive integer!'); return; }
+
+    clearBubbles();
+    const circle = document.getElementById('primeCircle');
+    const numEl = document.getElementById('primeNum');
+    const verdictEl = document.getElementById('primeVerdict');
+    const msgEl = document.getElementById('primeMsg');
+    const factorsList = document.getElementById('factorsList');
+    const factorChips = document.getElementById('factorChips');
+
+    numEl.textContent = val;
+    circle.className = 'prime-circle';
+
+    const prime = isPrime(val);
+    const factors = getFactors(val);
+    const primeFactors = getPrimeFactors(val);
+
+    setTimeout(() => {
+      if(prime) {
+        circle.classList.add('prime');
+        verdictEl.innerHTML = '<span class="verdict-prime">PRIME! ✨</span>';
+        msgEl.innerHTML = '<span class="msg-prime">🎉 ' + val + ' is a PRIME number! It has no divisors except 1 and itself!</span>';
+        factorsList.style.display = 'none';
+        spawnSparkles(160, 160);
+      } else {
+        circle.classList.add('composite');
+        verdictEl.innerHTML = '<span class="verdict-composite">Composite</span>';
+        msgEl.innerHTML = '<span class="msg-composite">📊 ' + val + ' is composite. Prime factors: ' + primeFactors.join(' × ') + '</span>';
+        factorChips.innerHTML = factors.map(f =>
+          `<span class="factor-chip">${f}</span>`
+        ).join('');
+        factorsList.style.display = 'block';
+        factorsList.style.animation = 'none';
+        factorsList.offsetHeight;
+        factorsList.style.animation = 'fadeIn .4s ease';
+        spawnFactorBubbles(factors, 160, 160);
+      }
+    }, 100);
+  };
+
+  document.getElementById('primeInput').addEventListener('keydown', e => {
+    if(e.key === 'Enter') checkPrime();
+  });
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>

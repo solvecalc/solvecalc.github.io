@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why School Chromebooks Need Browser-Based Tools</title>
+  <meta name="description" content="Managed Chromebooks block installs by design. What that means for classroom software, and why a page that runs entirely client-side sidesteps the problem.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/blog/why-chromebooks-need-browser-tools">
+  <meta property="og:title" content="Why School Chromebooks Need Browser-Based Tools">
+  <meta property="og:description" content="Managed Chromebooks block installs by design. What that means for classroom software, and why a page that runs entirely client-side sidesteps the problem.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/blog/why-chromebooks-need-browser-tools">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Why School Chromebooks Need Browser-Based Tools">
+  <meta name="twitter:description" content="Managed Chromebooks block installs by design. What that means for classroom software, and why a page that runs entirely client-side sidesteps the problem.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why Chromebooks Need Browser Tools","description":"Managed Chromebooks block installs by design. What that means for classroom software, and why a page that runs entirely client-side sidesteps the problem.","mainEntityOfPage":"https://solvecalc.github.io/blog/why-chromebooks-need-browser-tools","datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://solvecalc.github.io/blog"},{"@type":"ListItem","position":3,"name":"Why Chromebooks Need Browser Tools","item":"https://solvecalc.github.io/blog/why-chromebooks-need-browser-tools"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-article">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools">Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog" class=&#34;active&#34;>Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/blog">Blog</a> <span>/</span> <span>Why Chromebooks Need Browser Tools</span>
+  </nav>
+  <h1>Why Chromebooks Need Browser Tools</h1>
+  <p class="article-intro">Locked-down devices, and the software that still works on them.</p>
+  <div class="article-body">
+
+    <h2>The Device Most Students Actually Have</h2>
+
+    <p>School fleets standardised on Chromebooks because they are cheap, centrally managed and hard to break. The same management that makes them practical also means a student cannot install anything, and usually cannot approve an extension either.</p>
+
+    <p>Any tool that needs installing is therefore not available to the people who most need it.</p>
+
+
+    <h2>What Gets Blocked</h2>
+
+    <p>Installs, extensions, and often whole categories of domains. Policies vary by district, but the pattern is consistent: the browser works, and very little else is negotiable.</p>
+
+
+    <h2>Why Client-Side Matters Here</h2>
+
+    <p>A page that does its work in JavaScript on the device needs nothing but the page itself. No account, no server round trip for each calculation, no data leaving the machine. That last point is what lets a tool be used without a data-processing agreement, because there is no data to process.</p>
+
+
+    <h2>Offline and Flaky Connections</h2>
+
+    <p>Once a client-side page has loaded, it keeps working if the connection drops, because nothing further is being fetched. On school wifi at 9am that is a real advantage over anything that queries a server per keystroke.</p>
+
+
+    <h2>What to Look For</h2>
+
+    <p>A tool worth using on a managed device loads in one request, works without signing in, and does not ask for permissions it has no use for. If a calculator wants an account, the account is the product.</p>
+
+
+  </div>
+  <section class="home-section">
+    <h2>More Posts</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/blog/calculator-mistakes-that-cost-marks">
+        <span class="home-topic-title">Calculator Mistakes That Cost Marks</span>
+        <span class="home-topic-desc">Six ways a calculator hands you a confident wrong answer.</span>
+      </a>
+
+      <a class="home-topic-card" href="/blog/estimating-before-you-calculate">
+        <span class="home-topic-title">Estimating Before You Calculate</span>
+        <span class="home-topic-desc">A two-second habit that catches most input errors.</span>
+      </a>
+
+      <a class="home-topic-card" href="/blog/reading-a-question-before-solving-it">
+        <span class="home-topic-title">Reading a Question Before Solving It</span>
+        <span class="home-topic-desc">Most lost marks are comprehension, not arithmetic.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

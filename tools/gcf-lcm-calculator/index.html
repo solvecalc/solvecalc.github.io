@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GCF and LCM Calculator - Factors and Multiples Fast</title>
+  <meta name="description" content="Find the greatest common factor and lowest common multiple of two or more numbers, see the factor lists behind both, and stop confusing which one you need.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/gcf-lcm-calculator">
+  <meta property="og:title" content="GCF and LCM Calculator - Factors and Multiples Fast">
+  <meta property="og:description" content="Find the greatest common factor and lowest common multiple of two or more numbers, see the factor lists behind both, and stop confusing which one you need.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/gcf-lcm-calculator">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="GCF and LCM Calculator - Factors and Multiples Fast">
+  <meta name="twitter:description" content="Find the greatest common factor and lowest common multiple of two or more numbers, see the factor lists behind both, and stop confusing which one you need.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"GCF and LCM Calculator","url":"https://solvecalc.github.io/tools/gcf-lcm-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Find the greatest common factor and lowest common multiple of two or more numbers, see the factor lists behind both, and stop confusing which one you need.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which one do I need for adding fractions?","acceptedAnswer":{"@type":"Answer","text":"The lowest common multiple of the denominators. That becomes the common denominator you rewrite both fractions over."}},{"@type":"Question","name":"Can the GCF be 1?","acceptedAnswer":{"@type":"Answer","text":"Yes. Numbers with no shared factor beyond 1, such as 8 and 15, are called coprime and their GCF is 1."}},{"@type":"Question","name":"Does it work with more than two numbers?","acceptedAnswer":{"@type":"Answer","text":"Yes. The same rules apply across the whole set, taking shared primes at the lowest power for GCF and all primes at the highest for LCM."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"GCF and LCM Calculator","item":"https://solvecalc.github.io/tools/gcf-lcm-calculator"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>GCF and LCM Calculator</span>
+  </nav>
+  <h1 class="tool-h1">GCF and LCM Calculator</h1>
+  <p class="article-intro">Both answers at once, with the working that separates them.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="glcm-page">
+  <div class="glcm-main">
+    <div class="glcm-hero">
+      <h1>GCF and LCM Calculator</h1>
+    </div>
+
+    <div class="glcm-inputs">
+      <div class="glcm-input-group">
+        <label>Number A</label>
+        <input class="glcm-input" type="number" id="numA" value="12" min="1" max="10000">
+      </div>
+      <div class="glcm-input-group" style="justify-content:center;">
+        <label>&nbsp;</label>
+        <span style="font-size:2rem;font-weight:900;color:#c084fc;line-height:3rem;">&amp;</span>
+      </div>
+      <div class="glcm-input-group">
+        <label>Number B</label>
+        <input class="glcm-input" type="number" id="numB" value="18" min="1" max="10000">
+      </div>
+    </div>
+
+    <button class="glcm-btn" onclick="calcGCFLCM()"><i class="fa-solid fa-circle-nodes" style="margin-right:.4rem;"></i>Find GCF &amp; LCM</button>
+
+    <div class="venn-wrap">
+      <div class="widget-title"><i class="fa-solid fa-diagram-venn" style="margin-right:.3rem;"></i>Factor Venn Diagram</div>
+      <svg id="vennSvg" height="200" viewBox="0 0 520 200"></svg>
+    </div>
+
+    <div id="glcmResults">
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="rc-label">Greatest Common Factor (GCF)</div>
+          <div class="rc-value" id="gcfVal">-</div>
+          <div class="rc-note" id="gcfNote"></div>
+        </div>
+        <div class="result-card">
+          <div class="rc-label">Least Common Multiple (LCM)</div>
+          <div class="rc-value" id="lcmVal">-</div>
+          <div class="rc-note" id="lcmNote"></div>
+        </div>
+      </div>
+      <div class="steps-card" id="stepsCard">
+        <div class="widget-title"><i class="fa-solid fa-list-ol" style="margin-right:.3rem;"></i>Steps</div>
+        <div id="stepsContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function gcd(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while(b) { let t = b; b = a % b; a = t; }
+    return a;
+  }
+
+  function getFactors(n) {
+    const f = [];
+    for(let i = 1; i <= n; i++) { if(n % i === 0) f.push(i); }
+    return f;
+  }
+
+  function drawVenn(a, b, factA, factB, common, gcfVal) {
+    const svg = document.getElementById('vennSvg');
+    svg.innerHTML = '';
+    const W = 520, H = 200, r = 90;
+    const cx1 = 165, cx2 = 355, cy = 100;
+
+    // Left circle
+    const c1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c1.setAttribute('cx', cx1); c1.setAttribute('cy', cy); c1.setAttribute('r', r);
+    c1.setAttribute('fill', '#f3e8ff'); c1.setAttribute('stroke', '#c084fc'); c1.setAttribute('stroke-width', '2.5');
+    c1.setAttribute('opacity', '0.85'); svg.appendChild(c1);
+
+    // Right circle
+    const c2 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c2.setAttribute('cx', cx2); c2.setAttribute('cy', cy); c2.setAttribute('r', r);
+    c2.setAttribute('fill', '#ede9fe'); c2.setAttribute('stroke', '#a855f7'); c2.setAttribute('stroke-width', '2.5');
+    c2.setAttribute('opacity', '0.85'); svg.appendChild(c2);
+
+    // Labels
+    const la = document.createElementNS('http://www.w3.org/2000/svg','text');
+    la.setAttribute('x', cx1); la.setAttribute('y', cy - r - 8);
+    la.setAttribute('text-anchor', 'middle'); la.setAttribute('font-size', '14');
+    la.setAttribute('font-weight', '800'); la.setAttribute('fill', '#6b21a8');
+    la.textContent = 'Factors of ' + a; svg.appendChild(la);
+
+    const lb = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lb.setAttribute('x', cx2); lb.setAttribute('y', cy - r - 8);
+    lb.setAttribute('text-anchor', 'middle'); lb.setAttribute('font-size', '14');
+    lb.setAttribute('font-weight', '800'); lb.setAttribute('fill', '#6b21a8');
+    lb.textContent = 'Factors of ' + b; svg.appendChild(lb);
+
+    // GCF badge in overlap
+    const gcfCircle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    gcfCircle.setAttribute('cx', (cx1+cx2)/2); gcfCircle.setAttribute('cy', cy);
+    gcfCircle.setAttribute('r', '22');
+    gcfCircle.setAttribute('fill', '#a855f7'); gcfCircle.setAttribute('opacity', '0.3');
+    svg.appendChild(gcfCircle);
+
+    const gcfTxt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    gcfTxt.setAttribute('x', (cx1+cx2)/2); gcfTxt.setAttribute('y', cy - 6);
+    gcfTxt.setAttribute('text-anchor', 'middle'); gcfTxt.setAttribute('font-size', '11');
+    gcfTxt.setAttribute('font-weight', '800'); gcfTxt.setAttribute('fill', '#6b21a8');
+    gcfTxt.textContent = 'GCF'; svg.appendChild(gcfTxt);
+
+    const gcfNum = document.createElementNS('http://www.w3.org/2000/svg','text');
+    gcfNum.setAttribute('x', (cx1+cx2)/2); gcfNum.setAttribute('y', cy + 10);
+    gcfNum.setAttribute('text-anchor', 'middle'); gcfNum.setAttribute('font-size', '16');
+    gcfNum.setAttribute('font-weight', '900'); gcfNum.setAttribute('fill', '#a855f7');
+    gcfNum.textContent = gcfVal; svg.appendChild(gcfNum);
+
+    // Factor display in left (unique to A)
+    const onlyA = factA.filter(f => !common.includes(f)).slice(0, 6);
+    const positions = [
+      {x:-50,y:-30},{x:-60,y:0},{x:-50,y:30},{x:-30,y:-50},{x:-30,y:50},{x:-70,y:20}
+    ];
+    onlyA.forEach((f, i) => {
+      const pos = positions[i] || {x:-40,y: (i-3)*18};
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', cx1 + pos.x); t.setAttribute('y', cy + pos.y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '13');
+      t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#7c3aed');
+      t.setAttribute('opacity', '0'); t.textContent = f; svg.appendChild(t);
+      setTimeout(() => { t.setAttribute('opacity','1'); t.style.transition='opacity .3s'; }, i*80 + 200);
+    });
+
+    // Factor display in right (unique to B)
+    const onlyB = factB.filter(f => !common.includes(f)).slice(0, 6);
+    const posR = [
+      {x:50,y:-30},{x:60,y:0},{x:50,y:30},{x:30,y:-50},{x:30,y:50},{x:70,y:20}
+    ];
+    onlyB.forEach((f, i) => {
+      const pos = posR[i] || {x:40,y:(i-3)*18};
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', cx2 + pos.x); t.setAttribute('y', cy + pos.y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '13');
+      t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#7c3aed');
+      t.setAttribute('opacity', '0'); t.textContent = f; svg.appendChild(t);
+      setTimeout(() => { t.setAttribute('opacity','1'); }, i*80 + 400);
+    });
+
+    // Common factors in overlap region
+    const commonToShow = common.filter(f => f !== 1).slice(0, 3);
+    const cpositions = [{x:0,y:-25},{x:0,y:25},{x:0,y:0}];
+    commonToShow.forEach((f, i) => {
+      const pos = cpositions[i] || {x:0,y:(i-1)*20};
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', (cx1+cx2)/2 + pos.x);
+      t.setAttribute('y', cy + pos.y + (i === 1 ? 28 : i===0 ? -28 : 50));
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '12');
+      t.setAttribute('font-weight', '800'); t.setAttribute('fill', '#9333ea');
+      t.setAttribute('opacity', '0'); t.textContent = f; svg.appendChild(t);
+      setTimeout(() => { t.setAttribute('opacity','1'); }, i*100 + 600);
+    });
+  }
+
+  window.calcGCFLCM = function() {
+    const a = parseInt(document.getElementById('numA').value)||0;
+    const b = parseInt(document.getElementById('numB').value)||0;
+    if(a < 1 || b < 1) { alert('Please enter positive integers!'); return; }
+
+    const gcfVal = gcd(a, b);
+    const lcmVal = Math.abs(a * b) / gcfVal;
+    const factA = getFactors(a);
+    const factB = getFactors(b);
+    const common = factA.filter(f => factB.includes(f));
+
+    drawVenn(a, b, factA, factB, common, gcfVal);
+
+    document.getElementById('gcfVal').textContent = gcfVal;
+    document.getElementById('gcfNote').textContent = `Common factors: ${common.join(', ')}`;
+    document.getElementById('lcmVal').textContent = lcmVal;
+    document.getElementById('lcmNote').textContent = `${a} × ${b} ÷ ${gcfVal} = ${lcmVal}`;
+
+    const steps = [
+      `Find all factors of ${a}: {${factA.join(', ')}}`,
+      `Find all factors of ${b}: {${factB.join(', ')}}`,
+      `Common factors: {${common.join(', ')}}`,
+      `GCF = largest common factor = ${gcfVal}`,
+      `LCM = (${a} × ${b}) ÷ GCF = ${a*b} ÷ ${gcfVal} = ${lcmVal}`
+    ];
+
+    const stepsContainer = document.getElementById('stepsContainer');
+    stepsContainer.innerHTML = '';
+    steps.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'step-item';
+      div.innerHTML = `<div class="step-num">${i+1}</div><span>${s}</span>`;
+      stepsContainer.appendChild(div);
+    });
+
+    const results = document.getElementById('glcmResults');
+    results.style.display = 'block';
+    results.style.animation = 'none';
+    results.offsetHeight;
+  };
+
+  document.getElementById('numA').addEventListener('keydown', e => { if(e.key==='Enter') calcGCFLCM(); });
+  document.getElementById('numB').addEventListener('keydown', e => { if(e.key==='Enter') calcGCFLCM(); });
+
+  function shareThisPage() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: location.href });
+    } else {
+      navigator.clipboard.writeText(location.href).then(() => {
+        var btn = document.querySelector('.tool-share-btn');
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+      });
+    }
+  }
+  window.shareThisPage = shareThisPage;
+
+  // Draw initial empty Venn
+  (function initVenn(){
+    const svg = document.getElementById('vennSvg');
+    svg.innerHTML = '';
+    const cx1 = 165, cx2 = 355, cy = 100, r = 90;
+    [cx1, cx2].forEach((cx, idx) => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
+      c.setAttribute('fill', idx===0?'#f3e8ff':'#ede9fe');
+      c.setAttribute('stroke', idx===0?'#c084fc':'#a855f7');
+      c.setAttribute('stroke-width', '2.5'); c.setAttribute('opacity', '0.7');
+      svg.appendChild(c);
+    });
+    const hint = document.createElementNS('http://www.w3.org/2000/svg','text');
+    hint.setAttribute('x', '260'); hint.setAttribute('y', '108');
+    hint.setAttribute('text-anchor', 'middle'); hint.setAttribute('font-size', '13');
+    hint.setAttribute('fill', '#7c3aed'); hint.setAttribute('font-weight', '600');
+    hint.textContent = 'Enter numbers & click Calculate';
+    svg.appendChild(hint);
+  })();
+})();
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>Telling Them Apart</h2>
+
+    <p>The greatest common factor is the largest number that divides into all of your numbers. It is always less than or equal to the smallest one you entered. The lowest common multiple is the smallest number they all divide into, and it is always at least as large as the biggest one you entered.</p>
+
+    <p>If your answer is bigger than every input, it is an LCM. If it is smaller, it is a GCF. That single check catches most mix-ups.</p>
+
+
+    <h2>Where Each One Is Used</h2>
+
+    <p>Adding fractions needs the LCM, because that is the common denominator. Reducing a fraction needs the GCF, because that is what you divide top and bottom by. Same two numbers, opposite operations, which is exactly why they are so easy to swap by accident.</p>
+
+
+    <h2>The Prime Factor Method</h2>
+
+    <p>Break both numbers into primes. For the GCF, take each shared prime at the lowest power present; for the LCM, take every prime at the highest power. With 12 as 2 squared times 3 and 18 as 2 times 3 squared, the GCF is 2 times 3 which is 6, and the LCM is 4 times 9 which is 36.</p>
+
+
+    <h2>The Shortcut Worth Remembering</h2>
+
+    <p>For any two numbers, the GCF multiplied by the LCM equals the two numbers multiplied together. 6 times 36 is 216, and 12 times 18 is also 216. Find one and the other follows by division.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Which one do I need for adding fractions?</summary>
+        <div class="home-faq-a">The lowest common multiple of the denominators. That becomes the common denominator you rewrite both fractions over.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Can the GCF be 1?</summary>
+        <div class="home-faq-a">Yes. Numbers with no shared factor beyond 1, such as 8 and 15, are called coprime and their GCF is 1.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Does it work with more than two numbers?</summary>
+        <div class="home-faq-a">Yes. The same rules apply across the whole set, taking shared primes at the lowest power for GCF and all primes at the highest for LCM.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/fraction-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+        <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/prime-checker">
+        <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+        <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/times-table">
+        <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+        <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/exponent-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-superscript"></i> Exponent Calculator</span>
+        <span class="home-topic-desc">Powers, roots and negative or fractional exponents, worked out.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

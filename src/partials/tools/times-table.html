@@ -1,0 +1,225 @@
+<div class="tool-page-layout">
+
+
+<div class="tt-page">
+  <div class="tt-main">
+    <div class="tt-hero">
+      <h1>Times Table Chart</h1>
+    </div>
+
+    <div class="tt-controls">
+      <span style="font-size:.82rem;font-weight:700;color:#7c3aed;">Grid:</span>
+      <button class="tt-size-btn" onclick="buildTable(10)" data-size="10">10×10</button>
+      <button class="tt-size-btn active" onclick="buildTable(12)" data-size="12">12×12</button>
+      <button class="tt-size-btn" onclick="buildTable(15)" data-size="15">15×15</button>
+      <div class="tt-search-group">
+        <label>Find:</label>
+        <input class="tt-search" type="number" id="searchNum" placeholder="0" min="1">
+        <button class="tt-clear-btn" onclick="clearHighlight()">Clear</button>
+      </div>
+    </div>
+
+    <div class="tt-wrap" id="tableWrap"></div>
+
+    <div class="tt-legend">
+      <div class="legend-item"><div class="legend-color" style="background:#fdf4ff;border:1px solid #e9d5ff;"></div>1-30</div>
+      <div class="legend-item"><div class="legend-color" style="background:#e9d5ff;"></div>31-80</div>
+      <div class="legend-item"><div class="legend-color" style="background:#c084fc;"></div>80+</div>
+      <div class="legend-item"><div class="legend-color" style="background:#fde68a;"></div>Hover highlight</div>
+      <div class="legend-item"><div class="legend-color" style="background:#4ade80;"></div>Multiples</div>
+      <div class="legend-item"><div class="legend-color" style="background:#f43f5e;"></div>Search result</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  let tableSize = 12;
+  let activeMultiple = null;
+  let searchVal = null;
+
+  function getColorBand(val) {
+    if(val <= 30) return 'small';
+    if(val <= 60) return 'med1';
+    if(val <= 80) return 'med2';
+    if(val <= 120) return 'large';
+    return 'xlarge';
+  }
+
+  window.buildTable = function(size) {
+    tableSize = size;
+    document.querySelectorAll('.tt-size-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.size == size);
+    });
+
+    const wrap = document.getElementById('tableWrap');
+    const table = document.createElement('table');
+    table.className = 'tt';
+    table.id = 'mainTable';
+
+    // Header row
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const corner = document.createElement('th');
+    corner.className = 'corner';
+    corner.innerHTML = '×';
+    headerRow.appendChild(corner);
+
+    for(let col = 1; col <= size; col++) {
+      const th = document.createElement('th');
+      th.textContent = col;
+      th.dataset.col = col;
+      th.style.cursor = 'pointer';
+      th.addEventListener('click', () => highlightMultiple(col, 'col'));
+      th.addEventListener('mouseenter', () => previewHighlight(col, 'col'));
+      th.addEventListener('mouseleave', () => removePreview());
+      headerRow.appendChild(th);
+    }
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    for(let row = 1; row <= size; row++) {
+      const tr = document.createElement('tr');
+
+      const rowTh = document.createElement('th');
+      rowTh.textContent = row;
+      rowTh.dataset.row = row;
+      rowTh.style.cursor = 'pointer';
+      rowTh.addEventListener('click', () => highlightMultiple(row, 'row'));
+      rowTh.addEventListener('mouseenter', () => previewHighlight(row, 'row'));
+      rowTh.addEventListener('mouseleave', () => removePreview());
+      tr.appendChild(rowTh);
+
+      for(let col = 1; col <= size; col++) {
+        const td = document.createElement('td');
+        const val = row * col;
+        td.textContent = val;
+        td.dataset.row = row;
+        td.dataset.col = col;
+        td.dataset.val = val;
+        td.dataset.v = getColorBand(val);
+        td.addEventListener('mouseenter', () => onCellHover(row, col));
+        td.addEventListener('mouseleave', () => onCellLeave(row, col));
+        td.addEventListener('click', () => highlightMultiple(val, 'value'));
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.innerHTML = '';
+    wrap.appendChild(table);
+
+    if(activeMultiple !== null) highlightMultiple(activeMultiple.val, activeMultiple.type);
+    if(searchVal !== null) applySearch(searchVal);
+  };
+
+  function onCellHover(hRow, hCol) {
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+    table.querySelectorAll('td').forEach(td => {
+      const r = parseInt(td.dataset.row), c = parseInt(td.dataset.col);
+      td.classList.remove('row-hi','col-hi','both-hi');
+      if(r === hRow && c === hCol) td.classList.add('both-hi');
+      else if(r === hRow) td.classList.add('row-hi');
+      else if(c === hCol) td.classList.add('col-hi');
+    });
+    // Highlight headers
+    table.querySelectorAll('th[data-col]').forEach(th => {
+      th.classList.toggle('active-header', parseInt(th.dataset.col) === hCol);
+    });
+    table.querySelectorAll('th[data-row]').forEach(th => {
+      th.classList.toggle('active-header', parseInt(th.dataset.row) === hRow);
+    });
+  }
+
+  function onCellLeave() {
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+    table.querySelectorAll('td').forEach(td => td.classList.remove('row-hi','col-hi','both-hi'));
+    table.querySelectorAll('th').forEach(th => th.classList.remove('active-header'));
+    if(activeMultiple !== null) highlightMultiple(activeMultiple.val, activeMultiple.type, true);
+  }
+
+  function previewHighlight(num, type) {}
+  function removePreview() {}
+
+  function highlightMultiple(val, type, keepActive) {
+    if(!keepActive) {
+      if(activeMultiple && activeMultiple.val === val) {
+        activeMultiple = null;
+        clearMultiples();
+        return;
+      }
+      activeMultiple = {val, type};
+    }
+
+    clearMultiples();
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+
+    if(type === 'value') {
+      table.querySelectorAll('td').forEach(td => {
+        if(parseInt(td.dataset.val) === val) td.classList.add('multiple-hi');
+      });
+    } else if(type === 'row' || type === 'col') {
+      table.querySelectorAll('td').forEach(td => {
+        const r = parseInt(td.dataset.row), c = parseInt(td.dataset.col);
+        const cellVal = r * c;
+        if(cellVal % val === 0) td.classList.add('multiple-hi');
+      });
+    }
+  }
+
+  function clearMultiples() {
+    const table = document.getElementById('mainTable');
+    if(table) table.querySelectorAll('td').forEach(td => td.classList.remove('multiple-hi'));
+  }
+
+  window.clearHighlight = function() {
+    activeMultiple = null;
+    searchVal = null;
+    clearMultiples();
+    const table = document.getElementById('mainTable');
+    if(table) table.querySelectorAll('td').forEach(td => td.classList.remove('search-hi'));
+    document.getElementById('searchNum').value = '';
+  };
+
+  function applySearch(val) {
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+    table.querySelectorAll('td').forEach(td => {
+      td.classList.toggle('search-hi', parseInt(td.dataset.val) === val);
+    });
+  }
+
+  document.getElementById('searchNum').addEventListener('input', function() {
+    const v = parseInt(this.value);
+    if(!isNaN(v) && v > 0) {
+      searchVal = v;
+      applySearch(v);
+    } else {
+      searchVal = null;
+      const table = document.getElementById('mainTable');
+      if(table) table.querySelectorAll('td').forEach(td => td.classList.remove('search-hi'));
+    }
+  });
+
+  buildTable(12);
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>

@@ -1,0 +1,213 @@
+<div class="tool-page-layout">
+
+
+<div class="pct-page">
+  <div class="pct-main">
+    <div class="pct-hero">
+      <h1>Percentage Calculator</h1>
+    </div>
+
+    <div class="pct-card">
+      <div class="pct-tabs">
+        <button class="pct-tab active" data-panel="find">Find Percentage</button>
+        <button class="pct-tab" data-panel="change">Percentage Change</button>
+        <button class="pct-tab" data-panel="what">What Percent?</button>
+      </div>
+
+      <!-- Panel 1: Find Percentage -->
+      <div class="pct-panel active" id="panel-find">
+        <div class="pct-ring-wrap">
+          <div class="ring-container">
+            <svg width="200" height="200" viewBox="0 0 200 200">
+              <circle class="ring-bg" cx="100" cy="100" r="82"/>
+              <circle class="ring-fill" id="ring1" cx="100" cy="100" r="82" stroke-dasharray="515.22" stroke-dashoffset="515.22"/>
+            </svg>
+            <div class="ring-text">
+              <div class="ring-number" id="ring1-num">0</div>
+              <div class="ring-unit">%</div>
+            </div>
+          </div>
+        </div>
+        <div class="pct-fields">
+          <div class="pct-field">
+            <label>Percentage (%)</label>
+            <input type="number" id="f-pct" placeholder="e.g. 25" min="0" max="100" step="any">
+          </div>
+          <div class="pct-field">
+            <label>Of Number</label>
+            <input type="number" id="f-num" placeholder="e.g. 200" step="any">
+          </div>
+        </div>
+        <button class="pct-btn" onclick="calcFind()"><i class="fa-solid fa-calculator" style="margin-right:.4rem;"></i>Calculate</button>
+        <div class="pct-result-box" id="res-find">
+          <div class="pct-result-label">Result</div>
+          <div class="pct-result-value" id="res-find-val">-</div>
+          <div class="pct-result-note" id="res-find-note"></div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Percentage Change -->
+      <div class="pct-panel" id="panel-change">
+        <div class="pct-ring-wrap">
+          <div class="ring-container">
+            <svg width="200" height="200" viewBox="0 0 200 200">
+              <circle class="ring-bg" cx="100" cy="100" r="82"/>
+              <circle class="ring-fill" id="ring2" cx="100" cy="100" r="82" stroke-dasharray="515.22" stroke-dashoffset="515.22"/>
+            </svg>
+            <div class="ring-text">
+              <div class="ring-number" id="ring2-num">0</div>
+              <div class="ring-unit" id="ring2-unit">%</div>
+            </div>
+          </div>
+        </div>
+        <div class="pct-fields">
+          <div class="pct-field">
+            <label>Original Value</label>
+            <input type="number" id="c-orig" placeholder="e.g. 80" step="any">
+          </div>
+          <div class="pct-field">
+            <label>New Value</label>
+            <input type="number" id="c-new" placeholder="e.g. 100" step="any">
+          </div>
+        </div>
+        <button class="pct-btn" onclick="calcChange()"><i class="fa-solid fa-arrow-trend-up" style="margin-right:.4rem;"></i>Calculate Change</button>
+        <div class="pct-result-box" id="res-change">
+          <div class="pct-result-label">Percentage Change</div>
+          <div class="pct-result-value" id="res-change-val">-</div>
+          <div class="pct-result-note" id="res-change-note"></div>
+        </div>
+      </div>
+
+      <!-- Panel 3: What Percent -->
+      <div class="pct-panel" id="panel-what">
+        <div class="pct-ring-wrap">
+          <div class="ring-container">
+            <svg width="200" height="200" viewBox="0 0 200 200">
+              <circle class="ring-bg" cx="100" cy="100" r="82"/>
+              <circle class="ring-fill" id="ring3" cx="100" cy="100" r="82" stroke-dasharray="515.22" stroke-dashoffset="515.22"/>
+            </svg>
+            <div class="ring-text">
+              <div class="ring-number" id="ring3-num">0</div>
+              <div class="ring-unit">%</div>
+            </div>
+          </div>
+        </div>
+        <div class="pct-fields">
+          <div class="pct-field">
+            <label>Part</label>
+            <input type="number" id="w-part" placeholder="e.g. 30" step="any">
+          </div>
+          <div class="pct-field">
+            <label>Whole / Total</label>
+            <input type="number" id="w-whole" placeholder="e.g. 120" step="any">
+          </div>
+        </div>
+        <button class="pct-btn" onclick="calcWhat()"><i class="fa-solid fa-question" style="margin-right:.4rem;"></i>Find Percent</button>
+        <div class="pct-result-box" id="res-what">
+          <div class="pct-result-label">Answer</div>
+          <div class="pct-result-value" id="res-what-val">-</div>
+          <div class="pct-result-note" id="res-what-note"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const CIRC = 2 * Math.PI * 82; // 515.22
+
+  document.querySelectorAll('.pct-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.pct-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.pct-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  function animateRing(ringId, numId, pct, color) {
+    const ring = document.getElementById(ringId);
+    const numEl = document.getElementById(numId);
+    const clampedPct = Math.max(0, Math.min(100, Math.abs(pct)));
+    const offset = CIRC - (clampedPct / 100) * CIRC;
+    ring.style.strokeDashoffset = offset;
+    ring.style.stroke = color || '#14b8a6';
+    let current = 0;
+    const target = Math.round(pct * 100) / 100;
+    const duration = 1000;
+    const startTime = performance.now();
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      current = target * ease;
+      numEl.textContent = current.toFixed(current % 1 === 0 ? 0 : 1);
+      if(progress < 1) requestAnimationFrame(update);
+      else numEl.textContent = target % 1 === 0 ? target : target.toFixed(2);
+    }
+    requestAnimationFrame(update);
+  }
+
+  function showResult(boxId, val, note) {
+    const box = document.getElementById(boxId);
+    box.style.display = 'block';
+    box.style.animation = 'none';
+    box.offsetHeight;
+    box.style.animation = 'slideUp .4s ease';
+    document.getElementById(boxId + '-val').textContent = val;
+    if(note) document.getElementById(boxId + '-note').textContent = note;
+  }
+
+  window.calcFind = function() {
+    const pct = parseFloat(document.getElementById('f-pct').value);
+    const num = parseFloat(document.getElementById('f-num').value);
+    if(isNaN(pct) || isNaN(num)) { alert('Please enter both values!'); return; }
+    const result = (pct / 100) * num;
+    animateRing('ring1', 'ring1-num', pct, '#14b8a6');
+    showResult('res-find', result.toLocaleString('en', {maximumFractionDigits:4}),
+      `${pct}% of ${num} = ${result.toFixed(4).replace(/\.?0+$/,'')}`);
+  };
+
+  window.calcChange = function() {
+    const orig = parseFloat(document.getElementById('c-orig').value);
+    const newVal = parseFloat(document.getElementById('c-new').value);
+    if(isNaN(orig) || isNaN(newVal)) { alert('Please enter both values!'); return; }
+    if(orig === 0) { alert('Original value cannot be zero!'); return; }
+    const change = ((newVal - orig) / Math.abs(orig)) * 100;
+    const isIncrease = change >= 0;
+    const color = isIncrease ? '#14b8a6' : '#f43f5e';
+    document.getElementById('ring2-unit').textContent = isIncrease ? '% ↑' : '% ↓';
+    animateRing('ring2', 'ring2-num', Math.abs(change), color);
+    document.getElementById('ring2').style.stroke = color;
+    const sign = isIncrease ? '+' : '';
+    showResult('res-change', sign + change.toFixed(2) + '%',
+      isIncrease ? `Increased from ${orig} to ${newVal}` : `Decreased from ${orig} to ${newVal}`);
+    document.getElementById('res-change-val').style.color = color;
+  };
+
+  window.calcWhat = function() {
+    const part = parseFloat(document.getElementById('w-part').value);
+    const whole = parseFloat(document.getElementById('w-whole').value);
+    if(isNaN(part) || isNaN(whole)) { alert('Please enter both values!'); return; }
+    if(whole === 0) { alert('Total cannot be zero!'); return; }
+    const pct = (part / whole) * 100;
+    animateRing('ring3', 'ring3-num', pct, '#2dd4bf');
+    showResult('res-what', pct.toFixed(2) + '%', `${part} is ${pct.toFixed(2)}% of ${whole}`);
+  };
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>

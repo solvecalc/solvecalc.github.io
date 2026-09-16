@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Read the Question Twice, Solve It Once</title>
+  <meta name="description" content="Most lost marks are comprehension, not arithmetic. How to spot what a question actually asks, the units it wants, and the form the answer should take.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/blog/reading-a-question-before-solving-it">
+  <meta property="og:title" content="Read the Question Twice, Solve It Once">
+  <meta property="og:description" content="Most lost marks are comprehension, not arithmetic. How to spot what a question actually asks, the units it wants, and the form the answer should take.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/blog/reading-a-question-before-solving-it">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Read the Question Twice, Solve It Once">
+  <meta name="twitter:description" content="Most lost marks are comprehension, not arithmetic. How to spot what a question actually asks, the units it wants, and the form the answer should take.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Reading a Question Before Solving It","description":"Most lost marks are comprehension, not arithmetic. How to spot what a question actually asks, the units it wants, and the form the answer should take.","mainEntityOfPage":"https://solvecalc.github.io/blog/reading-a-question-before-solving-it","datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://solvecalc.github.io/blog"},{"@type":"ListItem","position":3,"name":"Reading a Question Before Solving It","item":"https://solvecalc.github.io/blog/reading-a-question-before-solving-it"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-article">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools">Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog" class=&#34;active&#34;>Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/blog">Blog</a> <span>/</span> <span>Reading a Question Before Solving It</span>
+  </nav>
+  <h1>Reading a Question Before Solving It</h1>
+  <p class="article-intro">Most lost marks are comprehension, not arithmetic.</p>
+  <div class="article-body">
+
+    <h2>Where Marks Actually Go</h2>
+
+    <p>Look at a marked paper and the pattern is rarely broken arithmetic. It is the right method applied to a slightly different question: the area when the perimeter was asked for, the discount instead of the final price, the answer in metres when the question said centimetres.</p>
+
+    <p>Those are reading errors, and they are cheaper to fix than any amount of extra practice.</p>
+
+
+    <h2>Find the Actual Verb</h2>
+
+    <p>Underline what the question tells you to produce. Calculate, estimate, explain, compare and prove all demand different things, and an explanation written where a proof was requested will not score full marks however true it is.</p>
+
+
+    <h2>Check the Units Before You Start</h2>
+
+    <p>If lengths arrive in centimetres and the answer must be in square metres, decide when you are converting before you calculate, not after. Converting halfway through a chain of working is where factors of a hundred go missing.</p>
+
+
+    <h2>Note the Required Form</h2>
+
+    <p>"Give your answer to three significant figures", "leave it in terms of pi", "as a fraction in simplest form". Each of those is a mark. Circle the instruction while you read it so the finished answer gets the right treatment.</p>
+
+
+    <h2>Ask What Would Be Reasonable</h2>
+
+    <p>A person is not 4 metres tall and a bus fare is not 900 pounds. Holding a rough sense of a plausible answer before starting means an implausible result gets questioned rather than written down.</p>
+
+
+    <h2>Re-read Before You Move On</h2>
+
+    <p>Ten seconds checking that the answer matches what was asked catches the majority of these errors. It is the highest-return habit available in an exam, and it costs nothing but discipline.</p>
+
+
+  </div>
+  <section class="home-section">
+    <h2>More Posts</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/blog/calculator-mistakes-that-cost-marks">
+        <span class="home-topic-title">Calculator Mistakes That Cost Marks</span>
+        <span class="home-topic-desc">Six ways a calculator hands you a confident wrong answer.</span>
+      </a>
+
+      <a class="home-topic-card" href="/blog/estimating-before-you-calculate">
+        <span class="home-topic-title">Estimating Before You Calculate</span>
+        <span class="home-topic-desc">A two-second habit that catches most input errors.</span>
+      </a>
+
+      <a class="home-topic-card" href="/blog/why-chromebooks-need-browser-tools">
+        <span class="home-topic-title">Why Chromebooks Need Browser Tools</span>
+        <span class="home-topic-desc">Locked-down devices, and the software that still works on them.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

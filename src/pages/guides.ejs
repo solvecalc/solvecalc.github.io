@@ -1,0 +1,23 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero-inner">
+    <h1 class="hero-h1">Guides</h1>
+    <p class="hero-sub">The reasoning behind the buttons: why the order of operations is fixed, what a logarithm is asking, and how much precision an answer should carry.</p>
+  </div>
+</section>
+<div class="page-wrap"><div class="home-layout"><div class="calc-section-wrap" style="width:100%;">
+  <section class="home-section">
+    <div class="home-topics-grid">
+<% guides.forEach(function (g) { %>
+      <a class="home-topic-card" href="/guides/<%= g.slug %>">
+        <span class="home-topic-title"><%= g.name %></span>
+        <span class="home-topic-desc"><%= g.blurb %></span>
+      </a>
+<% }); %>
+    </div>
+  </section>
+  <section class="home-section">
+    <h2>Why These Four</h2>
+    <p>They are the topics where a confident wrong answer is most likely. Order of operations decides what an expression even means. Fractions, decimals and percentages are one idea in three notations that questions deliberately mix. Logarithms look harder than they are until you read them as a question about exponents. Rounding quietly loses marks at the very last step.</p>
+    <p>Each guide is written to be read once and remembered, not skimmed. If you want to use the ideas straight away, the <a href="/tools">tools</a> apply them, and the <a href="/blog">blog</a> covers working accurately under time pressure.</p>
+  </section>
+</div></div></div>

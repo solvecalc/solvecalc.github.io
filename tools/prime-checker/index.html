@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prime Number Checker - Test Any Number Instantly</title>
+  <meta name="description" content="Check whether a number is prime and, when it is not, see the factors that prove otherwise. Includes the square root shortcut and why 1 is not counted as prime.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/prime-checker">
+  <meta property="og:title" content="Prime Number Checker - Test Any Number Instantly">
+  <meta property="og:description" content="Check whether a number is prime and, when it is not, see the factors that prove otherwise. Includes the square root shortcut and why 1 is not counted as prime.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/prime-checker">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Prime Number Checker - Test Any Number Instantly">
+  <meta name="twitter:description" content="Check whether a number is prime and, when it is not, see the factors that prove otherwise. Includes the square root shortcut and why 1 is not counted as prime.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Prime Number Checker","url":"https://solvecalc.github.io/tools/prime-checker","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Check whether a number is prime and, when it is not, see the factors that prove otherwise. Includes the square root shortcut and why 1 is not counted as prime.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is 1 a prime number?","acceptedAnswer":{"@type":"Answer","text":"No. A prime needs exactly two distinct divisors, and 1 only has one. Excluding it keeps prime factorisation unique, which is why the definition is written that way."}},{"@type":"Question","name":"Is 2 really prime?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it is the only even prime. Every other even number has 2 as a factor on top of 1 and itself."}},{"@type":"Question","name":"How large a number can it test?","acceptedAnswer":{"@type":"Answer","text":"Anything within JavaScript safe integer range checks instantly, because only divisors up to the square root are tried."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"Prime Number Checker","item":"https://solvecalc.github.io/tools/prime-checker"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>Prime Number Checker</span>
+  </nav>
+  <h1 class="tool-h1">Prime Number Checker</h1>
+  <p class="article-intro">Type a number, find out whether anything divides into it.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="prime-page">
+  <div class="prime-main">
+    <div class="prime-hero">
+      <h1>Prime Number Checker</h1>
+    </div>
+
+    <div class="prime-input-row">
+      <input class="prime-input" type="number" id="primeInput" placeholder="Enter number" min="2" max="99999" value="">
+      <button class="prime-check-btn" onclick="checkPrime()"><i class="fa-solid fa-magnifying-glass" style="margin-right:.3rem;"></i>CHECK</button>
+    </div>
+
+    <div class="prime-msg" id="primeMsg">Enter a number and press CHECK!</div>
+
+    <div class="prime-arena" id="primeArena">
+      <div class="prime-circle" id="primeCircle">
+        <div class="prime-number" id="primeNum">?</div>
+        <div class="prime-verdict" id="primeVerdict"></div>
+      </div>
+    </div>
+
+    <div class="factors-list" id="factorsList">
+      <div class="widget-title"><i class="fa-solid fa-list" style="margin-right:.3rem;"></i>All Factors</div>
+      <div class="factor-chips" id="factorChips"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function isPrime(n) {
+    if(n < 2) return false;
+    if(n === 2) return true;
+    if(n % 2 === 0) return false;
+    for(let i = 3; i <= Math.sqrt(n); i += 2) {
+      if(n % i === 0) return false;
+    }
+    return true;
+  }
+
+  function getFactors(n) {
+    const factors = [];
+    for(let i = 1; i <= n; i++) {
+      if(n % i === 0) factors.push(i);
+    }
+    return factors;
+  }
+
+  function getPrimeFactors(n) {
+    const factors = [];
+    let d = 2;
+    while(d * d <= n) {
+      while(n % d === 0) { factors.push(d); n = Math.floor(n/d); }
+      d++;
+    }
+    if(n > 1) factors.push(n);
+    return factors;
+  }
+
+  function clearBubbles() {
+    const arena = document.getElementById('primeArena');
+    arena.querySelectorAll('.factor-bubble, .sparkle').forEach(el => el.remove());
+  }
+
+  function spawnSparkles(cx, cy) {
+    const arena = document.getElementById('primeArena');
+    const emojis = ['✨','⭐','💫','🌟'];
+    for(let i = 0; i < 12; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      const angle = (i / 12) * 2 * Math.PI;
+      const dist = 80 + Math.random() * 60;
+      const sx = Math.cos(angle) * dist;
+      const sy = Math.sin(angle) * dist;
+      s.style.cssText = `left: ${cx}px; top: ${cy}px; --sx: ${sx}px; --sy: ${sy}px; animation-delay: ${Math.random()*.3}s;`;
+      s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      arena.appendChild(s);
+    }
+  }
+
+  function spawnFactorBubbles(factors, cx, cy) {
+    const arena = document.getElementById('primeArena');
+    const displayed = factors.filter(f => f !== 1 && f !== factors[factors.length-1]).slice(0, 10);
+    const compositeFactors = factors.slice(1, -1);
+    const toShow = compositeFactors.slice(0, 8);
+    const total = toShow.length;
+    toShow.forEach((f, i) => {
+      const angle = (i / Math.max(total, 1)) * 2 * Math.PI - Math.PI/2;
+      const dist = 120;
+      const tx = Math.cos(angle) * dist;
+      const ty = Math.sin(angle) * dist;
+      const size = f < 10 ? 44 : f < 100 ? 50 : 58;
+      const bubble = document.createElement('div');
+      bubble.className = 'factor-bubble';
+      bubble.style.cssText = `
+        left: ${cx}px; top: ${cy}px;
+        width: ${size}px; height: ${size}px;
+        font-size: ${f < 100 ? '1rem' : '.8rem'};
+        --tx: calc(${tx}px - 50%);
+        --ty: calc(${ty}px - 50%);
+        animation-delay: ${i * 0.08}s;
+      `;
+      bubble.textContent = f;
+      arena.appendChild(bubble);
+    });
+  }
+
+  window.checkPrime = function() {
+    const val = parseInt(document.getElementById('primeInput').value);
+    if(isNaN(val) || val < 1) { alert('Please enter a valid positive integer!'); return; }
+
+    clearBubbles();
+    const circle = document.getElementById('primeCircle');
+    const numEl = document.getElementById('primeNum');
+    const verdictEl = document.getElementById('primeVerdict');
+    const msgEl = document.getElementById('primeMsg');
+    const factorsList = document.getElementById('factorsList');
+    const factorChips = document.getElementById('factorChips');
+
+    numEl.textContent = val;
+    circle.className = 'prime-circle';
+
+    const prime = isPrime(val);
+    const factors = getFactors(val);
+    const primeFactors = getPrimeFactors(val);
+
+    setTimeout(() => {
+      if(prime) {
+        circle.classList.add('prime');
+        verdictEl.innerHTML = '<span class="verdict-prime">PRIME! ✨</span>';
+        msgEl.innerHTML = '<span class="msg-prime">🎉 ' + val + ' is a PRIME number! It has no divisors except 1 and itself!</span>';
+        factorsList.style.display = 'none';
+        spawnSparkles(160, 160);
+      } else {
+        circle.classList.add('composite');
+        verdictEl.innerHTML = '<span class="verdict-composite">Composite</span>';
+        msgEl.innerHTML = '<span class="msg-composite">📊 ' + val + ' is composite. Prime factors: ' + primeFactors.join(' × ') + '</span>';
+        factorChips.innerHTML = factors.map(f =>
+          `<span class="factor-chip">${f}</span>`
+        ).join('');
+        factorsList.style.display = 'block';
+        factorsList.style.animation = 'none';
+        factorsList.offsetHeight;
+        factorsList.style.animation = 'fadeIn .4s ease';
+        spawnFactorBubbles(factors, 160, 160);
+      }
+    }, 100);
+  };
+
+  document.getElementById('primeInput').addEventListener('keydown', e => {
+    if(e.key === 'Enter') checkPrime();
+  });
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>What Makes a Number Prime</h2>
+
+    <p>A prime has exactly two distinct divisors: itself and one. That wording matters, because it is what rules out the number 1, which has only a single divisor and therefore fails the test. 2 qualifies and is the only even number that ever will, since every other even number is divisible by 2.</p>
+
+
+    <h2>You Only Need to Check to the Square Root</h2>
+
+    <p>To test 97 you do not divide by every number below it. Factors come in pairs that multiply to the original, and one of each pair is always at or below the square root. Since the square root of 97 is a little under 10, checking 2, 3, 5 and 7 settles it. Nothing divides in, so 97 is prime.</p>
+
+    <p>That shortcut is why testing a six-digit number is still instant rather than a thousand divisions.</p>
+
+
+    <h2>Why Anyone Cares</h2>
+
+    <p>Primes are the building blocks of every other whole number: any integer above 1 is either prime or a unique product of primes. That uniqueness is what makes prime factorisation useful for finding common denominators, simplifying fractions, and the key exchange behind most encrypted connections.</p>
+
+
+    <h2>Reading the Factor List</h2>
+
+    <p>When a number is not prime this page lists what divides it. 91 looks prime to most people until you see 7 times 13. Seeing the factor pair is usually more useful than the yes or no answer on its own.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Is 1 a prime number?</summary>
+        <div class="home-faq-a">No. A prime needs exactly two distinct divisors, and 1 only has one. Excluding it keeps prime factorisation unique, which is why the definition is written that way.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Is 2 really prime?</summary>
+        <div class="home-faq-a">Yes, and it is the only even prime. Every other even number has 2 as a factor on top of 1 and itself.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">How large a number can it test?</summary>
+        <div class="home-faq-a">Anything within JavaScript safe integer range checks instantly, because only divisors up to the square root are tried.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/fraction-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+        <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+        <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/times-table">
+        <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+        <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/exponent-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-superscript"></i> Exponent Calculator</span>
+        <span class="home-topic-desc">Powers, roots and negative or fractional exponents, worked out.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

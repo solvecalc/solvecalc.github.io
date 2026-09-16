@@ -1,0 +1,224 @@
+<!-- ══ VAULT OVERLAY ══ -->
+<div id="vault-overlay" class="vault-overlay" aria-hidden="true">
+
+  <!-- Top bar -->
+  <div class="vault-topbar">
+    <button class="vault-sidebar-toggle" id="vault-sidebar-toggle" title="Toggle sidebar" aria-label="Toggle sidebar">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+    </button>
+    <span class="vault-esc-hint" id="vault-esc-hint"><kbd>Esc</kbd> to exit<button class="vault-esc-close" id="vault-esc-close" aria-label="Dismiss">✕</button></span>
+    <button class="vault-topbar-btn" id="vault-back-btn" title="Back to grid" style="display:none">← Back</button>
+    <div class="vault-topbar-center">
+      <div class="vault-search-wrap">
+        <svg class="vault-search-icon" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="vault-search" class="vault-search" placeholder="Search…" autocomplete="off" spellcheck="false">
+        <button id="vault-search-clear" class="vault-search-clear" aria-label="Clear search" style="display:none">✕</button>
+      </div>
+    </div>
+    <button class="vault-topbar-btn vault-fav-topbar-btn" id="vault-fav-btn" title="Favourites"><i class="fa-solid fa-heart"></i><span class="vault-fav-count" id="vault-fav-count" style="display:none">0</span></button>
+<button class="vault-topbar-btn" id="vault-theme-btn" title="Toggle theme">Dark</button>
+    <button class="vault-topbar-btn" id="vault-close-btn" title="Close">✕<span class="vault-close-label">Exit</span></button>
+  </div>
+
+  <!-- Backup Discord bar -->
+  <div class="vault-discord-bar" id="vault-discord-bar">
+    <span class="vault-discord-bar-text"><i class="fa-brands fa-discord"></i> All SolveCalc Links - join our backup Discord server</span>
+    <a href="https://discord.gg/xRVWnzZxuu" target="_blank" rel="noopener noreferrer" class="vault-discord-bar-btn">Join Discord</a>
+    <button class="vault-discord-bar-close" id="vault-discord-bar-close" aria-label="Dismiss">✕</button>
+  </div>
+
+  <!-- Grid view: sidebar + grid -->
+  <div id="vault-grid-view" class="vault-body">
+    <aside class="vault-cat-sidebar">
+      <div class="vault-cat-links">
+        <a class="vault-cat-link vault-gba-link" href="#" id="vault-gba-tab"><i class="fa-solid fa-microchip"></i>GBA Emu<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link active" href="#" data-cat=""><i class="fa-solid fa-gamepad"></i>All</a>
+        <a class="vault-cat-link vault-fav-link" href="#" id="vault-fav-cat" data-cat="__favs__"><i class="fa-solid fa-heart"></i>Favourites<span class="vault-fav-count-side" id="vault-fav-count-side" style="display:none">0</span></a>
+        <a class="vault-cat-link" href="#" data-cat="action"><i class="fa-solid fa-bolt"></i>Action<span class="v-cat-badge v-cat-badge-hot">Hot</span></a>
+        <a class="vault-cat-link" href="#" data-cat="adventure"><i class="fa-solid fa-compass"></i>Adventure</a>
+        <a class="vault-cat-link" href="#" data-cat="apps"><i class="fa-solid fa-table-cells-large"></i>Apps<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link" href="#" data-cat="arcade"><i class="fa-solid fa-dice"></i>Arcade<span class="v-cat-badge v-cat-badge-top">Top</span></a>
+        <a class="vault-cat-link" href="#" data-cat="casual"><i class="fa-solid fa-face-smile"></i>Casual</a>
+        <a class="vault-cat-link" href="#" data-cat="horror"><i class="fa-solid fa-ghost"></i>Horror<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link" href="#" data-cat="idle"><i class="fa-solid fa-clock"></i>Idle</a>
+        <a class="vault-cat-link" href="#" data-cat="io"><i class="fa-solid fa-globe"></i>IO<span class="v-cat-badge v-cat-badge-top">Top</span></a>
+        <a class="vault-cat-link" href="#" data-cat="platformer"><i class="fa-solid fa-person-running"></i>Platformer</a>
+        <a class="vault-cat-link" href="#" data-cat="puzzle"><i class="fa-solid fa-puzzle-piece"></i>Puzzle</a>
+        <a class="vault-cat-link" href="#" data-cat="racing"><i class="fa-solid fa-flag-checkered"></i>Racing<span class="v-cat-badge v-cat-badge-new">New</span></a>
+        <a class="vault-cat-link" href="#" data-cat="shooter"><i class="fa-solid fa-crosshairs"></i>Shooter<span class="v-cat-badge v-cat-badge-hot">Hot</span></a>
+        <a class="vault-cat-link" href="#" data-cat="sports"><i class="fa-solid fa-futbol"></i>Sports</a>
+        <a class="vault-cat-link" href="#" data-cat="strategy"><i class="fa-solid fa-chess"></i>Strategy</a>
+        <a class="vault-cat-link" href="#" data-cat="open-world"><i class="fa-solid fa-map-location-dot"></i>Open World</a>
+        <a class="vault-cat-link" href="#" data-cat="multiplayer"><i class="fa-solid fa-tower-broadcast"></i>Multiplayer</a>
+        <a class="vault-cat-link vault-codes-link" href="#" id="vault-codes-tab"><i class="fa-solid fa-key"></i>Secret Codes</a>
+      </div>
+      <button class="vault-cat-exit-btn" onclick="closeVault()"><i class="fa-solid fa-right-from-bracket"></i>Exit</button>
+    </aside>
+    <div class="vault-main-area">
+      <div id="vault-grid" class="vault-grid"></div>
+
+      <!-- Secret Codes panel -->
+      <div id="vault-codes-panel" class="vault-codes-panel" style="display:none">
+        <div class="codes-header">
+          <h2 class="codes-title">Secret Codes</h2>
+          <input type="text" id="codes-search" class="codes-search" placeholder="Search activities...">
+        </div>
+        <div id="codes-list" class="codes-list"></div>
+      </div>
+
+      <!-- GBA Emulator panel - click-to-play shelf + bring-your-own-ROM -->
+      <div id="vault-gba-panel" class="vault-codes-panel" style="display:none">
+        <div class="codes-header">
+          <h2 class="codes-title">GBA Emulator</h2>
+        </div>
+
+        <div id="gba-upload-wrap" class="vault-split">
+          <div class="vault-side-left" id="gba-sidebar">
+            <p class="vault-side-label">Browse Titles</p>
+            <div id="gba-side-cards"></div>
+          </div>
+          <div id="gba-upload-box" class="gba-upload-box">
+            <div id="gba-dropzone" class="gba-dropzone">
+              <i class="fa-solid fa-microchip gba-dropzone-icon"></i>
+              <p class="gba-dropzone-title">Load a GBA ROM</p>
+              <p class="gba-dropzone-sub">Choose a <code>.gba</code> file from your own device to play it here. Nothing is uploaded - the file stays in your browser.</p>
+              <label class="gba-file-btn">
+                <i class="fa-solid fa-folder-open"></i> Choose ROM File
+                <input type="file" id="gba-file-input" accept=".gba" hidden>
+              </label>
+            </div>
+
+            <div class="gba-kbd-guide">
+              <div class="gba-kbd-table-wrap">
+                <div class="gba-kbd-heading"><i class="fa-solid fa-keyboard"></i> Keyboard Shortcuts</div>
+                <table>
+                  <tr><th>Key</th><th>What it does</th></tr>
+                  <tr><td><kbd>&uarr;</kbd> <kbd>&darr;</kbd> <kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>D-pad</td></tr>
+                  <tr><td><kbd>X</kbd></td><td>A button</td></tr>
+                  <tr><td><kbd>Z</kbd></td><td>B button</td></tr>
+                  <tr><td><kbd>A</kbd></td><td>L shoulder button</td></tr>
+                  <tr><td><kbd>S</kbd></td><td>R shoulder button</td></tr>
+                  <tr><td><kbd>Enter</kbd></td><td>Start</td></tr>
+                  <tr><td><kbd>Shift</kbd></td><td>Select</td></tr>
+                  <tr><td><kbd>Esc</kbd></td><td>Open the in-emulator menu</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="vault-side-right" id="gba-sidebar-right">
+            <p class="vault-side-label">Popular Picks</p>
+            <div id="gba-side-cards-right"></div>
+          </div>
+        </div>
+
+        <div id="gba-player-wrap" class="gba-player-wrap" style="display:none">
+          <div class="vault-frame-header">
+            <div class="vault-frame-left">
+              <button class="vault-topbar-btn" id="gba-back-btn" title="Back to upload">← Back</button>
+            </div>
+            <div class="vault-frame-center">
+              <span class="vault-play-title" id="gba-play-title"></span>
+            </div>
+            <div class="vault-frame-btns">
+              <button class="vault-fs-btn" id="gba-restart-btn" title="Restart game" aria-label="Restart game"><i class="fa-solid fa-rotate-right"></i></button>
+              <button class="vault-fs-btn vault-fs-btn--wide" id="gba-fs-btn" title="Fullscreen"><span class="vault-fs-glyph" aria-hidden="true">⛶</span><span class="vault-fs-label">Fullscreen</span></button>
+            </div>
+          </div>
+          <div id="game" class="gba-game-host"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Play view -->
+  <div id="vault-play-view" class="vault-play-view" style="display:none">
+    <div class="vault-split">
+      <div class="vault-side-left" id="vault-sidebar">
+        <p class="vault-side-label">More</p>
+        <div id="vault-side-cards"></div>
+      </div>
+      <div class="vault-main-frame" style="position:relative">
+        <div class="vault-frame-header">
+          <div class="vault-frame-left">
+            <button class="vault-topbar-btn" id="vault-frame-back-btn" title="Back to grid">← Back</button>
+          </div>
+          <div class="vault-frame-center">
+            <span id="vault-play-title" class="vault-play-title"></span>
+          </div>
+          <div class="vault-frame-btns">
+            <button class="vault-fs-btn" id="vault-reload-btn" title="Reload activity" aria-label="Reload activity" style="display:none"><i class="fa-solid fa-rotate-right"></i></button>
+            <button class="vault-play-fav-btn" id="vault-play-fav-btn" aria-label="Favourite" title="Favourite"><i class="fa-regular fa-heart"></i></button>
+            <button class="vault-fs-btn vault-fs-btn--wide" id="vault-fs-btn" title="Fullscreen"><span class="vault-fs-glyph" aria-hidden="true">⛶</span><span class="vault-fs-label">Fullscreen</span></button>
+          </div>
+        </div>
+        <!-- Splash screen shown before game load -->
+        <div id="vault-splash" class="vault-splash">
+          <!-- Blurred background: 3 game thumbs -->
+          <div class="vsplash-bg" aria-hidden="true">
+            <img class="vsplash-bg-img" id="vsb-img-1" src="" alt="Game thumbnail background">
+            <img class="vsplash-bg-img" id="vsb-img-2" src="" alt="Game thumbnail background">
+            <img class="vsplash-bg-img" id="vsb-img-3" src="" alt="Game thumbnail background">
+            <div class="vsplash-bg-overlay"></div>
+          </div>
+          <!-- In-content ads on the splash screen, above and below the game
+               card. Neither blocks the Start button: no countdown, no dismiss,
+               no "watch to play". That distinction is what keeps these ordinary
+               display placements rather than incentivised/interstitial ones,
+               which standard AdSense units may not be used for.
+               Border only for now so the positions can be reviewed before any
+               ad code goes in. -->
+          <div class="vault-splash-ad vault-splash-ad-top" id="vault-splash-ad-top"></div>
+
+          <!-- Foreground: absolutely centered over the blurred bg -->
+          <div class="vault-splash-inner">
+            <div class="vault-splash-left">
+              <h2 class="vault-splash-title" id="vault-splash-title">Play Free Browser Games</h2>
+              <p class="vault-splash-desc">Free activities right here in your browser, no downloads needed.</p>
+              <div class="vault-splash-cta">
+                <button class="vault-splash-play-btn" id="vault-splash-play-btn">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  Start
+                </button>
+                <p class="vault-splash-hint">No login required, start your activity right now</p>
+              </div>
+            </div>
+            <div class="vault-splash-right">
+              <div class="vault-splash-stack">
+                <div class="vault-splash-card">
+                  <img id="vault-splash-thumb" src="" alt="Game thumbnail">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vault-splash-ad vault-splash-ad-bottom" id="vault-splash-ad-bottom"></div>
+        </div>
+        <!-- Ad loading overlay -->
+        <div id="vault-ad-loader" class="vault-ad-loader">
+          <div class="vault-ad-spinner"></div>
+        </div>
+        <!-- Pre-game video ad container (IMA renders the player + skip/countdown
+             UI in here). Currently unused - the pre-roll is disabled, see the
+             note by the script tags at the bottom of this file. Left in place
+             so re-enabling is a two-line change. Never visible without the
+             .active class, which only _playPrerollThen() adds. -->
+        <div id="vault-ad-container" class="vault-ad-container"></div>
+        <iframe id="vault-iframe" src="" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" referrerpolicy="strict-origin-when-cross-origin" style="display:none"></iframe>
+
+        <!-- Horizontal ad below the played game. Was already wired in
+             main.js (_pushPlayAd, mounted the first time a game opens) but
+             this container had been removed at some point with the trigger
+             left behind - restored while migrating off AdSense. Sits inside
+             .vault-play-view, which is itself display:none until a game is
+             open, so this is never visible on the grid or splash screens. -->
+        <div class="sc-ad sc-ad-section" id="sc-gam-playad"></div>
+
+      </div>
+      <div class="vault-side-right" id="vault-sidebar-right">
+        <p class="vault-side-label">Up Next</p>
+        <div id="vault-side-cards-right"></div>
+      </div>
+    </div>
+  </div>
+
+
+</div><!-- /vault-overlay -->

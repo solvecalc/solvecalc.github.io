@@ -1,0 +1,37 @@
+<script>
+(function () {
+  var playBtn = document.getElementById('vault-splash-play-btn');
+  if (playBtn) {
+    playBtn.addEventListener('click', function () {
+      playBtn.disabled = true;                       // guard double-clicks
+      if (typeof _hideSplash === 'function') _hideSplash();
+
+      // Show the centered spinner ONLY while we actually wait on an ad. A
+      // frequency-capped user (already watched one in the last 24h) plays no ad
+      // and the game opens directly, so the ad-loader is skipped for them - no
+      // spinner. They still see the game's own top loading bar as it downloads.
+      var _willWaitOnAd = (typeof _prerollSuppressed === 'function') ? !_prerollSuppressed() : true;
+      var adLoaderEl = document.getElementById('vault-ad-loader');
+      if (adLoaderEl && _willWaitOnAd) adLoaderEl.classList.add('active');
+
+      // Start loading the activity in the background NOW, in parallel with the
+      // ad request, so it is ready the instant the ad ends or a no-fill
+      // resolves. It stays hidden until launch reveals it.
+      if (typeof _preloadGameFrame === 'function') _preloadGameFrame();
+
+      var launch = function () {
+        if (typeof _hideSplashAndLaunch === 'function') _hideSplashAndLaunch();
+      };
+
+      // Play the VDO.AI VAST pre-roll, then launch. _playPrerollThen always
+      // calls launch() - on ad success, skip, no-fill, error, or timeout - so
+      // the activity can never be blocked by an ad problem.
+      if (typeof _playPrerollThen === 'function') {
+        _playPrerollThen(launch);
+      } else {
+        launch();
+      }
+    });
+  }
+})();
+</script>

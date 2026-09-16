@@ -1,0 +1,23 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero-inner">
+    <h1 class="hero-h1">Blog</h1>
+    <p class="hero-sub">Short, practical posts about working accurately: the calculator habits that cost marks, and the ones that save them.</p>
+  </div>
+</section>
+<div class="page-wrap"><div class="home-layout"><div class="calc-section-wrap" style="width:100%;">
+  <section class="home-section">
+    <div class="home-topics-grid">
+<% posts.forEach(function (b) { %>
+      <a class="home-topic-card" href="/blog/<%= b.slug %>">
+        <span class="home-topic-title"><%= b.name %></span>
+        <span class="home-topic-desc"><%= b.blurb %></span>
+      </a>
+<% }); %>
+    </div>
+  </section>
+  <section class="home-section">
+    <h2>What This Is For</h2>
+    <p>The <a href="/guides">guides</a> explain how the maths works. These posts are about everything around it: reading the question properly, estimating before trusting a screen, and the handful of calculator behaviours that produce confident wrong answers.</p>
+    <p>They are deliberately short. Each one is a single habit worth adopting, not a chapter.</p>
+  </section>
+</div></div></div>

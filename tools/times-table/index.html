@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Times Table Generator - Any Number, Any Range</title>
+  <meta name="description" content="Generate a clean multiplication table for any number and range, ready to read on screen or print for practice. Includes the tricks that cut memorisation down.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/times-table">
+  <meta property="og:title" content="Times Table Generator - Any Number, Any Range">
+  <meta property="og:description" content="Generate a clean multiplication table for any number and range, ready to read on screen or print for practice. Includes the tricks that cut memorisation down.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/times-table">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Times Table Generator - Any Number, Any Range">
+  <meta name="twitter:description" content="Generate a clean multiplication table for any number and range, ready to read on screen or print for practice. Includes the tricks that cut memorisation down.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Times Table Generator","url":"https://solvecalc.github.io/tools/times-table","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Generate a clean multiplication table for any number and range, ready to read on screen or print for practice. Includes the tricks that cut memorisation down.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far can the table go?","acceptedAnswer":{"@type":"Answer","text":"Well past the usual twelve. Set whatever upper limit you need and the grid is generated to match."}},{"@type":"Question","name":"Can I print it?","acceptedAnswer":{"@type":"Answer","text":"Yes. The table is plain HTML and prints cleanly without the surrounding page furniture."}},{"@type":"Question","name":"Which tables are hardest?","acceptedAnswer":{"@type":"Answer","text":"Sevens and eights, because they lack the pattern shortcuts that nines, fives and tens have. Those are worth drilling directly."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"Times Table Generator","item":"https://solvecalc.github.io/tools/times-table"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>Times Table Generator</span>
+  </nav>
+  <h1 class="tool-h1">Times Table Generator</h1>
+  <p class="article-intro">Pick a number and a range, get a table you can actually read.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="tt-page">
+  <div class="tt-main">
+    <div class="tt-hero">
+      <h1>Times Table Chart</h1>
+    </div>
+
+    <div class="tt-controls">
+      <span style="font-size:.82rem;font-weight:700;color:#7c3aed;">Grid:</span>
+      <button class="tt-size-btn" onclick="buildTable(10)" data-size="10">10×10</button>
+      <button class="tt-size-btn active" onclick="buildTable(12)" data-size="12">12×12</button>
+      <button class="tt-size-btn" onclick="buildTable(15)" data-size="15">15×15</button>
+      <div class="tt-search-group">
+        <label>Find:</label>
+        <input class="tt-search" type="number" id="searchNum" placeholder="0" min="1">
+        <button class="tt-clear-btn" onclick="clearHighlight()">Clear</button>
+      </div>
+    </div>
+
+    <div class="tt-wrap" id="tableWrap"></div>
+
+    <div class="tt-legend">
+      <div class="legend-item"><div class="legend-color" style="background:#fdf4ff;border:1px solid #e9d5ff;"></div>1-30</div>
+      <div class="legend-item"><div class="legend-color" style="background:#e9d5ff;"></div>31-80</div>
+      <div class="legend-item"><div class="legend-color" style="background:#c084fc;"></div>80+</div>
+      <div class="legend-item"><div class="legend-color" style="background:#fde68a;"></div>Hover highlight</div>
+      <div class="legend-item"><div class="legend-color" style="background:#4ade80;"></div>Multiples</div>
+      <div class="legend-item"><div class="legend-color" style="background:#f43f5e;"></div>Search result</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  let tableSize = 12;
+  let activeMultiple = null;
+  let searchVal = null;
+
+  function getColorBand(val) {
+    if(val <= 30) return 'small';
+    if(val <= 60) return 'med1';
+    if(val <= 80) return 'med2';
+    if(val <= 120) return 'large';
+    return 'xlarge';
+  }
+
+  window.buildTable = function(size) {
+    tableSize = size;
+    document.querySelectorAll('.tt-size-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.size == size);
+    });
+
+    const wrap = document.getElementById('tableWrap');
+    const table = document.createElement('table');
+    table.className = 'tt';
+    table.id = 'mainTable';
+
+    // Header row
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    const corner = document.createElement('th');
+    corner.className = 'corner';
+    corner.innerHTML = '×';
+    headerRow.appendChild(corner);
+
+    for(let col = 1; col <= size; col++) {
+      const th = document.createElement('th');
+      th.textContent = col;
+      th.dataset.col = col;
+      th.style.cursor = 'pointer';
+      th.addEventListener('click', () => highlightMultiple(col, 'col'));
+      th.addEventListener('mouseenter', () => previewHighlight(col, 'col'));
+      th.addEventListener('mouseleave', () => removePreview());
+      headerRow.appendChild(th);
+    }
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    for(let row = 1; row <= size; row++) {
+      const tr = document.createElement('tr');
+
+      const rowTh = document.createElement('th');
+      rowTh.textContent = row;
+      rowTh.dataset.row = row;
+      rowTh.style.cursor = 'pointer';
+      rowTh.addEventListener('click', () => highlightMultiple(row, 'row'));
+      rowTh.addEventListener('mouseenter', () => previewHighlight(row, 'row'));
+      rowTh.addEventListener('mouseleave', () => removePreview());
+      tr.appendChild(rowTh);
+
+      for(let col = 1; col <= size; col++) {
+        const td = document.createElement('td');
+        const val = row * col;
+        td.textContent = val;
+        td.dataset.row = row;
+        td.dataset.col = col;
+        td.dataset.val = val;
+        td.dataset.v = getColorBand(val);
+        td.addEventListener('mouseenter', () => onCellHover(row, col));
+        td.addEventListener('mouseleave', () => onCellLeave(row, col));
+        td.addEventListener('click', () => highlightMultiple(val, 'value'));
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.innerHTML = '';
+    wrap.appendChild(table);
+
+    if(activeMultiple !== null) highlightMultiple(activeMultiple.val, activeMultiple.type);
+    if(searchVal !== null) applySearch(searchVal);
+  };
+
+  function onCellHover(hRow, hCol) {
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+    table.querySelectorAll('td').forEach(td => {
+      const r = parseInt(td.dataset.row), c = parseInt(td.dataset.col);
+      td.classList.remove('row-hi','col-hi','both-hi');
+      if(r === hRow && c === hCol) td.classList.add('both-hi');
+      else if(r === hRow) td.classList.add('row-hi');
+      else if(c === hCol) td.classList.add('col-hi');
+    });
+    // Highlight headers
+    table.querySelectorAll('th[data-col]').forEach(th => {
+      th.classList.toggle('active-header', parseInt(th.dataset.col) === hCol);
+    });
+    table.querySelectorAll('th[data-row]').forEach(th => {
+      th.classList.toggle('active-header', parseInt(th.dataset.row) === hRow);
+    });
+  }
+
+  function onCellLeave() {
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+    table.querySelectorAll('td').forEach(td => td.classList.remove('row-hi','col-hi','both-hi'));
+    table.querySelectorAll('th').forEach(th => th.classList.remove('active-header'));
+    if(activeMultiple !== null) highlightMultiple(activeMultiple.val, activeMultiple.type, true);
+  }
+
+  function previewHighlight(num, type) {}
+  function removePreview() {}
+
+  function highlightMultiple(val, type, keepActive) {
+    if(!keepActive) {
+      if(activeMultiple && activeMultiple.val === val) {
+        activeMultiple = null;
+        clearMultiples();
+        return;
+      }
+      activeMultiple = {val, type};
+    }
+
+    clearMultiples();
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+
+    if(type === 'value') {
+      table.querySelectorAll('td').forEach(td => {
+        if(parseInt(td.dataset.val) === val) td.classList.add('multiple-hi');
+      });
+    } else if(type === 'row' || type === 'col') {
+      table.querySelectorAll('td').forEach(td => {
+        const r = parseInt(td.dataset.row), c = parseInt(td.dataset.col);
+        const cellVal = r * c;
+        if(cellVal % val === 0) td.classList.add('multiple-hi');
+      });
+    }
+  }
+
+  function clearMultiples() {
+    const table = document.getElementById('mainTable');
+    if(table) table.querySelectorAll('td').forEach(td => td.classList.remove('multiple-hi'));
+  }
+
+  window.clearHighlight = function() {
+    activeMultiple = null;
+    searchVal = null;
+    clearMultiples();
+    const table = document.getElementById('mainTable');
+    if(table) table.querySelectorAll('td').forEach(td => td.classList.remove('search-hi'));
+    document.getElementById('searchNum').value = '';
+  };
+
+  function applySearch(val) {
+    const table = document.getElementById('mainTable');
+    if(!table) return;
+    table.querySelectorAll('td').forEach(td => {
+      td.classList.toggle('search-hi', parseInt(td.dataset.val) === val);
+    });
+  }
+
+  document.getElementById('searchNum').addEventListener('input', function() {
+    const v = parseInt(this.value);
+    if(!isNaN(v) && v > 0) {
+      searchVal = v;
+      applySearch(v);
+    } else {
+      searchVal = null;
+      const table = document.getElementById('mainTable');
+      if(table) table.querySelectorAll('td').forEach(td => td.classList.remove('search-hi'));
+    }
+  });
+
+  buildTable(12);
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>Tables Are Smaller Than They Look</h2>
+
+    <p>The twelve by twelve grid has 144 squares, which sounds like a lot to learn. It is not. Because 7 times 8 and 8 times 7 give the same answer, almost half the grid is a mirror image of the other half. Strike out the ones, twos, fives and tens, which most people already know, and the genuinely unfamiliar set is closer to fifteen facts.</p>
+
+
+    <h2>The Ones Worth Knowing Cold</h2>
+
+    <p>Nines have a check built in: the digits of every answer in the nine times table add to nine. 9 times 7 is 63, and 6 plus 3 is 9. If your answer fails that test it is wrong.</p>
+
+    <p>Fours are just doubling twice, and eights are doubling three times. 8 times 6 becomes 6 to 12 to 24 to 48, which is faster than recalling it for most people.</p>
+
+
+    <h2>Why Speed Matters Later</h2>
+
+    <p>Fluent tables are the difference between long division being tedious and being impossible. The same goes for simplifying fractions, factorising, and spotting that a number is divisible before you commit to a method. Time spent here is repaid in every topic that follows.</p>
+
+
+    <h2>Using the Table</h2>
+
+    <p>Set the number and how far you want it to run. The generated grid prints cleanly in black and white, which is usually what a practice sheet needs to be.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">How far can the table go?</summary>
+        <div class="home-faq-a">Well past the usual twelve. Set whatever upper limit you need and the grid is generated to match.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Can I print it?</summary>
+        <div class="home-faq-a">Yes. The table is plain HTML and prints cleanly without the surrounding page furniture.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Which tables are hardest?</summary>
+        <div class="home-faq-a">Sevens and eights, because they lack the pattern shortcuts that nines, fives and tens have. Those are worth drilling directly.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/fraction-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+        <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/prime-checker">
+        <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+        <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+        <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/exponent-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-superscript"></i> Exponent Calculator</span>
+        <span class="home-topic-desc">Powers, roots and negative or fractional exponents, worked out.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

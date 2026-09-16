@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exponent Calculator - Powers, Roots and Indices</title>
+  <meta name="description" content="Raise any number to a power, including negative and fractional exponents, and see what each one means. Covers the index laws and why anything to the zero is 1.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/exponent-calculator">
+  <meta property="og:title" content="Exponent Calculator - Powers, Roots and Indices">
+  <meta property="og:description" content="Raise any number to a power, including negative and fractional exponents, and see what each one means. Covers the index laws and why anything to the zero is 1.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/exponent-calculator">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Exponent Calculator - Powers, Roots and Indices">
+  <meta name="twitter:description" content="Raise any number to a power, including negative and fractional exponents, and see what each one means. Covers the index laws and why anything to the zero is 1.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Exponent Calculator","url":"https://solvecalc.github.io/tools/exponent-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Raise any number to a power, including negative and fractional exponents, and see what each one means. Covers the index laws and why anything to the zero is 1.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does a negative exponent mean?","acceptedAnswer":{"@type":"Answer","text":"A reciprocal. Two to the minus three is one over two cubed, which equals one eighth. The result stays positive."}},{"@type":"Question","name":"What is a fractional exponent?","acceptedAnswer":{"@type":"Answer","text":"A root. The power of one half is a square root, one third is a cube root, and so on for any denominator."}},{"@type":"Question","name":"Why is anything to the power of zero equal to 1?","acceptedAnswer":{"@type":"Answer","text":"Because dividing a power by itself subtracts the exponents to zero, and any number divided by itself is 1. Zero to the zero is the exception and is left undefined."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"Exponent Calculator","item":"https://solvecalc.github.io/tools/exponent-calculator"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>Exponent Calculator</span>
+  </nav>
+  <h1 class="tool-h1">Exponent Calculator</h1>
+  <p class="article-intro">Any base, any exponent, including the ones that look strange.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="exp-page">
+  <div class="exp-main">
+    <div class="exp-hero">
+      <h1>Exponent Calculator</h1>
+    </div>
+
+    <div class="exp-display" id="expDisplay">
+      <div class="exp-visual-num" id="expVisualNum">
+        <span id="baseDisplay">2</span><sup id="expDisplay2">3</sup>
+      </div>
+      <div class="exp-equals">=</div>
+      <div class="exp-result-num" id="expResultNum">8</div>
+    </div>
+
+    <div class="exp-controls">
+      <div class="exp-input-group">
+        <label>Base</label>
+        <input class="exp-input" type="number" id="base" value="2" step="1" min="-1000" max="1000">
+      </div>
+      <div class="exp-input-group">
+        <label>Exponent</label>
+        <input class="exp-input" type="number" id="exponent" value="3" step="1" min="-10" max="20">
+      </div>
+      <button class="exp-btn" onclick="calcExponent()"><i class="fa-solid fa-bolt" style="margin-right:.4rem;"></i>Calculate</button>
+    </div>
+
+    <div class="exp-grid-wrap">
+      <div class="widget-title"><i class="fa-solid fa-grid-2" style="margin-right:.3rem;"></i>Visual Grid</div>
+      <div id="expGrid"></div>
+      <div class="exp-grid-note" id="expGridNote">Calculate to see the visual representation</div>
+      <div class="steps-box" id="stepsBox" style="display:none;">
+        <div class="widget-title"><i class="fa-solid fa-list-ol" style="margin-right:.3rem;"></i>Step-by-Step</div>
+        <div id="stepsContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const GRID_COLORS = [
+    ['#f5a623','#1a2038'], ['#ffd700','#1a2038'], ['#2dd4bf','#1a2038'],
+    ['#818cf8','#1a2038'], ['#f43f5e','#1a2038'], ['#4ade80','#1a2038'],
+    ['#fb923c','#1a2038'], ['#a78bfa','#1a2038'], ['#38bdf8','#1a2038'],
+    ['#f472b6','#1a2038']
+  ];
+
+  function updateDisplay() {
+    const base = document.getElementById('base').value || '?';
+    const exp = document.getElementById('exponent').value || '?';
+    document.getElementById('baseDisplay').textContent = base;
+    document.getElementById('expDisplay2').textContent = exp;
+  }
+
+  document.getElementById('base').addEventListener('input', updateDisplay);
+  document.getElementById('exponent').addEventListener('input', updateDisplay);
+
+  window.calcExponent = function() {
+    const base = parseFloat(document.getElementById('base').value);
+    const exp = parseInt(document.getElementById('exponent').value);
+
+    if(isNaN(base) || isNaN(exp)) { alert('Please enter valid numbers!'); return; }
+
+    const result = Math.pow(base, exp);
+
+    document.getElementById('baseDisplay').textContent = base;
+    document.getElementById('expDisplay2').textContent = exp;
+
+    // Animate result number
+    const resultEl = document.getElementById('expResultNum');
+    let current = 0;
+    const target = result;
+    const isSmall = Math.abs(target) < 1e6;
+    if(isSmall) {
+      let start = null;
+      function animNum(ts) {
+        if(!start) start = ts;
+        const progress = Math.min((ts - start) / 600, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        resultEl.textContent = parseFloat((target * ease).toFixed(2));
+        if(progress < 1) requestAnimationFrame(animNum);
+        else resultEl.textContent = result % 1 === 0 ? result : result.toFixed(6);
+      }
+      requestAnimationFrame(animNum);
+    } else {
+      resultEl.textContent = result.toExponential(4);
+    }
+
+    // Build steps
+    const steps = [];
+    if(exp === 0) {
+      steps.push(`Any number to the power of 0 = 1`);
+      steps.push(`${base}⁰ = 1`);
+    } else if(exp === 1) {
+      steps.push(`Any number to the power of 1 = itself`);
+      steps.push(`${base}¹ = ${base}`);
+    } else if(exp < 0) {
+      steps.push(`Negative exponent: ${base}^${exp} = 1 / ${base}^${Math.abs(exp)}`);
+      steps.push(`${base}^${Math.abs(exp)} = ${Math.pow(base, Math.abs(exp))}`);
+      steps.push(`Result: 1 / ${Math.pow(base, Math.abs(exp))} = ${result}`);
+    } else {
+      let mult = base;
+      steps.push(`Start: ${base}`);
+      for(let i = 2; i <= Math.min(exp, 8); i++) {
+        mult *= base;
+        steps.push(`× ${base} = ${mult}`);
+      }
+      if(exp > 8) steps.push(`... (continued) = ${result}`);
+    }
+
+    const stepsContainer = document.getElementById('stepsContainer');
+    stepsContainer.innerHTML = '';
+    steps.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'step-item';
+      div.innerHTML = `<div class="step-num">${i+1}</div><span>${s}</span>`;
+      stepsContainer.appendChild(div);
+    });
+
+    const stepsBox = document.getElementById('stepsBox');
+    stepsBox.style.display = 'block';
+
+    // Draw grid (only for reasonable cases)
+    const grid = document.getElementById('expGrid');
+    const gridNote = document.getElementById('expGridNote');
+    grid.innerHTML = '';
+
+    const b = Math.abs(Math.round(base));
+    const e = Math.abs(exp);
+
+    if(b > 0 && b <= 15 && e >= 1 && e <= 7 && result > 0 && result <= 200) {
+      const totalSquares = Math.round(result);
+      const groupSize = Math.round(Math.pow(b, e > 1 ? 1 : 0));
+
+      for(let i = 0; i < totalSquares; i++) {
+        const sq = document.createElement('div');
+        sq.className = 'exp-square';
+        const groupIdx = Math.floor(i / b);
+        const [bg, fg] = GRID_COLORS[groupIdx % GRID_COLORS.length];
+        sq.style.cssText = `background: ${bg}; color: ${fg}; animation-delay: ${i * 20}ms;`;
+        if(b <= 6) sq.textContent = base;
+        grid.appendChild(sq);
+      }
+      gridNote.textContent = `${totalSquares} squares = ${base}${'×' + base.toString().repeat(e-1)} (${e} times)`;
+    } else if(result > 200) {
+      gridNote.textContent = `${base}^${exp} = ${result} - too large to display as grid, but calculated above!`;
+      // Show a symbolic representation instead
+      const info = document.createElement('div');
+      info.style.cssText = 'color:#f5a623;font-size:1.5rem;font-weight:900;padding:.5rem;';
+      info.textContent = `${base}` + ' × '.repeat(Math.min(exp-1, 5)) + `${base}` + (exp > 6 ? ` ... (${exp} times)` : '');
+      grid.appendChild(info);
+    } else {
+      gridNote.textContent = 'Grid visualization not available for this combination';
+    }
+  };
+
+  calcExponent();
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>What the Exponent Counts</h2>
+
+    <p>An exponent counts how many times the base is multiplied by itself. Two to the fifth is 2 times 2 times 2 times 2 times 2, which is 32. That plain reading covers positive whole numbers and nothing else, which is where the confusion usually starts.</p>
+
+
+    <h2>Negative and Fractional Exponents</h2>
+
+    <p>A negative exponent means a reciprocal, not a negative answer. Two to the minus three is one over two cubed, which is one eighth, and is firmly positive.</p>
+
+    <p>A fractional exponent is a root. Nine to the power of one half is the square root of nine, which is 3. Eight to the power of one third is the cube root of eight, which is 2. Combining the two, 8 to the power of minus one third is one half.</p>
+
+
+    <h2>Why Anything to the Zero Is 1</h2>
+
+    <p>Dividing powers subtracts exponents, so 2 to the fifth divided by 2 to the fifth is 2 to the zero. Any number divided by itself is 1, so 2 to the zero must be 1. The same reasoning holds for every base except zero itself, where it is left undefined.</p>
+
+
+    <h2>The Laws Worth Memorising</h2>
+
+    <p>Multiplying powers of the same base adds exponents, dividing subtracts them, and a power raised to a power multiplies them. Those three cover most of what an exam will ask, and they are the reason index questions can usually be simplified before anything is calculated.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">What does a negative exponent mean?</summary>
+        <div class="home-faq-a">A reciprocal. Two to the minus three is one over two cubed, which equals one eighth. The result stays positive.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">What is a fractional exponent?</summary>
+        <div class="home-faq-a">A root. The power of one half is a square root, one third is a cube root, and so on for any denominator.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Why is anything to the power of zero equal to 1?</summary>
+        <div class="home-faq-a">Because dividing a power by itself subtracts the exponents to zero, and any number divided by itself is 1. Zero to the zero is the exception and is left undefined.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/fraction-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-divide"></i> Fraction Calculator</span>
+        <span class="home-topic-desc">Add, subtract, multiply and divide fractions with the steps shown.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/prime-checker">
+        <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+        <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+        <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/times-table">
+        <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+        <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

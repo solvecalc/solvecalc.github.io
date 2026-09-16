@@ -1,0 +1,35 @@
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <span><%= item.name %></span>
+  </nav>
+  <h1><%= item.name %></h1>
+  <p class="article-intro"><%= item.blurb %></p>
+  <div class="article-body">
+<% item.sections.forEach(function (s) { %>
+    <h2><%= s.h %></h2>
+<% s.p.forEach(function (para) { %>
+    <p><%- para %></p>
+<% }); %>
+<% }); %>
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+<% item.faq.forEach(function (f) { %>
+      <details class="home-faq-item">
+        <summary class="home-faq-q"><%= f.q %></summary>
+        <div class="home-faq-a"><%= f.a %></div>
+      </details>
+<% }); %>
+    </div>
+  </div>
+  <section class="home-section">
+    <h2>More Guides</h2>
+    <div class="home-topics-grid">
+<% siblings.forEach(function (g) { %>
+      <a class="home-topic-card" href="/guides/<%= g.slug %>">
+        <span class="home-topic-title"><%= g.name %></span>
+        <span class="home-topic-desc"><%= g.blurb %></span>
+      </a>
+<% }); %>
+    </div>
+  </section>
+</div>

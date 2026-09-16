@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fraction Calculator - Add and Simplify Fractions Free</title>
+  <meta name="description" content="Work with two fractions at once: add, subtract, multiply or divide them, then read the reduced answer and the working that produced it. Free, no sign-up.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/tools/fraction-calculator">
+  <meta property="og:title" content="Fraction Calculator - Add and Simplify Fractions Free">
+  <meta property="og:description" content="Work with two fractions at once: add, subtract, multiply or divide them, then read the reduced answer and the working that produced it. Free, no sign-up.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/tools/fraction-calculator">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fraction Calculator - Add and Simplify Fractions Free">
+  <meta name="twitter:description" content="Work with two fractions at once: add, subtract, multiply or divide them, then read the reduced answer and the working that produced it. Free, no sign-up.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Fraction Calculator","url":"https://solvecalc.github.io/tools/fraction-calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"All","description":"Work with two fractions at once: add, subtract, multiply or divide them, then read the reduced answer and the working that produced it. Free, no sign-up.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does it reduce the answer automatically?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every result is divided by the greatest common factor of its numerator and denominator before it is shown, so 8/12 comes back as 2/3."}},{"@type":"Question","name":"Can it handle negative fractions?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the minus sign on the numerator. The sign is carried through the working and shown on the final answer."}},{"@type":"Question","name":"What about mixed numbers?","acceptedAnswer":{"@type":"Answer","text":"They are converted to improper fractions internally, and the answer is given as both an improper fraction and a mixed number."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://solvecalc.github.io/tools"},{"@type":"ListItem","position":3,"name":"Fraction Calculator","item":"https://solvecalc.github.io/tools/fraction-calculator"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-tool">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools" class=&#34;active&#34;>Tools</a>
+      <a href="/guides">Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span>Fraction Calculator</span>
+  </nav>
+  <h1 class="tool-h1">Fraction Calculator</h1>
+  <p class="article-intro">Four operations on two fractions, with the reduced result and the steps that got there.</p>
+</div>
+
+<div class="tool-page-layout">
+
+
+<div class="frac-page">
+  <div class="frac-main">
+    <div class="frac-hero">
+      <h1>Fraction Calculator</h1>
+    </div>
+
+    <div class="frac-ops">
+      <button class="op-btn active" data-op="+" title="Add">+</button>
+      <button class="op-btn" data-op="-" title="Subtract">−</button>
+      <button class="op-btn" data-op="*" title="Multiply">×</button>
+      <button class="op-btn" data-op="/" title="Divide">÷</button>
+    </div>
+
+    <div class="frac-inputs">
+      <div class="frac-box">
+        <label>Fraction A</label>
+        <input class="frac-num-input" id="a_num" type="number" value="1" min="-999" max="999" step="1">
+        <div class="frac-line"></div>
+        <input class="frac-num-input" id="a_den" type="number" value="2" min="1" max="999" step="1">
+      </div>
+      <div class="op-display" id="opDisplay">+</div>
+      <div class="frac-box">
+        <label>Fraction B</label>
+        <input class="frac-num-input" id="b_num" type="number" value="1" min="-999" max="999" step="1">
+        <div class="frac-line"></div>
+        <input class="frac-num-input" id="b_den" type="number" value="3" min="1" max="999" step="1">
+      </div>
+    </div>
+
+    <div class="frac-visuals" id="fracVisuals">
+      <div class="pie-wrap">
+        <svg id="pieA" width="110" height="110" viewBox="0 0 110 110"></svg>
+        <div class="pie-label" id="pieALabel">1/2</div>
+      </div>
+      <div class="pie-wrap">
+        <svg id="pieB" width="110" height="110" viewBox="0 0 110 110"></svg>
+        <div class="pie-label" id="pieBLabel">1/3</div>
+      </div>
+    </div>
+
+    <button class="frac-calc-btn" id="calcBtn"><i class="fa-solid fa-equals" style="margin-right:.4rem;"></i>Calculate</button>
+
+    <div class="frac-result" id="fracResult">
+      <div class="result-label">Result</div>
+      <div class="result-fraction">
+        <div class="result-num" id="resNum">0</div>
+        <div class="result-line" id="resLine"></div>
+        <div class="result-num" id="resDen">1</div>
+      </div>
+      <div class="result-mixed" id="resMixed"></div>
+      <div class="steps-box">
+        <div class="widget-title"><i class="fa-solid fa-list-ol" style="margin-right:.3rem;"></i>Step-by-Step</div>
+        <div id="stepsContainer"></div>
+      </div>
+    </div>
+    <div id="confettiContainer" class="confetti-container"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  let currentOp = '+';
+
+  document.querySelectorAll('.op-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.op-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentOp = btn.dataset.op;
+      document.getElementById('opDisplay').textContent =
+        currentOp === '+' ? '+' : currentOp === '-' ? '−' : currentOp === '*' ? '×' : '÷';
+      updatePies();
+    });
+  });
+
+  ['a_num','a_den','b_num','b_den'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updatePies);
+  });
+
+  function gcd(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while(b) { let t = b; b = a % b; a = t; }
+    return a || 1;
+  }
+
+  function simplify(n, d) {
+    if(d === 0) return [n, d];
+    const g = gcd(Math.abs(n), Math.abs(d));
+    let sn = n/g, sd = d/g;
+    if(sd < 0) { sn = -sn; sd = -sd; }
+    return [sn, sd];
+  }
+
+  function drawPie(svgId, num, den, color1, color2) {
+    const svg = document.getElementById(svgId);
+    const cx = 55, cy = 55, r = 48;
+    svg.innerHTML = '';
+    const denom = Math.abs(den) || 1;
+    const numer = Math.min(Math.abs(num), denom);
+    const ratio = numer / denom;
+
+    // Background circle
+    const bgCircle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    bgCircle.setAttribute('cx', cx); bgCircle.setAttribute('cy', cy);
+    bgCircle.setAttribute('r', r); bgCircle.setAttribute('fill', '#e9d5ff');
+    svg.appendChild(bgCircle);
+
+    if(ratio > 0 && ratio <= 1) {
+      const angle = ratio * 2 * Math.PI;
+      const x = cx + r * Math.sin(angle);
+      const y = cy - r * Math.cos(angle);
+      const largeArc = ratio > 0.5 ? 1 : 0;
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      const d = ratio >= 1
+        ? `M ${cx} ${cy-r} A ${r} ${r} 0 1 1 ${cx-0.001} ${cy-r} Z`
+        : `M ${cx} ${cy-r} A ${r} ${r} 0 ${largeArc} 1 ${x} ${y} L ${cx} ${cy} Z`;
+      path.setAttribute('d', d);
+      path.setAttribute('fill', color1);
+      svg.appendChild(path);
+    }
+
+    // Draw dividing lines for equal parts
+    for(let i = 0; i < denom && denom <= 20; i++) {
+      const ang = (i / denom) * 2 * Math.PI;
+      const lx = cx + r * Math.sin(ang);
+      const ly = cy - r * Math.cos(ang);
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+      line.setAttribute('x2', lx); line.setAttribute('y2', ly);
+      line.setAttribute('stroke', '#fff'); line.setAttribute('stroke-width', '1.5');
+      svg.appendChild(line);
+    }
+
+    // Border
+    const border = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    border.setAttribute('cx', cx); border.setAttribute('cy', cy);
+    border.setAttribute('r', r); border.setAttribute('fill', 'none');
+    border.setAttribute('stroke', color2); border.setAttribute('stroke-width', '2.5');
+    svg.appendChild(border);
+  }
+
+  function updatePies() {
+    const an = parseInt(document.getElementById('a_num').value)||0;
+    const ad = parseInt(document.getElementById('a_den').value)||1;
+    const bn = parseInt(document.getElementById('b_num').value)||0;
+    const bd = parseInt(document.getElementById('b_den').value)||1;
+    drawPie('pieA', an, ad, '#c084fc', '#a855f7');
+    drawPie('pieB', bn, bd, '#f0abfc', '#e879f9');
+    document.getElementById('pieALabel').textContent = an + '/' + ad;
+    document.getElementById('pieBLabel').textContent = bn + '/' + bd;
+  }
+
+  document.getElementById('calcBtn').addEventListener('click', calculate);
+
+  function calculate() {
+    const an = parseInt(document.getElementById('a_num').value)||0;
+    const ad = parseInt(document.getElementById('a_den').value)||1;
+    const bn = parseInt(document.getElementById('b_num').value)||0;
+    const bd = parseInt(document.getElementById('b_den').value)||1;
+
+    if(ad === 0 || bd === 0) { alert('Denominator cannot be zero!'); return; }
+    if(currentOp === '/' && bn === 0) { alert('Cannot divide by zero fraction!'); return; }
+
+    let rn, rd;
+    const steps = [];
+
+    if(currentOp === '+') {
+      rn = an*bd + bn*ad; rd = ad*bd;
+      steps.push(`Find common denominator: ${ad} × ${bd} = ${rd}`);
+      steps.push(`Convert: ${an}/${ad} = ${an*bd}/${rd}, ${bn}/${bd} = ${bn*ad}/${rd}`);
+      steps.push(`Add numerators: ${an*bd} + ${bn*ad} = ${rn}`);
+    } else if(currentOp === '-') {
+      rn = an*bd - bn*ad; rd = ad*bd;
+      steps.push(`Find common denominator: ${ad} × ${bd} = ${rd}`);
+      steps.push(`Convert: ${an}/${ad} = ${an*bd}/${rd}, ${bn}/${bd} = ${bn*ad}/${rd}`);
+      steps.push(`Subtract numerators: ${an*bd} − ${bn*ad} = ${rn}`);
+    } else if(currentOp === '*') {
+      rn = an*bn; rd = ad*bd;
+      steps.push(`Multiply numerators: ${an} × ${bn} = ${rn}`);
+      steps.push(`Multiply denominators: ${ad} × ${bd} = ${rd}`);
+    } else {
+      rn = an*bd; rd = ad*bn;
+      steps.push(`Flip the second fraction: ${bn}/${bd} → ${bd}/${bn}`);
+      steps.push(`Multiply: (${an} × ${bd}) / (${ad} × ${bn}) = ${rn}/${rd}`);
+    }
+
+    const [sn, sd] = simplify(rn, rd);
+    const g = gcd(Math.abs(rn), Math.abs(rd));
+    if(g > 1) steps.push(`Simplify by dividing by ${g}: ${rn}/${rd} = ${sn}/${sd}`);
+
+    document.getElementById('resNum').textContent = sn;
+    document.getElementById('resDen').textContent = sd;
+
+    const resLine = document.getElementById('resLine');
+    const resMixed = document.getElementById('resMixed');
+
+    if(sd === 1) {
+      resLine.style.display = 'none';
+      resMixed.textContent = '';
+    } else {
+      resLine.style.display = 'block';
+      if(Math.abs(sn) > sd) {
+        const whole = Math.trunc(sn/sd);
+        const rem = Math.abs(sn % sd);
+        resMixed.textContent = rem > 0 ? `Mixed number: ${whole} ${rem}/${sd}` : '';
+      } else { resMixed.textContent = `= ${(sn/sd).toFixed(4)}`; }
+    }
+
+    const stepsContainer = document.getElementById('stepsContainer');
+    stepsContainer.innerHTML = '';
+    steps.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'step-item';
+      div.innerHTML = `<div class="step-icon">${i+1}</div><span>${s}</span>`;
+      stepsContainer.appendChild(div);
+    });
+
+    const res = document.getElementById('fracResult');
+    res.style.display = 'block';
+    res.style.animation = 'none';
+    res.offsetHeight;
+    res.style.animation = 'popIn .4s cubic-bezier(.175,.885,.32,1.275)';
+
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
+    const colors = ['#c084fc','#a855f7','#f0abfc','#e879f9','#d8b4fe','#fde68a'];
+    for(let i = 0; i < 60; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.cssText = `
+        left: ${Math.random()*100}%;
+        background: ${colors[Math.floor(Math.random()*colors.length)]};
+        width: ${6+Math.random()*8}px;
+        height: ${6+Math.random()*8}px;
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        animation-duration: ${1.5+Math.random()*2}s;
+        animation-delay: ${Math.random()*.5}s;
+      `;
+      container.appendChild(piece);
+    }
+    setTimeout(() => { container.innerHTML = ''; }, 3500);
+  }
+
+  updatePies();
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>
+
+
+<div class="page-wrap">
+  <section class="tool-article">
+
+    <h2>Why Fractions Trip People Up</h2>
+
+    <p>Almost every fraction mistake is a missing common denominator. Multiplying and dividing do not need one, which makes it easy to forget that adding and subtracting absolutely do. Two thirds plus one quarter is not three sevenths, and the calculator above shows why by rewriting both parts over twelve before it adds anything.</p>
+
+    <p>The second common slip is stopping too early. An answer of eight twelfths is correct but unfinished, and in most classrooms it loses a mark. Anything this page returns is already reduced as far as it goes.</p>
+
+
+    <h2>Adding and Subtracting</h2>
+
+    <p>Find a denominator both fractions can use, rewrite each one over it, then work only on the top numbers. The bottom stays put. For 2/3 + 1/4 the shared denominator is 12, the fractions become 8/12 and 3/12, and the answer is 11/12, which will not reduce.</p>
+
+    <p>Subtraction behaves identically until the result goes negative, which is allowed and simply carries the sign on the numerator.</p>
+
+
+    <h2>Multiplying and Dividing</h2>
+
+    <p>Multiplication is the straightforward one: tops together, bottoms together, reduce. 2/3 times 4/5 is 8/15.</p>
+
+    <p>Division flips the second fraction and then multiplies. 2/3 divided by 4/5 becomes 2/3 times 5/4, which is 10/12, reducing to 5/6. Flipping the wrong fraction is the classic error here, so the steps above always name which one was inverted.</p>
+
+
+    <h2>Mixed Numbers</h2>
+
+    <p>A mixed number like 2 1/3 is converted to 7/3 before any arithmetic happens, because improper fractions are far easier to compute with. The result is given back in both forms so you can quote whichever your teacher expects.</p>
+
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Does it reduce the answer automatically?</summary>
+        <div class="home-faq-a">Yes. Every result is divided by the greatest common factor of its numerator and denominator before it is shown, so 8/12 comes back as 2/3.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Can it handle negative fractions?</summary>
+        <div class="home-faq-a">Yes. Enter the minus sign on the numerator. The sign is carried through the working and shown on the final answer.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">What about mixed numbers?</summary>
+        <div class="home-faq-a">They are converted to improper fractions internally, and the answer is given as both an improper fraction and a mixed number.</div>
+      </details>
+
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Other Tools</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/tools/percentage-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-percent"></i> Percentage Calculator</span>
+        <span class="home-topic-desc">Percentage of a number, increase, decrease and reverse percentages.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/prime-checker">
+        <span class="home-topic-title"><i class="fa-solid fa-hashtag"></i> Prime Number Checker</span>
+        <span class="home-topic-desc">Test whether a number is prime and see its factors if it is not.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/gcf-lcm-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-layer-group"></i> GCF and LCM Calculator</span>
+        <span class="home-topic-desc">Greatest common factor and lowest common multiple, with the factors listed.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/roman-numeral-converter">
+        <span class="home-topic-title"><i class="fa-solid fa-landmark"></i> Roman Numeral Converter</span>
+        <span class="home-topic-desc">Convert numbers to Roman numerals and read numerals back as numbers.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/times-table">
+        <span class="home-topic-title"><i class="fa-solid fa-table"></i> Times Table Generator</span>
+        <span class="home-topic-desc">Print or practise any multiplication table up to whatever range you need.</span>
+      </a>
+
+      <a class="home-topic-card" href="/tools/exponent-calculator">
+        <span class="home-topic-title"><i class="fa-solid fa-superscript"></i> Exponent Calculator</span>
+        <span class="home-topic-desc">Powers, roots and negative or fractional exponents, worked out.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>

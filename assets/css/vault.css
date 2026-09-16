@@ -1,0 +1,228 @@
+/* ── Vault Splash Screen ── */
+.vault-splash {
+  display: none;
+  overflow: hidden;
+  background: #0d0d14;
+}
+.vault-splash.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  bottom: 0; /* full height, no ad zone */
+  z-index: 2;
+}
+
+/* Blurred background images */
+.vsplash-bg {
+  position: absolute; inset: 0;
+  display: flex;
+  z-index: 0;
+}
+.vsplash-bg-img {
+  flex: 1; min-width: 0;
+  object-fit: cover;
+  filter: blur(14px);
+  transform: scale(1.12);
+  opacity: 0.75;
+}
+.vsplash-bg-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.58);
+}
+
+/* Inner wrapper */
+.vault-splash-inner {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  padding: 48px 40px;
+  box-sizing: border-box;
+}
+
+/* Splash ad slots - one above the game card, one below the Start CTA.
+   min-height (not height) reserves the space: it stops the splash reflowing
+   when an ad fills, while still letting a responsive unit render taller than
+   expected instead of being clipped. Clipping matters - an obscured or
+   cropped ad is an AdSense policy breach, so nothing here may use
+   overflow:hidden or a max-height. */
+.vault-splash-ad {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 728px;
+  min-height: 90px;
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  box-sizing: border-box;
+}
+/* Visible: non-blocking display slots above and below the game card. The
+   visitor can press Start at any time, which is what keeps these ordinary
+   in-content placements rather than an interstitial. */
+.vault-splash-ad ins { width: 100%; }
+/* No vertical margin on the slots themselves. The gap above and below the
+   card is owned solely by .vault-splash-inner's padding, so both ads sit the
+   same distance from the content - adding a margin here as well made the top
+   gap (margin + padding) visibly larger than the bottom one (padding only). */
+.vault-splash-ad-top,
+.vault-splash-ad-bottom { margin: 0 auto; }
+
+@media (max-width: 900px) {
+  .vault-splash-ad { max-width: 468px; min-height: 60px; }
+}
+@media (max-width: 520px) {
+  /* Two banners plus the card and CTA do not fit a phone viewport at 100px
+     each, so the mobile pair is shorter. The splash scrolls if a responsive
+     unit still comes back taller than the reserved height. */
+  .vault-splash-ad { max-width: 320px; min-height: 100px; }
+}
+
+/* Foreground */
+.vault-splash-left { flex: 1; max-width: 420px; }
+.vault-splash-right { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+.vault-splash-title {
+  font-size: 2rem; font-weight: 800; margin: 0 0 14px;
+  color: #fff;
+  line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.vault-splash-desc {
+  color: rgba(255,255,255,0.7); font-size: 0.97rem; line-height: 1.65;
+  margin: 0 0 32px;
+}
+.vault-splash-play-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #e53935; color: #fff;
+  border: none; border-radius: 6px;
+  padding: 20px 52px;
+  font-size: 1.15rem; font-weight: 800; letter-spacing: 0.07em;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.15s, transform 0.1s;
+}
+.vault-splash-play-btn svg { width: 30px; height: 30px; }
+.vault-splash-play-btn svg path { stroke: currentColor; stroke-width: 3.5; stroke-linejoin: round; }
+.vault-splash-play-btn:hover { background: #c62828; transform: translateY(-1px); }
+.vault-splash-play-btn:active { transform: translateY(1px); }
+.vault-splash-play-btn:disabled { background: #555; cursor: not-allowed; }
+
+/* CTA block: button + hint left-aligned with title */
+.vault-splash-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+.vault-splash-hint { color: rgba(255,255,255,0.45); font-size: 0.8rem; margin: 11px 0 0; text-align: left; }
+
+/* Stacked card effect */
+.vault-splash-stack {
+  position: relative;
+  width: 260px; height: 260px;
+}
+/* Card 3 -furthest back, most rotated */
+.vault-splash-stack::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 6px;
+  border: 6px solid rgba(255,255,255,0.55);
+  background: #2a2030;
+  transform: rotate(10deg) translate(14px, 10px);
+  z-index: 0;
+}
+/* Card 2 -middle */
+.vault-splash-stack::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 6px;
+  border: 6px solid rgba(255,255,255,0.8);
+  background: #1e1830;
+  transform: rotate(5deg) translate(7px, 5px);
+  z-index: 1;
+}
+/* Card 1 -front (actual thumb) */
+.vault-splash-card {
+  position: absolute; inset: 0;
+  border-radius: 6px; overflow: hidden;
+  box-shadow: 0 28px 72px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4);
+  transform: rotate(-3deg);
+  border: 0;
+  background: #111;
+  z-index: 2;
+}
+.vault-splash-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@media (max-width: 900px) {
+  .vault-splash-inner { flex-direction: column; align-items: center; justify-content: center; gap: 32px; padding: 32px 24px; text-align: center; }
+  .vault-splash-left { max-width: 100%; margin-top: 0; }
+  .vault-splash-right { order: -1; }
+  .vault-splash-stack { width: 180px; height: 180px; }
+  .vault-splash-title { font-size: 1.6rem; margin-bottom: 12px; }
+  .vault-splash-cta { align-items: center; }
+  .vault-splash-hint { text-align: center; }
+}
+@media (max-width: 520px) {
+  .vault-splash-inner { gap: 24px; padding: 20px 16px; }
+  .vault-splash-stack { width: 130px; height: 130px; }
+  .vault-splash-title { font-size: 1.25rem; }
+  .vault-splash-play-btn { padding: 16px 36px; font-size: 1rem; }
+  .vault-splash-desc { font-size: 0.88rem; margin-bottom: 18px; }
+}
+
+/* Ad loading spinner overlay */
+.vault-ad-loader {
+  display: none;
+  position: absolute;
+  /* Start below the frame header (Back/title/Exit row) so the spinner sits in
+     the real play area, vertically centred - not the whole frame. The header
+     height is published as --vault-header-h from JS; 53px is the fallback. */
+  top: var(--vault-header-h, 53px); left: 0; right: 0; bottom: 0;
+  background: #ebebeb;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+.vault-ad-loader.active { display: flex; }
+
+/* Pre-game video ad container. Confined to the real play area - below the
+   frame header (Back/title/Exit row) down to the bottom - so it fills exactly
+   the box the game iframe occupies, not the header. z-index sits above the
+   loader/splash so the ad covers them while playing. IMA draws its own player,
+   skip button and countdown inside this element - we only size and place it. */
+.vault-ad-container {
+  display: none;
+  position: absolute;
+  top: var(--vault-header-h, 53px); left: 0; right: 0; bottom: 0;
+  background: #000;
+  z-index: 6;
+}
+.vault-ad-container.active { display: block; }
+/* Escape hatch shown a few seconds into a video ad. Some VAST creatives ship
+   with no skip and no close control at all, so this is the only guaranteed way
+   out for the visitor. Sits above IMA's own player (which renders inside this
+   container) so a creative can never cover it. */
+.vault-ad-escape {
+  /* Bottom-LEFT deliberately. IMA renders its own "Skip Ad" control in the
+     bottom-RIGHT of the ad player, and on a skippable creative that overruns
+     its declared duration both can be on screen at once - same corner would
+     mean one sitting on top of the other. */
+  position: absolute; left: 14px; bottom: 14px; z-index: 10;
+  font: 700 15px/1 'Noto Sans', system-ui, sans-serif;
+  color: #fff; background: rgba(0,0,0,.78);
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 0;
+  padding: 13px 22px; cursor: pointer;
+  transition: background .15s;
+}
+.vault-ad-escape:hover { background: rgba(0,0,0,.92); }
+@media (max-width: 760px) {
+  .vault-ad-escape { left: 10px; bottom: 10px; font-size: 14px; padding: 12px 18px; }
+}
+.vault-ad-spinner {
+  width: 64px; height: 64px;
+  border: 5px solid #d0d0d0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: vaultSpin 0.75s linear infinite;
+}
+@keyframes vaultSpin { to { transform: rotate(360deg); } }

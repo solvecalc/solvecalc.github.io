@@ -1,0 +1,242 @@
+<div class="tool-page-layout">
+
+
+<div class="glcm-page">
+  <div class="glcm-main">
+    <div class="glcm-hero">
+      <h1>GCF and LCM Calculator</h1>
+    </div>
+
+    <div class="glcm-inputs">
+      <div class="glcm-input-group">
+        <label>Number A</label>
+        <input class="glcm-input" type="number" id="numA" value="12" min="1" max="10000">
+      </div>
+      <div class="glcm-input-group" style="justify-content:center;">
+        <label>&nbsp;</label>
+        <span style="font-size:2rem;font-weight:900;color:#c084fc;line-height:3rem;">&amp;</span>
+      </div>
+      <div class="glcm-input-group">
+        <label>Number B</label>
+        <input class="glcm-input" type="number" id="numB" value="18" min="1" max="10000">
+      </div>
+    </div>
+
+    <button class="glcm-btn" onclick="calcGCFLCM()"><i class="fa-solid fa-circle-nodes" style="margin-right:.4rem;"></i>Find GCF &amp; LCM</button>
+
+    <div class="venn-wrap">
+      <div class="widget-title"><i class="fa-solid fa-diagram-venn" style="margin-right:.3rem;"></i>Factor Venn Diagram</div>
+      <svg id="vennSvg" height="200" viewBox="0 0 520 200"></svg>
+    </div>
+
+    <div id="glcmResults">
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="rc-label">Greatest Common Factor (GCF)</div>
+          <div class="rc-value" id="gcfVal">-</div>
+          <div class="rc-note" id="gcfNote"></div>
+        </div>
+        <div class="result-card">
+          <div class="rc-label">Least Common Multiple (LCM)</div>
+          <div class="rc-value" id="lcmVal">-</div>
+          <div class="rc-note" id="lcmNote"></div>
+        </div>
+      </div>
+      <div class="steps-card" id="stepsCard">
+        <div class="widget-title"><i class="fa-solid fa-list-ol" style="margin-right:.3rem;"></i>Steps</div>
+        <div id="stepsContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function gcd(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while(b) { let t = b; b = a % b; a = t; }
+    return a;
+  }
+
+  function getFactors(n) {
+    const f = [];
+    for(let i = 1; i <= n; i++) { if(n % i === 0) f.push(i); }
+    return f;
+  }
+
+  function drawVenn(a, b, factA, factB, common, gcfVal) {
+    const svg = document.getElementById('vennSvg');
+    svg.innerHTML = '';
+    const W = 520, H = 200, r = 90;
+    const cx1 = 165, cx2 = 355, cy = 100;
+
+    // Left circle
+    const c1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c1.setAttribute('cx', cx1); c1.setAttribute('cy', cy); c1.setAttribute('r', r);
+    c1.setAttribute('fill', '#f3e8ff'); c1.setAttribute('stroke', '#c084fc'); c1.setAttribute('stroke-width', '2.5');
+    c1.setAttribute('opacity', '0.85'); svg.appendChild(c1);
+
+    // Right circle
+    const c2 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c2.setAttribute('cx', cx2); c2.setAttribute('cy', cy); c2.setAttribute('r', r);
+    c2.setAttribute('fill', '#ede9fe'); c2.setAttribute('stroke', '#a855f7'); c2.setAttribute('stroke-width', '2.5');
+    c2.setAttribute('opacity', '0.85'); svg.appendChild(c2);
+
+    // Labels
+    const la = document.createElementNS('http://www.w3.org/2000/svg','text');
+    la.setAttribute('x', cx1); la.setAttribute('y', cy - r - 8);
+    la.setAttribute('text-anchor', 'middle'); la.setAttribute('font-size', '14');
+    la.setAttribute('font-weight', '800'); la.setAttribute('fill', '#6b21a8');
+    la.textContent = 'Factors of ' + a; svg.appendChild(la);
+
+    const lb = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lb.setAttribute('x', cx2); lb.setAttribute('y', cy - r - 8);
+    lb.setAttribute('text-anchor', 'middle'); lb.setAttribute('font-size', '14');
+    lb.setAttribute('font-weight', '800'); lb.setAttribute('fill', '#6b21a8');
+    lb.textContent = 'Factors of ' + b; svg.appendChild(lb);
+
+    // GCF badge in overlap
+    const gcfCircle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    gcfCircle.setAttribute('cx', (cx1+cx2)/2); gcfCircle.setAttribute('cy', cy);
+    gcfCircle.setAttribute('r', '22');
+    gcfCircle.setAttribute('fill', '#a855f7'); gcfCircle.setAttribute('opacity', '0.3');
+    svg.appendChild(gcfCircle);
+
+    const gcfTxt = document.createElementNS('http://www.w3.org/2000/svg','text');
+    gcfTxt.setAttribute('x', (cx1+cx2)/2); gcfTxt.setAttribute('y', cy - 6);
+    gcfTxt.setAttribute('text-anchor', 'middle'); gcfTxt.setAttribute('font-size', '11');
+    gcfTxt.setAttribute('font-weight', '800'); gcfTxt.setAttribute('fill', '#6b21a8');
+    gcfTxt.textContent = 'GCF'; svg.appendChild(gcfTxt);
+
+    const gcfNum = document.createElementNS('http://www.w3.org/2000/svg','text');
+    gcfNum.setAttribute('x', (cx1+cx2)/2); gcfNum.setAttribute('y', cy + 10);
+    gcfNum.setAttribute('text-anchor', 'middle'); gcfNum.setAttribute('font-size', '16');
+    gcfNum.setAttribute('font-weight', '900'); gcfNum.setAttribute('fill', '#a855f7');
+    gcfNum.textContent = gcfVal; svg.appendChild(gcfNum);
+
+    // Factor display in left (unique to A)
+    const onlyA = factA.filter(f => !common.includes(f)).slice(0, 6);
+    const positions = [
+      {x:-50,y:-30},{x:-60,y:0},{x:-50,y:30},{x:-30,y:-50},{x:-30,y:50},{x:-70,y:20}
+    ];
+    onlyA.forEach((f, i) => {
+      const pos = positions[i] || {x:-40,y: (i-3)*18};
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', cx1 + pos.x); t.setAttribute('y', cy + pos.y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '13');
+      t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#7c3aed');
+      t.setAttribute('opacity', '0'); t.textContent = f; svg.appendChild(t);
+      setTimeout(() => { t.setAttribute('opacity','1'); t.style.transition='opacity .3s'; }, i*80 + 200);
+    });
+
+    // Factor display in right (unique to B)
+    const onlyB = factB.filter(f => !common.includes(f)).slice(0, 6);
+    const posR = [
+      {x:50,y:-30},{x:60,y:0},{x:50,y:30},{x:30,y:-50},{x:30,y:50},{x:70,y:20}
+    ];
+    onlyB.forEach((f, i) => {
+      const pos = posR[i] || {x:40,y:(i-3)*18};
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', cx2 + pos.x); t.setAttribute('y', cy + pos.y);
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '13');
+      t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#7c3aed');
+      t.setAttribute('opacity', '0'); t.textContent = f; svg.appendChild(t);
+      setTimeout(() => { t.setAttribute('opacity','1'); }, i*80 + 400);
+    });
+
+    // Common factors in overlap region
+    const commonToShow = common.filter(f => f !== 1).slice(0, 3);
+    const cpositions = [{x:0,y:-25},{x:0,y:25},{x:0,y:0}];
+    commonToShow.forEach((f, i) => {
+      const pos = cpositions[i] || {x:0,y:(i-1)*20};
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x', (cx1+cx2)/2 + pos.x);
+      t.setAttribute('y', cy + pos.y + (i === 1 ? 28 : i===0 ? -28 : 50));
+      t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '12');
+      t.setAttribute('font-weight', '800'); t.setAttribute('fill', '#9333ea');
+      t.setAttribute('opacity', '0'); t.textContent = f; svg.appendChild(t);
+      setTimeout(() => { t.setAttribute('opacity','1'); }, i*100 + 600);
+    });
+  }
+
+  window.calcGCFLCM = function() {
+    const a = parseInt(document.getElementById('numA').value)||0;
+    const b = parseInt(document.getElementById('numB').value)||0;
+    if(a < 1 || b < 1) { alert('Please enter positive integers!'); return; }
+
+    const gcfVal = gcd(a, b);
+    const lcmVal = Math.abs(a * b) / gcfVal;
+    const factA = getFactors(a);
+    const factB = getFactors(b);
+    const common = factA.filter(f => factB.includes(f));
+
+    drawVenn(a, b, factA, factB, common, gcfVal);
+
+    document.getElementById('gcfVal').textContent = gcfVal;
+    document.getElementById('gcfNote').textContent = `Common factors: ${common.join(', ')}`;
+    document.getElementById('lcmVal').textContent = lcmVal;
+    document.getElementById('lcmNote').textContent = `${a} × ${b} ÷ ${gcfVal} = ${lcmVal}`;
+
+    const steps = [
+      `Find all factors of ${a}: {${factA.join(', ')}}`,
+      `Find all factors of ${b}: {${factB.join(', ')}}`,
+      `Common factors: {${common.join(', ')}}`,
+      `GCF = largest common factor = ${gcfVal}`,
+      `LCM = (${a} × ${b}) ÷ GCF = ${a*b} ÷ ${gcfVal} = ${lcmVal}`
+    ];
+
+    const stepsContainer = document.getElementById('stepsContainer');
+    stepsContainer.innerHTML = '';
+    steps.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'step-item';
+      div.innerHTML = `<div class="step-num">${i+1}</div><span>${s}</span>`;
+      stepsContainer.appendChild(div);
+    });
+
+    const results = document.getElementById('glcmResults');
+    results.style.display = 'block';
+    results.style.animation = 'none';
+    results.offsetHeight;
+  };
+
+  document.getElementById('numA').addEventListener('keydown', e => { if(e.key==='Enter') calcGCFLCM(); });
+  document.getElementById('numB').addEventListener('keydown', e => { if(e.key==='Enter') calcGCFLCM(); });
+
+  function shareThisPage() {
+    if (navigator.share) {
+      navigator.share({ title: document.title, url: location.href });
+    } else {
+      navigator.clipboard.writeText(location.href).then(() => {
+        var btn = document.querySelector('.tool-share-btn');
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+      });
+    }
+  }
+  window.shareThisPage = shareThisPage;
+
+  // Draw initial empty Venn
+  (function initVenn(){
+    const svg = document.getElementById('vennSvg');
+    svg.innerHTML = '';
+    const cx1 = 165, cx2 = 355, cy = 100, r = 90;
+    [cx1, cx2].forEach((cx, idx) => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
+      c.setAttribute('fill', idx===0?'#f3e8ff':'#ede9fe');
+      c.setAttribute('stroke', idx===0?'#c084fc':'#a855f7');
+      c.setAttribute('stroke-width', '2.5'); c.setAttribute('opacity', '0.7');
+      svg.appendChild(c);
+    });
+    const hint = document.createElementNS('http://www.w3.org/2000/svg','text');
+    hint.setAttribute('x', '260'); hint.setAttribute('y', '108');
+    hint.setAttribute('text-anchor', 'middle'); hint.setAttribute('font-size', '13');
+    hint.setAttribute('fill', '#7c3aed'); hint.setAttribute('font-weight', '600');
+    hint.textContent = 'Enter numbers & click Calculate';
+    svg.appendChild(hint);
+  })();
+})();
+</script>
+</div>

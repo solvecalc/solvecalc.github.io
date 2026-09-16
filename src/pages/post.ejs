@@ -1,0 +1,26 @@
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/blog">Blog</a> <span>/</span> <span><%= item.name %></span>
+  </nav>
+  <h1><%= item.name %></h1>
+  <p class="article-intro"><%= item.blurb %></p>
+  <div class="article-body">
+<% item.sections.forEach(function (s) { %>
+    <h2><%= s.h %></h2>
+<% s.p.forEach(function (para) { %>
+    <p><%- para %></p>
+<% }); %>
+<% }); %>
+  </div>
+  <section class="home-section">
+    <h2>More Posts</h2>
+    <div class="home-topics-grid">
+<% siblings.forEach(function (b) { %>
+      <a class="home-topic-card" href="/blog/<%= b.slug %>">
+        <span class="home-topic-title"><%= b.name %></span>
+        <span class="home-topic-desc"><%= b.blurb %></span>
+      </a>
+<% }); %>
+    </div>
+  </section>
+</div>

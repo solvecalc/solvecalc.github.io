@@ -1,0 +1,27 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero-inner">
+    <h1 class="hero-h1">Math Tools</h1>
+    <p class="hero-sub"><%= tools.length %> focused calculators for the jobs a plain keypad handles badly. Each one shows its working, not just an answer.</p>
+  </div>
+</section>
+<div class="page-wrap"><div class="home-layout"><div class="calc-section-wrap" style="width:100%;">
+  <section class="home-section">
+    <div class="home-topics-grid">
+<% tools.forEach(function (t) { %>
+      <a class="home-topic-card" href="/tools/<%= t.slug %>">
+        <span class="home-topic-title"><i class="fa-solid <%= t.icon %>"></i> <%= t.name %></span>
+        <span class="home-topic-desc"><%= t.blurb %></span>
+      </a>
+<% }); %>
+    </div>
+  </section>
+  <section class="home-section">
+    <h2>When a Dedicated Tool Beats the Calculator</h2>
+    <p>The <a href="/">main calculator</a> handles anything you can express as a single line of arithmetic. These pages exist for the questions that are several steps long, where the steps themselves are where mistakes happen: reducing a fraction, finding a common denominator, working a percentage backwards from a discounted price.</p>
+    <p>Each tool shows the intermediate working rather than only the result, which matters when the method is what is being marked.</p>
+  </section>
+  <section class="home-section">
+    <h2>All of It Runs on Your Device</h2>
+    <p>Every tool here is JavaScript executing in your browser. Nothing you type is uploaded, there is no account, and each page keeps working if the connection drops after it has loaded.</p>
+  </section>
+</div></div></div>

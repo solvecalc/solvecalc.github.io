@@ -1,0 +1,222 @@
+<div class="tool-page-layout">
+
+
+<div class="base-page">
+  <div class="base-main">
+    <div class="base-hero">
+      <h1>Number Base Converter</h1>
+    </div>
+
+    <div class="base-input-wrap">
+      <label><i class="fa-solid fa-keyboard" style="margin-right:.3rem;"></i>Enter a Number</label>
+      <div class="base-source-row">
+        <input class="base-input" type="text" id="baseInput" placeholder="e.g. 255" value="42">
+        <select class="base-from-select" id="fromBase">
+          <option value="10">Decimal (Base 10)</option>
+          <option value="2">Binary (Base 2)</option>
+          <option value="8">Octal (Base 8)</option>
+          <option value="16">Hex (Base 16)</option>
+        </select>
+        <button class="base-btn" onclick="doConvert()"><i class="fa-solid fa-bolt" style="margin-right:.3rem;"></i>Convert</button>
+      </div>
+      <div class="base-error" id="baseError"></div>
+    </div>
+
+    <div class="base-grid">
+      <!-- Binary -->
+      <div class="base-card" id="card-bin">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#f5a623;">Binary</span>
+          <span class="base-card-sub">Base 2 (0s and 1s)</span>
+          <button class="copy-badge" onclick="copyVal('binVal')">Copy</button>
+        </div>
+        <div class="base-value" id="binVal" onclick="setFromBase('binVal','2')">-</div>
+        <div class="bit-display" id="bitDisplay"></div>
+      </div>
+
+      <!-- Octal -->
+      <div class="base-card" id="card-oct">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#818cf8;">Octal</span>
+          <span class="base-card-sub">Base 8 (0-7)</span>
+          <button class="copy-badge" onclick="copyVal('octVal')">Copy</button>
+        </div>
+        <div class="base-value" id="octVal" onclick="setFromBase('octVal','8')" style="color:#818cf8;">-</div>
+        <div class="octal-display" id="octDisplay"></div>
+      </div>
+
+      <!-- Decimal -->
+      <div class="base-card" id="card-dec">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#2dd4bf;">Decimal</span>
+          <span class="base-card-sub">Base 10 (0-9)</span>
+          <button class="copy-badge" onclick="copyVal('decVal')">Copy</button>
+        </div>
+        <div class="base-value" id="decVal" onclick="setFromBase('decVal','10')" style="color:#2dd4bf;">-</div>
+        <div class="dec-bar" id="decBar" style="width:0;"></div>
+      </div>
+
+      <!-- Hex -->
+      <div class="base-card" id="card-hex">
+        <div class="base-card-header">
+          <span class="base-card-title" style="color:#f43f5e;">Hexadecimal</span>
+          <span class="base-card-sub">Base 16 (0-9, A-F)</span>
+          <button class="copy-badge" onclick="copyVal('hexVal')">Copy</button>
+        </div>
+        <div class="base-value" id="hexVal" onclick="setFromBase('hexVal','16')" style="color:#f43f5e;">-</div>
+        <div class="hex-display" id="hexDisplay"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const HEX_COLORS = ['#f43f5e','#f97316','#f5a623','#eab308','#84cc16','#22c55e','#14b8a6','#06b6d4','#3b82f6','#6366f1','#8b5cf6','#a855f7','#ec4899','#f43f5e','#fb923c','#fbbf24'];
+
+  function updateBits(binStr) {
+    const container = document.getElementById('bitDisplay');
+    container.innerHTML = '';
+    const padded = binStr.length < 8 ? binStr.padStart(8, '0') : binStr;
+    padded.split('').forEach((bit, i) => {
+      const span = document.createElement('div');
+      span.className = 'bit ' + (bit === '1' ? 'on' : 'off');
+      span.textContent = bit;
+      span.style.animationDelay = i * 30 + 'ms';
+      container.appendChild(span);
+    });
+  }
+
+  function updateHex(hexStr) {
+    const container = document.getElementById('hexDisplay');
+    container.innerHTML = '';
+    hexStr.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'hex-digit';
+      const v = parseInt(ch, 16);
+      span.style.cssText = `color: ${HEX_COLORS[v] || '#c8d4f0'}; background: ${HEX_COLORS[v]}22; border-radius: 6px; padding: .1rem .3rem;`;
+      span.textContent = ch.toUpperCase();
+      container.appendChild(span);
+    });
+  }
+
+  function updateOctal(octStr) {
+    const container = document.getElementById('octDisplay');
+    container.innerHTML = '';
+    octStr.split('').forEach(ch => {
+      const span = document.createElement('span');
+      span.className = 'octal-digit';
+      span.textContent = ch;
+      container.appendChild(span);
+    });
+  }
+
+  function updateDecBar(val, max) {
+    const bar = document.getElementById('decBar');
+    const pct = Math.min((val / Math.max(max, 1)) * 100, 100);
+    bar.style.width = pct + '%';
+  }
+
+  window.doConvert = function() {
+    const raw = document.getElementById('baseInput').value.trim().toUpperCase();
+    const fromBase = parseInt(document.getElementById('fromBase').value);
+    const errEl = document.getElementById('baseError');
+    errEl.style.display = 'none';
+
+    if(!raw) { errEl.textContent = 'Please enter a number!'; errEl.style.display = 'block'; return; }
+
+    // Validate
+    const validChars = { 2: /^[01]+$/, 8: /^[0-7]+$/, 10: /^\d+$/, 16: /^[0-9A-F]+$/ };
+    if(!validChars[fromBase].test(raw)) {
+      errEl.textContent = `Invalid ${fromBase === 2 ? 'binary' : fromBase === 8 ? 'octal' : fromBase === 10 ? 'decimal' : 'hex'} number!`;
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const decimal = parseInt(raw, fromBase);
+    if(decimal > 2147483647) {
+      errEl.textContent = 'Number too large! Maximum is 2,147,483,647.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const binStr = decimal.toString(2);
+    const octStr = decimal.toString(8);
+    const decStr = decimal.toString(10);
+    const hexStr = decimal.toString(16).toUpperCase();
+
+    // Animate values with transition
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.textContent = val;
+        el.style.opacity = '1';
+        el.style.transition = 'opacity .3s';
+      }, 150);
+    };
+
+    setVal('binVal', binStr);
+    setVal('octVal', octStr);
+    setVal('decVal', decStr);
+    setVal('hexVal', hexStr);
+
+    setTimeout(() => {
+      updateBits(binStr);
+      updateOctal(octStr);
+      updateDecBar(decimal, 65535);
+      updateHex(hexStr);
+    }, 200);
+
+    // Highlight active source base card
+    ['bin','oct','dec','hex'].forEach(b => {
+      document.getElementById('card-' + b).classList.remove('active-base');
+    });
+    const baseMap = { '2':'bin', '8':'oct', '10':'dec', '16':'hex' };
+    if(baseMap[fromBase]) document.getElementById('card-' + baseMap[fromBase]).classList.add('active-base');
+  };
+
+  window.setFromBase = function(valId, base) {
+    const val = document.getElementById(valId).textContent;
+    if(val === '-') return;
+    document.getElementById('baseInput').value = val;
+    document.getElementById('fromBase').value = base;
+    doConvert();
+  };
+
+  window.copyVal = function(id) {
+    const val = document.getElementById(id).textContent;
+    if(val === '-') return;
+    navigator.clipboard.writeText(val).catch(() => {});
+    const el = document.getElementById(id);
+    const rect = el.getBoundingClientRect();
+    const tip = document.createElement('div');
+    tip.className = 'tooltip';
+    tip.textContent = 'Copied!';
+    tip.style.left = (rect.left + window.scrollX) + 'px';
+    tip.style.top = (rect.top + window.scrollY - 30) + 'px';
+    document.body.appendChild(tip);
+    setTimeout(() => tip.remove(), 900);
+  };
+
+  document.getElementById('baseInput').addEventListener('keydown', e => {
+    if(e.key === 'Enter') doConvert();
+  });
+
+  doConvert();
+})();
+
+function shareThisPage() {
+  if (navigator.share) {
+    navigator.share({ title: document.title, url: location.href });
+  } else {
+    navigator.clipboard.writeText(location.href).then(() => {
+      var btn = document.querySelector('.tool-share-btn');
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+      setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+    });
+  }
+}
+</script>
+</div>

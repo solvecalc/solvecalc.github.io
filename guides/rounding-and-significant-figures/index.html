@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rounding and Significant Figures - Getting It Right</title>
+  <meta name="description" content="Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://solvecalc.github.io/guides/rounding-and-significant-figures">
+  <meta property="og:title" content="Rounding and Significant Figures - Getting It Right">
+  <meta property="og:description" content="Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solvecalc.github.io/guides/rounding-and-significant-figures">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:site_name" content="SolveCalc">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Rounding and Significant Figures - Getting It Right">
+  <meta name="twitter:description" content="Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rounding and Significant Figures","description":"Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.","mainEntityOfPage":"https://solvecalc.github.io/guides/rounding-and-significant-figures","datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is 0.0500 two significant figures or three?","acceptedAnswer":{"@type":"Answer","text":"Three. The leading zeros are placeholders, but the trailing zeros after the decimal point are a deliberate claim of precision."}},{"@type":"Question","name":"Why is rounding twice a problem?","acceptedAnswer":{"@type":"Answer","text":"Each rounding introduces error, and rounding an already rounded number compounds it. Keep full precision until the final step."}},{"@type":"Question","name":"How many figures should my answer have?","acceptedAnswer":{"@type":"Answer","text":"Match the least precise measurement you started with. Two significant figures in means two significant figures out."}}]}</script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://solvecalc.github.io/guides"},{"@type":"ListItem","position":3,"name":"Rounding and Significant Figures","item":"https://solvecalc.github.io/guides/rounding-and-significant-figures"}]}</script>
+
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+  <link rel="shortcut icon" href="/assets/img/logo-48.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-180.png">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="preload" as="image" href="/assets/img/solvecalc-calcsolver-logo.webp" fetchpriority="high">
+  
+  <link rel="preconnect" href="https://learn.edumain.net" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV0T3K6WSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KV0T3K6WSM');
+  </script>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+
+  <style>
+    :root {
+      --bg: #f6f7fb; --bg2: #ffffff; --bg3: #eef1f8;
+      --card: #ffffff; --card-hover: #f7f9ff;
+      --accent: #4f46e5; --accent2: #6366f1;
+      --text: #1a202c; --text-muted: #4a5568; --border: #dfe3ec;
+    }
+    
+    #vault-gba-tab { display: none !important; }
+  </style>
+</head>
+<body class="page-article">
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc - free calcsolver and scientific calculator" class="logo-wordmark" width="512" height="101" fetchpriority="high">
+    </a>
+    <span class="site-tagline">Free CalcSolver</span>
+    <nav class="header-nav">
+      <a href="/">Calculator</a>
+      <a href="/tools">Tools</a>
+      <a href="/guides" class=&#34;active&#34;>Guides</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob-nav">
+    <a href="/">Calculator</a>
+    <a href="/tools">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/blog">Blog</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+</header>
+
+<main>
+<div class="page-wrap">
+  <nav class="article-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Calculator</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <span>Rounding and Significant Figures</span>
+  </nav>
+  <h1>Rounding and Significant Figures</h1>
+  <p class="article-intro">How precise to be, and how to avoid losing marks getting there.</p>
+  <div class="article-body">
+
+    <h2>Two Different Instructions</h2>
+
+    <p>Decimal places count digits after the point. Significant figures count meaningful digits from the first non-zero one onward. They are not interchangeable, and a question asking for one will not accept the other.</p>
+
+    <p>0.004821 to two decimal places is 0.00, which is useless. To two significant figures it is 0.0048, which preserves the information. That gap is exactly why significant figures exist.</p>
+
+
+    <h2>Which Zeros Count</h2>
+
+    <p>Leading zeros never count: they are placeholders. Zeros between non-zero digits always count, so 4007 has four significant figures. Trailing zeros after a decimal point count, because writing them was a deliberate claim of precision, so 2.50 has three.</p>
+
+    <p>Trailing zeros in a whole number such as 1500 are genuinely ambiguous, which is what standard form is for.</p>
+
+
+    <h2>Round Once, at the End</h2>
+
+    <p>Rounding partway through and then continuing compounds the error. Work with full precision throughout and round only the final answer.</p>
+
+    <p>A worked example: 2.4 times 3.6 is 8.64, and rounding that to 8.6 at the end is correct. Rounding the inputs first to 2 and 4 gives 8, which is wrong by a margin that grows with every further step.</p>
+
+
+    <h2>Choosing a Sensible Precision</h2>
+
+    <p>An answer cannot be more precise than the data it came from. Measure a room as 3.2 by 4.1 metres and the area is 13.12 square metres on paper, but honestly it is 13 square metres: two significant figures in, two out.</p>
+
+    <p>Quoting every digit the calculator offers is not more accurate. It just misrepresents how much you actually know.</p>
+
+
+    <h2>The Five Rule and Its Exception</h2>
+
+    <p>Digits below five round down, five and above round up. Most classrooms stop there, and for schoolwork that is fine.</p>
+
+    <p>Statistical work often rounds a bare five to the nearest even digit instead, so 2.5 becomes 2 and 3.5 becomes 4, because always rounding up biases a long series of numbers upward. Use the plain rule unless you are told otherwise.</p>
+
+
+    <h2>Common Questions</h2>
+    <div class="home-faq-list">
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Is 0.0500 two significant figures or three?</summary>
+        <div class="home-faq-a">Three. The leading zeros are placeholders, but the trailing zeros after the decimal point are a deliberate claim of precision.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">Why is rounding twice a problem?</summary>
+        <div class="home-faq-a">Each rounding introduces error, and rounding an already rounded number compounds it. Keep full precision until the final step.</div>
+      </details>
+
+      <details class="home-faq-item">
+        <summary class="home-faq-q">How many figures should my answer have?</summary>
+        <div class="home-faq-a">Match the least precise measurement you started with. Two significant figures in means two significant figures out.</div>
+      </details>
+
+    </div>
+  </div>
+  <section class="home-section">
+    <h2>More Guides</h2>
+    <div class="home-topics-grid">
+
+      <a class="home-topic-card" href="/guides/order-of-operations">
+        <span class="home-topic-title">Order of Operations</span>
+        <span class="home-topic-desc">The fixed sequence every calculator follows, and the two rules people miss.</span>
+      </a>
+
+      <a class="home-topic-card" href="/guides/fractions-decimals-percentages">
+        <span class="home-topic-title">Fractions, Decimals and Percentages</span>
+        <span class="home-topic-desc">Three notations for the same quantity, and how to move between them.</span>
+      </a>
+
+      <a class="home-topic-card" href="/guides/logarithms">
+        <span class="home-topic-title">Logarithms</span>
+        <span class="home-topic-desc">One question, asked backwards: what power produced this number.</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-col footer-col-brand">
+      <a href="/" class="footer-brand logo" aria-label="SolveCalc">
+        <img src="/assets/img/solvecalc-calcsolver-logo.webp" alt="SolveCalc calcsolver" class="logo-wordmark" width="512" height="101" loading="lazy">
+      </a>
+      <p class="footer-tagline">A free calcsolver that runs entirely in your browser: a full scientific calculator, focused math tools, and short guides. Nothing to install, no account to make.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Explore</p>
+      <nav class="footer-col-links">
+        <a href="/">Calculator</a>
+        <a href="/tools">Math Tools</a>
+        <a href="/guides">Guides</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Legal</p>
+      <nav class="footer-col-links">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Project</p>
+      <nav class="footer-col-links">
+        <a href="https://github.com/solvecalc/solvecalc.github.io" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Source on GitHub</a>
+        <a href="https://solvecalc.net" target="_blank" rel="noopener noreferrer">SolveCalc.net</a>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2026 SolveCalc. Hosted on GitHub Pages.</span>
+  </div>
+</footer>
+
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  function tick() {
+    var vault = document.getElementById('vault-overlay');
+    var vaultOpen = vault && vault.classList.contains('open');
+    btn.classList.toggle('visible', !vaultOpen && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  var vault = document.getElementById('vault-overlay');
+  if (vault) new MutationObserver(tick).observe(vault, { attributes: true, attributeFilter: ['class'] });
+  tick();
+  btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+(function () {
+  var btn = document.getElementById('mob-menu-btn');
+  var nav = document.getElementById('mob-nav');
+  if (btn) btn.addEventListener('click', function () { nav.classList.toggle('open'); });
+})();
+</script>
+
+</body>
+</html>
