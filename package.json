@@ -4,7 +4,9 @@
   "private": true,
   "description": "Static build of the SolveCalc calcsolver and game vault for GitHub Pages",
   "scripts": {
-    "build": "node src/build.js"
+    "build": "node src/build.js",
+    "indexnow": "node src/indexnow.js",
+    "deploy": "npm run build && npm run indexnow"
   },
   "devDependencies": {
     "ejs": "^3.1.10"

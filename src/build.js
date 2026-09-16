@@ -220,6 +220,10 @@ fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   indexed.map((p) => `  <url><loc>${U(p.path)}</loc><lastmod>${BUILD_DATE}</lastmod></url>\n`).join('') +
   '</urlset>\n');
+// IndexNow needs its key readable at the site root; written here so a clean
+// checkout plus a build always has it.
+const INDEXNOW_KEY = '9d68979f049dfc0fc3b5963df0f66b52';
+fs.writeFileSync(path.join(ROOT, INDEXNOW_KEY + '.txt'), INDEXNOW_KEY);
 // Disables Jekyll so every file is served exactly as committed.
 fs.writeFileSync(path.join(ROOT, '.nojekyll'), '');
 
