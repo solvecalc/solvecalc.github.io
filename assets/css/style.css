@@ -3759,3 +3759,38 @@ body .home-article p a, body .article-body p a, body .article-body li a, body .h
 @media (max-width: 340px) {
   .tools-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ── FAQ bars ──────────────────────────────────────────────────────────────
+   The rules above set background: var(--card-bg), which is not a variable this
+   build defines, so every FAQ row rendered with no background at all. These
+   give each row a brushed-silver face, a matching border and a little lift on
+   hover, and they apply everywhere the FAQ list is used: home, tools, guides. */
+.home-faq-item {
+  background: linear-gradient(180deg, #f7f8fa 0%, #e8eaef 100%);
+  border: 1px solid #d3d7de;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.home-faq-item:hover {
+  border-color: #b9bfc9;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1);
+}
+.home-faq-item[open] {
+  background: linear-gradient(180deg, #fdfdfe 0%, #eef0f4 100%);
+  border-color: #b9bfc9;
+}
+.home-faq-q { color: #1f2937; }
+.home-faq-a { color: #4a5568; border-top: 1px solid #dfe3ea; padding-top: 14px; }
+
+/* The FAQ is the last thing inside a tool page's article, and the article's
+   bottom padding (42px) plus its margin (51px) plus the next section's top
+   padding (48px) left a 94px hole under the last question. */
+.tool-article:has(> .home-faq-list:last-child) { padding-bottom: 1.25rem; margin-bottom: 0; }
+.tool-article + .home-section { padding-top: 1.75rem; }
+/* Fallback for browsers without :has() - the same trim, applied unconditionally
+   to tool articles, which are the only place this pattern is used. */
+@supports not selector(:has(*)) {
+  .tool-article { padding-bottom: 1.25rem; margin-bottom: 0; }
+}

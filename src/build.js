@@ -20,7 +20,7 @@ const YEAR = new Date().getFullYear();
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 // Bumped whenever the CSS or JS changes, so returning visitors are not served
 // a stale copy from cache.
-const ASSET_V = '2';
+const ASSET_V = '4';
 
 const tools = require('./content/tools');
 const guides = require('./content/guides');
