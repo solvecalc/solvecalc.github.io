@@ -4,7 +4,7 @@
     <p class="hero-sub">Arithmetic, trigonometry, roots, powers and logarithms, worked out in the browser tab you already have open. No install, no account, no cost. The full project lives at <a href="https://solvecalc.net" target="_blank" rel="noopener">solvecalc.net</a>.</p>
     <div class="hero-btns">
       <a class="hero-btn-primary" href="#calc-col"><i class="fa-solid fa-calculator"></i> Use the Calculator</a>
-      <a class="hero-btn-ghost" href="/tools"><i class="fa-solid fa-wrench"></i> Browse the Tools</a>
+      <a class="hero-btn-ghost" href="/tools/"><i class="fa-solid fa-wrench"></i> Browse the Tools</a>
     </div>
   </div>
 </section>
@@ -32,7 +32,7 @@
       <p>Some questions are awkward on a plain calculator. Reducing a fraction, working out which numbers divide evenly into two others, or turning a decimal into a ratio all take several steps and an easy slip. Each of those has its own page here, with the working shown rather than just the answer.</p>
       <div class="tools-grid">
 <% topTools.forEach(function (t) { %>
-        <a class="tool-card" href="/tools/<%= t.slug %>" style="--tool-color:<%= t.color %>">
+        <a class="tool-card" href="/tools/<%= t.slug %>/" style="--tool-color:<%= t.color %>">
         <div class="tool-icon-wrap"><i class="fa-solid <%= t.icon %>"></i></div>
         <div class="tool-name"><%= t.name %></div>
         <div class="tool-desc"><%= t.blurb %></div>
@@ -40,7 +40,7 @@
       </a>
 <% }); %>
       </div>
-      <p class="text-center" style="margin-top:16px;"><a href="/tools">See all <%= toolCount %> tools</a></p>
+      <p class="text-center" style="margin-top:16px;"><a href="/tools/">See all <%= toolCount %> tools</a></p>
     </section>
 
     <section class="home-section">
@@ -51,7 +51,7 @@
 
     <section class="home-section">
       <h2>Reading Material</h2>
-      <p>The <a href="/guides">guides</a> cover the reasoning behind the buttons: why the order of operations is fixed, what a logarithm is actually asking, how percentages and fractions convert. The <a href="/blog">blog</a> is shorter and more practical, mostly about working accurately under exam conditions.</p>
+      <p>The <a href="/guides/">guides</a> cover the reasoning behind the buttons: why the order of operations is fixed, what a logarithm is actually asking, how percentages and fractions convert. The <a href="/blog/">blog</a> is shorter and more practical, mostly about working accurately under exam conditions.</p>
     </section>
 
     <section class="home-section home-faq-section" id="faq">

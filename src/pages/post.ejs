@@ -1,9 +1,15 @@
 <div class="page-wrap">
   <nav class="article-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Calculator</a> <span>/</span> <a href="/blog">Blog</a> <span>/</span> <span><%= item.name %></span>
+    <a href="/">Calculator</a> <span>/</span> <a href="/blog/">Blog</a> <span>/</span> <span><%= item.name %></span>
   </nav>
   <h1><%= item.name %></h1>
   <p class="article-intro"><%= item.blurb %></p>
+  <figure class="article-hero">
+    <img src="/assets/img/posts/<%= item.slug %>.webp" alt="<%= item.imgAlt %>" width="1024" height="576" fetchpriority="high" decoding="async">
+<% if (item.credit) { %>
+    <figcaption>Photo by <a href="<%= item.credit.where %>" rel="noopener nofollow" target="_blank"><%= item.credit.who %></a>, <a href="<%= item.credit.licUrl %>" rel="license noopener nofollow" target="_blank"><%= item.credit.lic %></a></figcaption>
+<% } %>
+  </figure>
   <div class="article-body">
 <% item.sections.forEach(function (s) { %>
     <h2><%= s.h %></h2>
@@ -16,7 +22,8 @@
     <h2>More Posts</h2>
     <div class="tools-grid">
 <% siblings.forEach(function (b) { %>
-      <a class="tool-card" href="/blog/<%= b.slug %>" style="--tool-color:#0891b2">
+      <a class="tool-card" href="/blog/<%= b.slug %>/" style="--tool-color:#0891b2">
+        <div class="card-thumb"><img src="/assets/img/posts/<%= b.slug %>-card.webp" alt="<%= b.imgAlt %>" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name"><%= b.name %></div>
         <div class="tool-desc"><%= b.blurb %></div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>

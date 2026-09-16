@@ -8,7 +8,8 @@
   <section class="home-section">
     <div class="tools-grid">
 <% posts.forEach(function (b) { %>
-      <a class="tool-card" href="/blog/<%= b.slug %>" style="--tool-color:#0891b2">
+      <a class="tool-card" href="/blog/<%= b.slug %>/" style="--tool-color:#0891b2">
+        <div class="card-thumb"><img src="/assets/img/posts/<%= b.slug %>-card.webp" alt="<%= b.imgAlt %>" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name"><%= b.name %></div>
         <div class="tool-desc"><%= b.blurb %></div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
@@ -18,7 +19,7 @@
   </section>
   <section class="home-section">
     <h2>What This Is For</h2>
-    <p>The <a href="/guides">guides</a> explain how the maths works. These posts are about everything around it: reading the question properly, estimating before trusting a screen, and the handful of calculator behaviours that produce confident wrong answers.</p>
+    <p>The <a href="/guides/">guides</a> explain how the maths works. These posts are about everything around it: reading the question properly, estimating before trusting a screen, and the handful of calculator behaviours that produce confident wrong answers.</p>
     <p>They are deliberately short. Each one is a single habit worth adopting, not a chapter.</p>
   </section>
 </div></div></div>

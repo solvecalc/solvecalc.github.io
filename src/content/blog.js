@@ -5,6 +5,7 @@
 module.exports = [
   {
     slug: 'calculator-mistakes-that-cost-marks', name: 'Calculator Mistakes That Cost Marks',
+    img: true, imgAlt: "A pocket calculator beside a pencil and a hand-written division sum on a whiteboard",
     title: 'Calculator Mistakes That Quietly Cost You Marks',
     desc: 'Six errors that produce a confident wrong answer: degrees against radians, minus signs, implied brackets, rounding early, and skipping the estimate.',
     blurb: 'Six ways a calculator hands you a confident wrong answer.',
@@ -29,6 +30,7 @@ module.exports = [
   },
   {
     slug: 'estimating-before-you-calculate', name: 'Estimating Before You Calculate',
+    img: true, imgAlt: "A person sketching rough figures in a notebook with a phone and laptop on the desk",
     title: 'Estimate First: The Habit That Catches Typos',
     desc: 'How to get a rough answer in a couple of seconds, why it catches most calculator slips, and the rounding tricks that make mental estimation reliable.',
     blurb: 'A two-second habit that catches most input errors.',
@@ -51,6 +53,8 @@ module.exports = [
   },
   {
     slug: 'why-chromebooks-need-browser-tools', name: 'Why Chromebooks Need Browser Tools',
+    img: true, imgAlt: "Two school students sharing a laptop at a classroom table",
+    credit: { who: "Barrett.Discovery", where: "https://www.flickr.com/photos/barrettdiscovery/", lic: "CC BY 2.0", licUrl: "https://creativecommons.org/licenses/by/2.0/" },
     title: 'Why School Chromebooks Need Browser-Based Tools',
     desc: 'Managed Chromebooks block installs by design. What that means for classroom software, and why a page that runs entirely client-side sidesteps the problem.',
     blurb: 'Locked-down devices, and the software that still works on them.',
@@ -71,6 +75,8 @@ module.exports = [
   },
   {
     slug: 'reading-a-question-before-solving-it', name: 'Reading a Question Before Solving It',
+    img: true, imgAlt: "A hand filling in pencil answers on a multiple-choice exam answer sheet",
+    credit: { who: "albertogp123", where: "https://www.flickr.com/photos/albertogp123/", lic: "CC BY 2.0", licUrl: "https://creativecommons.org/licenses/by/2.0/" },
     title: 'Read the Question Twice, Solve It Once',
     desc: 'Most lost marks are comprehension, not arithmetic. How to spot what a question actually asks, the units it wants, and the form the answer should take.',
     blurb: 'Most lost marks are comprehension, not arithmetic.',

@@ -1,9 +1,15 @@
 <div class="page-wrap">
   <nav class="article-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Calculator</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <span><%= item.name %></span>
+    <a href="/">Calculator</a> <span>/</span> <a href="/guides/">Guides</a> <span>/</span> <span><%= item.name %></span>
   </nav>
   <h1><%= item.name %></h1>
   <p class="article-intro"><%= item.blurb %></p>
+  <figure class="article-hero">
+    <img src="/assets/img/posts/<%= item.slug %>.webp" alt="<%= item.imgAlt %>" width="1024" height="576" fetchpriority="high" decoding="async">
+<% if (item.credit) { %>
+    <figcaption>Photo by <a href="<%= item.credit.where %>" rel="noopener nofollow" target="_blank"><%= item.credit.who %></a>, <a href="<%= item.credit.licUrl %>" rel="license noopener nofollow" target="_blank"><%= item.credit.lic %></a></figcaption>
+<% } %>
+  </figure>
   <div class="article-body">
 <% item.sections.forEach(function (s) { %>
     <h2><%= s.h %></h2>
@@ -25,7 +31,8 @@
     <h2>More Guides</h2>
     <div class="tools-grid">
 <% siblings.forEach(function (g) { %>
-      <a class="tool-card" href="/guides/<%= g.slug %>" style="--tool-color:#4f46e5">
+      <a class="tool-card" href="/guides/<%= g.slug %>/" style="--tool-color:#4f46e5">
+        <div class="card-thumb"><img src="/assets/img/posts/<%= g.slug %>-card.webp" alt="<%= g.imgAlt %>" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name"><%= g.name %></div>
         <div class="tool-desc"><%= g.blurb %></div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>

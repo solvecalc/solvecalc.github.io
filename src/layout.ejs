@@ -6,19 +6,20 @@
   <title><%= title %></title>
   <meta name="description" content="<%= desc %>">
   <meta name="robots" content="<%= robots %>">
-  <link rel="canonical" href="<%= SITE %><%= path %>">
+  <link rel="canonical" href="<%= canonical %>">
   <meta property="og:title" content="<%= title %>">
   <meta property="og:description" content="<%= desc %>">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="<%= SITE %><%= path %>">
-  <meta property="og:image" content="<%= SITE %>/assets/img/solvecalc-calcsolver-logo.png">
-  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:url" content="<%= canonical %>">
+  <meta property="og:image" content="<%= SITE %><%= ogImage %>">
+  <meta property="og:image:alt" content="<%= ogImageAlt %>">
   <meta property="og:site_name" content="SolveCalc">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="<%= item && item.img ? 'summary_large_image' : 'summary' %>">
   <meta name="twitter:title" content="<%= title %>">
   <meta name="twitter:description" content="<%= desc %>">
-  <meta name="twitter:image" content="<%= SITE %>/assets/img/solvecalc-calcsolver-logo.png">
+  <meta name="twitter:image" content="<%= SITE %><%= ogImage %>">
+  <meta name="twitter:image:alt" content="<%= ogImageAlt %>">
 <% schema.forEach(function (obj) { %>
   <script type="application/ld+json"><%- JSON.stringify(obj).replace(/</g, '\\u003c') %></script>
 <% }); %>
@@ -72,10 +73,10 @@
     <span class="site-tagline">Free CalcSolver</span>
     <nav class="header-nav">
       <a href="/"<%= path === '/' ? ' class="active"' : '' %>>Calculator</a>
-      <a href="/tools"<%= path.startsWith('/tools') ? ' class="active"' : '' %>>Tools</a>
-      <a href="/guides"<%= path.startsWith('/guides') ? ' class="active"' : '' %>>Guides</a>
-      <a href="/blog"<%= path.startsWith('/blog') ? ' class="active"' : '' %>>Blog</a>
-      <a href="/about"<%= path === '/about' ? ' class="active"' : '' %>>About</a>
+      <a href="/tools/"<%= path.startsWith('/tools') ? ' class="active"' : '' %>>Tools</a>
+      <a href="/guides/"<%= path.startsWith('/guides') ? ' class="active"' : '' %>>Guides</a>
+      <a href="/blog/"<%= path.startsWith('/blog') ? ' class="active"' : '' %>>Blog</a>
+      <a href="/about/"<%= path === '/about' ? ' class="active"' : '' %>>About</a>
     </nav>
     <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
       <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -83,11 +84,11 @@
   </div>
   <div class="mob-nav" id="mob-nav">
     <a href="/">Calculator</a>
-    <a href="/tools">Tools</a>
-    <a href="/guides">Guides</a>
-    <a href="/blog">Blog</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+    <a href="/tools/">Tools</a>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
   </div>
 </header>
 
@@ -107,20 +108,20 @@
       <p class="footer-col-title">Explore</p>
       <nav class="footer-col-links">
         <a href="/">Calculator</a>
-        <a href="/tools">Math Tools</a>
-        <a href="/guides">Guides</a>
-        <a href="/blog">Blog</a>
-        <a href="/about">About</a>
+        <a href="/tools/">Math Tools</a>
+        <a href="/guides/">Guides</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about/">About</a>
       </nav>
     </div>
     <div class="footer-col">
       <p class="footer-col-title">Legal</p>
       <nav class="footer-col-links">
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-        <a href="/disclaimer">Disclaimer</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+        <a href="/disclaimer/">Disclaimer</a>
         <a href="/sitemap.xml">Sitemap</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
     <div class="footer-col">

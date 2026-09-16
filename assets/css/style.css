@@ -3810,3 +3810,46 @@ body .home-article p a, body .article-body p a, body .article-body li a, body .h
 @supports not selector(:has(*)) {
   .tool-article { padding-bottom: 1.25rem; margin-bottom: 0; }
 }
+
+/* ── Featured images ───────────────────────────────────────────────────────
+ * Blog and guide cards carry a thumbnail; the card already has padding, so
+ * the image is pulled back out to the card edges rather than sitting inside
+ * it. Both sizes are fixed 16:9 so nothing reflows while they load.
+ */
+.tool-card .card-thumb {
+  margin: -1.4rem -1.2rem .25rem;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  background: #e8eaef;
+}
+.tool-card .card-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.article-hero {
+  margin: 0 0 30px;
+}
+.article-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #e8eaef;
+}
+.article-hero figcaption {
+  margin-top: .5rem;
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+.article-hero figcaption a { color: var(--text-muted); text-decoration: underline; }
+.article-hero figcaption a:hover { color: var(--accent); }
+@media (max-width: 500px) {
+  /* Card padding shrinks at this width, so the thumbnail's bleed must match. */
+  .tool-card .card-thumb { margin: -1.1rem -.9rem .25rem; }
+}

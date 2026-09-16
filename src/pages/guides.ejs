@@ -8,7 +8,8 @@
   <section class="home-section">
     <div class="tools-grid">
 <% guides.forEach(function (g) { %>
-      <a class="tool-card" href="/guides/<%= g.slug %>" style="--tool-color:#4f46e5">
+      <a class="tool-card" href="/guides/<%= g.slug %>/" style="--tool-color:#4f46e5">
+        <div class="card-thumb"><img src="/assets/img/posts/<%= g.slug %>-card.webp" alt="<%= g.imgAlt %>" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name"><%= g.name %></div>
         <div class="tool-desc"><%= g.blurb %></div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
@@ -19,6 +20,6 @@
   <section class="home-section">
     <h2>Why These Four</h2>
     <p>They are the topics where a confident wrong answer is most likely. Order of operations decides what an expression even means. Fractions, decimals and percentages are one idea in three notations that questions deliberately mix. Logarithms look harder than they are until you read them as a question about exponents. Rounding quietly loses marks at the very last step.</p>
-    <p>Each guide is written to be read once and remembered, not skimmed. If you want to use the ideas straight away, the <a href="/tools">tools</a> apply them, and the <a href="/blog">blog</a> covers working accurately under time pressure.</p>
+    <p>Each guide is written to be read once and remembered, not skimmed. If you want to use the ideas straight away, the <a href="/tools/">tools</a> apply them, and the <a href="/blog/">blog</a> covers working accurately under time pressure.</p>
   </section>
 </div></div></div>

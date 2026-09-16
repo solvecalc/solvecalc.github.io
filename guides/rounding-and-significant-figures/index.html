@@ -6,25 +6,26 @@
   <title>Rounding and Significant Figures - Getting It Right</title>
   <meta name="description" content="Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://solvecalc.github.io/guides/rounding-and-significant-figures">
+  <link rel="canonical" href="https://solvecalc.github.io/guides/rounding-and-significant-figures/">
   <meta property="og:title" content="Rounding and Significant Figures - Getting It Right">
   <meta property="og:description" content="Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://solvecalc.github.io/guides/rounding-and-significant-figures">
-  <meta property="og:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
-  <meta property="og:image:alt" content="SolveCalc calcsolver logo">
+  <meta property="og:url" content="https://solvecalc.github.io/guides/rounding-and-significant-figures/">
+  <meta property="og:image" content="https://solvecalc.github.io/assets/img/posts/rounding-and-significant-figures.webp">
+  <meta property="og:image:alt" content="A vernier caliper measuring a small object, with the millimetre scale in focus">
   <meta property="og:site_name" content="SolveCalc">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rounding and Significant Figures - Getting It Right">
   <meta name="twitter:description" content="Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.">
-  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/solvecalc-calcsolver-logo.png">
+  <meta name="twitter:image" content="https://solvecalc.github.io/assets/img/posts/rounding-and-significant-figures.webp">
+  <meta name="twitter:image:alt" content="A vernier caliper measuring a small object, with the millimetre scale in focus">
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rounding and Significant Figures","description":"Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.","mainEntityOfPage":"https://solvecalc.github.io/guides/rounding-and-significant-figures","datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rounding and Significant Figures","description":"Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.","mainEntityOfPage":"https://solvecalc.github.io/guides/rounding-and-significant-figures/","datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"},"publisher":{"@type":"Organization","name":"SolveCalc","url":"https://solvecalc.github.io/"},"image":["https://solvecalc.github.io/assets/img/posts/rounding-and-significant-figures.webp"]}</script>
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is 0.0500 two significant figures or three?","acceptedAnswer":{"@type":"Answer","text":"Three. The leading zeros are placeholders, but the trailing zeros after the decimal point are a deliberate claim of precision."}},{"@type":"Question","name":"Why is rounding twice a problem?","acceptedAnswer":{"@type":"Answer","text":"Each rounding introduces error, and rounding an already rounded number compounds it. Keep full precision until the final step."}},{"@type":"Question","name":"How many figures should my answer have?","acceptedAnswer":{"@type":"Answer","text":"Match the least precise measurement you started with. Two significant figures in means two significant figures out."}}]}</script>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://solvecalc.github.io/guides"},{"@type":"ListItem","position":3,"name":"Rounding and Significant Figures","item":"https://solvecalc.github.io/guides/rounding-and-significant-figures"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://solvecalc.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://solvecalc.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Rounding and Significant Figures","item":"https://solvecalc.github.io/guides/rounding-and-significant-figures/"}]}</script>
 
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/logo-512.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/logo-192.png">
@@ -47,7 +48,7 @@
   <link rel="stylesheet" href="/assets/css/fonts.css">
   <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css"></noscript>
-  <link rel="stylesheet" href="/assets/css/style.css?v=6">
+  <link rel="stylesheet" href="/assets/css/style.css?v=7">
 
   <style>
     :root {
@@ -70,10 +71,10 @@
     <span class="site-tagline">Free CalcSolver</span>
     <nav class="header-nav">
       <a href="/">Calculator</a>
-      <a href="/tools">Tools</a>
-      <a href="/guides" class=&#34;active&#34;>Guides</a>
-      <a href="/blog">Blog</a>
-      <a href="/about">About</a>
+      <a href="/tools/">Tools</a>
+      <a href="/guides/" class=&#34;active&#34;>Guides</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
     </nav>
     <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu">
       <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -81,21 +82,25 @@
   </div>
   <div class="mob-nav" id="mob-nav">
     <a href="/">Calculator</a>
-    <a href="/tools">Tools</a>
-    <a href="/guides">Guides</a>
-    <a href="/blog">Blog</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+    <a href="/tools/">Tools</a>
+    <a href="/guides/">Guides</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about/">About</a>
+    <a href="/contact/">Contact</a>
   </div>
 </header>
 
 <main>
 <div class="page-wrap">
   <nav class="article-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Calculator</a> <span>/</span> <a href="/guides">Guides</a> <span>/</span> <span>Rounding and Significant Figures</span>
+    <a href="/">Calculator</a> <span>/</span> <a href="/guides/">Guides</a> <span>/</span> <span>Rounding and Significant Figures</span>
   </nav>
   <h1>Rounding and Significant Figures</h1>
   <p class="article-intro">How precise to be, and how to avoid losing marks getting there.</p>
+  <figure class="article-hero">
+    <img src="/assets/img/posts/rounding-and-significant-figures.webp" alt="A vernier caliper measuring a small object, with the millimetre scale in focus" width="1024" height="576" fetchpriority="high" decoding="async">
+
+  </figure>
   <div class="article-body">
 
     <h2>Two Different Instructions</h2>
@@ -157,19 +162,22 @@
     <h2>More Guides</h2>
     <div class="tools-grid">
 
-      <a class="tool-card" href="/guides/order-of-operations" style="--tool-color:#4f46e5">
+      <a class="tool-card" href="/guides/order-of-operations/" style="--tool-color:#4f46e5">
+        <div class="card-thumb"><img src="/assets/img/posts/order-of-operations-card.webp" alt="A classroom blackboard covered in hand-written mathematical equations" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name">Order of Operations</div>
         <div class="tool-desc">The fixed sequence every calculator follows, and the two rules people miss.</div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
       </a>
 
-      <a class="tool-card" href="/guides/fractions-decimals-percentages" style="--tool-color:#4f46e5">
+      <a class="tool-card" href="/guides/fractions-decimals-percentages/" style="--tool-color:#4f46e5">
+        <div class="card-thumb"><img src="/assets/img/posts/fractions-decimals-percentages-card.webp" alt="A red fifty percent off sale tag hanging on a rail of clothes in a shop" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name">Fractions, Decimals and Percentages</div>
         <div class="tool-desc">Three notations for the same quantity, and how to move between them.</div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
       </a>
 
-      <a class="tool-card" href="/guides/logarithms" style="--tool-color:#4f46e5">
+      <a class="tool-card" href="/guides/logarithms/" style="--tool-color:#4f46e5">
+        <div class="card-thumb"><img src="/assets/img/posts/logarithms-card.webp" alt="A circular slide rule photographed against a dark background" width="560" height="315" loading="lazy" decoding="async"></div>
         <div class="tool-name">Logarithms</div>
         <div class="tool-desc">One question, asked backwards: what power produced this number.</div>
         <div class="tool-arrow">Read <i class="fa-solid fa-arrow-right fa-xs"></i></div>
@@ -193,20 +201,20 @@
       <p class="footer-col-title">Explore</p>
       <nav class="footer-col-links">
         <a href="/">Calculator</a>
-        <a href="/tools">Math Tools</a>
-        <a href="/guides">Guides</a>
-        <a href="/blog">Blog</a>
-        <a href="/about">About</a>
+        <a href="/tools/">Math Tools</a>
+        <a href="/guides/">Guides</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about/">About</a>
       </nav>
     </div>
     <div class="footer-col">
       <p class="footer-col-title">Legal</p>
       <nav class="footer-col-links">
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-        <a href="/disclaimer">Disclaimer</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms/">Terms of Service</a>
+        <a href="/disclaimer/">Disclaimer</a>
         <a href="/sitemap.xml">Sitemap</a>
-        <a href="/contact">Contact</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
     <div class="footer-col">

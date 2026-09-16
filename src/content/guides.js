@@ -5,6 +5,8 @@
 module.exports = [
   {
     slug: 'order-of-operations', name: 'Order of Operations',
+    img: true, imgAlt: "A classroom blackboard covered in hand-written mathematical equations",
+    credit: { who: "thepatrick", where: "https://www.flickr.com/photos/thepatrick/", lic: "CC BY 2.0", licUrl: "https://creativecommons.org/licenses/by/2.0/" },
     title: 'Order of Operations - PEMDAS and BODMAS Explained',
     desc: 'Why 2 + 3 x 4 is 14 and not 20, what PEMDAS and BODMAS each stand for, and the two rules about left-to-right working that most people were never told.',
     blurb: 'The fixed sequence every calculator follows, and the two rules people miss.',
@@ -35,6 +37,7 @@ module.exports = [
   },
   {
     slug: 'fractions-decimals-percentages', name: 'Fractions, Decimals and Percentages',
+    img: true, imgAlt: "A red fifty percent off sale tag hanging on a rail of clothes in a shop",
     title: 'Fractions, Decimals and Percentages - Converting Between',
     desc: 'How to move between fractions, decimals and percentages in any direction, which conversions are worth memorising, and why some fractions never terminate.',
     blurb: 'Three notations for the same quantity, and how to move between them.',
@@ -62,6 +65,7 @@ module.exports = [
   },
   {
     slug: 'logarithms', name: 'Logarithms',
+    img: true, imgAlt: "A circular slide rule photographed against a dark background",
     title: 'Logarithms Explained - What Log Actually Asks',
     desc: 'A logarithm answers one question: what power was applied. Covers log and ln, the three laws, change of base, and why log scales appear in earthquakes and sound.',
     blurb: 'One question, asked backwards: what power produced this number.',
@@ -89,6 +93,7 @@ module.exports = [
   },
   {
     slug: 'rounding-and-significant-figures', name: 'Rounding and Significant Figures',
+    img: true, imgAlt: "A vernier caliper measuring a small object, with the millimetre scale in focus",
     title: 'Rounding and Significant Figures - Getting It Right',
     desc: 'Decimal places against significant figures, why rounding twice gives the wrong answer, and how to decide what precision an answer should actually carry.',
     blurb: 'How precise to be, and how to avoid losing marks getting there.',

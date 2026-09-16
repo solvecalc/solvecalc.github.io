@@ -20,7 +20,12 @@ const YEAR = new Date().getFullYear();
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 // Bumped whenever the CSS or JS changes, so returning visitors are not served
 // a stale copy from cache.
-const ASSET_V = '6';
+const ASSET_V = '7';
+
+// GitHub Pages serves /tools as a 301 to /tools/, so every URL this file emits
+// (canonical, schema, sitemap) uses the trailing-slash form that is actually
+// served. Anything else makes Google crawl a redirect to reach the real page.
+const U = (p) => SITE + (p === '/' ? '/' : p + '/');
 
 const tools = require('./content/tools');
 const guides = require('./content/guides');
@@ -72,14 +77,14 @@ const faq = [
     a: 'Same calculator, much smaller site. This build keeps the calculator, nine tools and a handful of guides, with its own writing. The full project, with far more reference material, is at solvecalc.net.' },
 ];
 
-const org = { '@type': 'Organization', name: 'SolveCalc', url: SITE + '/' };
+const org = { '@type': 'Organization', name: 'SolveCalc', url: U('/') };
 const webSite = {
   '@context': 'https://schema.org', '@type': 'WebSite', name: 'SolveCalc',
-  alternateName: ['CalcSolver', 'Calc Solver', 'CalcSolve', 'Solve Calc'], url: SITE + '/',
+  alternateName: ['CalcSolver', 'Calc Solver', 'CalcSolve', 'Solve Calc'], url: U('/'),
 };
 const webApp = {
   '@context': 'https://schema.org', '@type': 'WebApplication', name: 'SolveCalc CalcSolver',
-  url: SITE + '/', applicationCategory: 'UtilitiesApplication', operatingSystem: 'All',
+  url: U('/'), applicationCategory: 'UtilitiesApplication', operatingSystem: 'All',
   description: 'Free online calcsolver and scientific calculator that runs in the browser.',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: org,
 };
@@ -89,20 +94,21 @@ const faqSchema = (items) => ({
 });
 const crumbs = (items) => ({
   '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-  itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: SITE + it.path })),
+  itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: U(it.path) })),
 });
 const softwareApp = (t) => ({
   '@context': 'https://schema.org', '@type': 'WebApplication', name: t.name,
-  url: `${SITE}/tools/${t.slug}`, applicationCategory: 'UtilitiesApplication',
+  url: U(`/tools/${t.slug}`), applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'All', description: t.desc,
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: org,
 });
 const article = (item, kind) => ({
   '@context': 'https://schema.org', '@type': kind === 'blog' ? 'BlogPosting' : 'Article',
   headline: item.name, description: item.desc,
-  mainEntityOfPage: `${SITE}/${kind === 'blog' ? 'blog' : 'guides'}/${item.slug}`,
+  mainEntityOfPage: U(`/${kind === 'blog' ? 'blog' : 'guides'}/${item.slug}`),
   datePublished: item.date || BUILD_DATE, dateModified: BUILD_DATE,
   author: org, publisher: org,
+  ...(item.img ? { image: [`${SITE}/assets/img/posts/${item.slug}.webp`] } : {}),
 });
 
 const PAGES = [
@@ -173,6 +179,7 @@ for (const b of posts) {
   });
 }
 
+const LOGO = '/assets/img/solvecalc-calcsolver-logo.png';
 const layout = fs.readFileSync(path.join(__dirname, 'layout.ejs'), 'utf8');
 const vaultHtml = fs.readFileSync(path.join(__dirname, 'partials', 'vault.html'), 'utf8');
 // The splash's Play button handler is inline on solvecalc.net's homepage, so it
@@ -189,7 +196,10 @@ for (const page of PAGES) {
   if (page.vault) body += '\n' + vaultHtml + '\n' + vaultPlayHtml;
 
   const html = ejs.render(layout, {
-    ...shared, ...page, body, vault: !!page.vault,
+    ...shared, ...page, body, vault: !!page.vault, canonical: U(page.path),
+    item: page.item || null,
+    ogImage: page.item && page.item.img ? `/assets/img/posts/${page.item.slug}.webp` : LOGO,
+    ogImageAlt: page.item && page.item.img ? page.item.imgAlt : 'SolveCalc calcsolver logo',
     robots: page.robots || 'index, follow', schema: page.schema || [],
   }, { filename: path.join(__dirname, 'layout.ejs') });
 
@@ -208,7 +218,7 @@ fs.writeFileSync(path.join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSite
 const indexed = PAGES.filter((p) => !(p.robots || '').includes('noindex'));
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  indexed.map((p) => `  <url><loc>${SITE}${p.path}</loc><lastmod>${BUILD_DATE}</lastmod></url>\n`).join('') +
+  indexed.map((p) => `  <url><loc>${U(p.path)}</loc><lastmod>${BUILD_DATE}</lastmod></url>\n`).join('') +
   '</urlset>\n');
 // Disables Jekyll so every file is served exactly as committed.
 fs.writeFileSync(path.join(ROOT, '.nojekyll'), '');

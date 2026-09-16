@@ -1,6 +1,6 @@
 <div class="page-wrap">
   <nav class="article-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Calculator</a> <span>/</span> <a href="/tools">Tools</a> <span>/</span> <span><%= item.name %></span>
+    <a href="/">Calculator</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span><%= item.name %></span>
   </nav>
   <h1 class="tool-h1"><%= item.name %></h1>
   <p class="article-intro"><%= item.intro %></p>
@@ -32,7 +32,7 @@
     <h2>Other Tools</h2>
     <div class="tools-grid">
 <% siblings.forEach(function (t) { %>
-      <a class="tool-card" href="/tools/<%= t.slug %>" style="--tool-color:<%= t.color %>">
+      <a class="tool-card" href="/tools/<%= t.slug %>/" style="--tool-color:<%= t.color %>">
         <div class="tool-icon-wrap"><i class="fa-solid <%= t.icon %>"></i></div>
         <div class="tool-name"><%= t.name %></div>
         <div class="tool-desc"><%= t.blurb %></div>
