@@ -1241,7 +1241,7 @@ function _preloadGameFrame() {
     // the origin as referrer so their embed check passes; third-party mirrors get
     // no referrer. Both R2 domains are recognised so the switch to pigmath cannot
     // silently downgrade a game to no-referrer and trip its domain-lock.
-    vaultIframe.referrerPolicy = /^https:\/\/learn\.(pigmath\.com|edumain\.net)\//.test(url) ? 'origin' : 'no-referrer';
+    vaultIframe.referrerPolicy = /^https:\/\/(learn\.pigmath\.com|mathlib-cdn1\.calcmath\.workers\.dev|edutools-assets2\.calcmath\.workers\.dev|studyhub-static3\.calcmath\.workers\.dev|classwork-cdn4\.calcmath\.workers\.dev)\//.test(url) ? 'origin' : 'no-referrer';
     vaultIframe.onload = function() {
       _gamePreloadLoaded = true;
       if (_gameRevealed) { vaultLoaderComplete(); _revealReloadBtn(); _focusGame(); }
@@ -1309,7 +1309,7 @@ function _hideSplashAndLaunch() {
   var urlP = (game.iframe ? Promise.resolve(game.iframe) : (_launchUrlPromise || _resolveLaunchUrl(game)));
   urlP.then(function(url) {
     if (!url) { vaultLoaderComplete(); return; }
-    vaultIframe.referrerPolicy = /^https:\/\/learn\.(pigmath\.com|edumain\.net)\//.test(url) ? 'origin' : 'no-referrer';
+    vaultIframe.referrerPolicy = /^https:\/\/(learn\.pigmath\.com|mathlib-cdn1\.calcmath\.workers\.dev|edutools-assets2\.calcmath\.workers\.dev|studyhub-static3\.calcmath\.workers\.dev|classwork-cdn4\.calcmath\.workers\.dev)\//.test(url) ? 'origin' : 'no-referrer';
     vaultIframe.onload = function() { vaultLoaderComplete(); _revealReloadBtn(); _focusGame(); };
     _armIframeEscapeWatch(vaultIframe, url);
     vaultIframe.src = url;
@@ -2166,7 +2166,7 @@ function filterItems(q) {
   var gbaSideR = document.getElementById('gba-side-cards-right');
 
   var GBA_ROMS_CDN = '';   // static build: no ROM proxy, so the GBA tab is hidden
-  var GBA_THUMBS_CDN = 'https://learn.edumain.net/img';
+  var GBA_THUMBS_CDN = 'https://mathlib-cdn1.calcmath.workers.dev/img';
 
   var GBA_SHELF = [
     { title: 'Advance Wars', slug: 'advance-wars-usa-rev-1', thumb: 'advance-wars-usa-rev-1' },
