@@ -385,7 +385,7 @@ document.addEventListener('pointerlockchange', () => {
 // just drop back to windowed play with focus still on the game, so the
 // player's Escape reaches the in-game menu on their very next press instead
 // of having silently backed them out of the activity entirely.
-const GAME_CODES_WITH_OWN_ESC_MENU = new Set(['4518', '4014']);
+const GAME_CODES_WITH_OWN_ESC_MENU = new Set(['4518', '4014', '5166']);
 // True only while an activity is actually loaded and playing — cleared
 // whenever the player backs out to the grid, so a grid-screen Escape never
 // gets mistaken for "let the game handle it" just because a game was played
