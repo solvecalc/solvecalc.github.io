@@ -55,6 +55,7 @@
       <button class="vault-cat-exit-btn" onclick="closeVault()"><i class="fa-solid fa-right-from-bracket"></i>Exit</button>
     </aside>
     <div class="vault-main-area">
+      <div class="ad-slot ad-slot-vault" data-ad="horizontal" aria-label="Advertisement"></div>
       <div id="vault-grid" class="vault-grid"></div>
 
       <!-- Secret Codes panel -->
@@ -136,6 +137,7 @@
       <div class="vault-side-left" id="vault-sidebar">
         <p class="vault-side-label">More</p>
         <div id="vault-side-cards"></div>
+        <div class="ad-slot ad-slot-side" data-ad="vertical" aria-label="Advertisement"></div>
       </div>
       <div class="vault-main-frame" style="position:relative">
         <div class="vault-frame-header">
@@ -210,12 +212,13 @@
              left behind - restored while migrating off AdSense. Sits inside
              .vault-play-view, which is itself display:none until a game is
              open, so this is never visible on the grid or splash screens. -->
-        <div class="sc-ad sc-ad-section" id="sc-gam-playad"></div>
+        <div class="sc-ad sc-ad-section ad-slot" id="sc-gam-playad" data-ad="horizontal" aria-label="Advertisement"></div>
 
       </div>
       <div class="vault-side-right" id="vault-sidebar-right">
         <p class="vault-side-label">Up Next</p>
         <div id="vault-side-cards-right"></div>
+        <div class="ad-slot ad-slot-side" data-ad="vertical" aria-label="Advertisement"></div>
       </div>
     </div>
   </div>

@@ -3859,3 +3859,15 @@ body .home-article p a, body .article-body p a, body .article-body li a, body .h
 .ad-native-wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 .ad-native-wrap > div:empty { display: none; }
 .ad-native-wrap > div { padding: 10px 0 4px; }
+
+/* Adsterra rails beside the calculator (wide screens only) and extra vault slots */
+.calc-rails { display: flex; justify-content: center; align-items: flex-start; gap: 24px; width: 100%; }
+.calc-main-col { display: flex; flex-direction: column; align-items: center; gap: 16px; flex: 1 1 auto; min-width: 0; max-width: 560px; }
+.ad-rail { display: none; width: 160px; flex: 0 0 160px; position: sticky; top: 84px; }
+.ad-rail .ad-slot { margin: 0 0 16px; }
+@media (min-width: 1160px) { .ad-rail { display: block; } }
+.ad-slot-vault { margin: 10px auto 14px; }
+.ad-slot-row { grid-column: 1 / -1; width: 100%; margin: 14px auto; }
+.vault-cat-row + .ad-slot-row, .ad-slot-row + .vault-cat-row { margin-top: 14px; }
+.ad-slot-side { margin: 14px auto 0; width: 160px; max-width: 100%; }
+#sc-gam-playad.ad-slot { max-width: 100%; margin: 12px auto; }

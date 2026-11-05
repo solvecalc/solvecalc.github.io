@@ -15,13 +15,17 @@
   var NATIVE = '43f99fb8dbcdb37037dd2810a803933f';
   var LADDERS = {
     horizontal: [[728, 90], [468, 60], [320, 50]],
-    rect: [[300, 250]]
+    rect: [[300, 250]],
+    vertical: [[160, 600]],
+    'vertical-short': [[160, 300]]
   };
   if (/[?&]noads=1/.test(location.search)) return;
 
   function pick(kind, width) {
     var l = LADDERS[kind] || LADDERS.horizontal;
-    for (var i = 0; i < l.length; i++) if (l[i][0] <= width) return l[i];
+    // 160-wide rails accept a few px less (sidebar padding) rather than dropping the unit
+    var slack = (kind === 'vertical' || kind === 'vertical-short') ? 12 : 0;
+    for (var i = 0; i < l.length; i++) if (l[i][0] <= width + slack) return l[i];
     return null;
   }
 
@@ -106,14 +110,58 @@
     document.body.appendChild(s);
   }
 
+  var io = null;
+  function observe(b) {
+    if (b.dataset.watched) return;
+    b.dataset.watched = '1';
+    if (io) io.observe(b); else mount(b);
+  }
+  function watchStatic() {
+    Array.prototype.forEach.call(document.querySelectorAll('.ad-slot[data-ad]'), observe);
+  }
+
+  // Vault grid: a banner after every second category row (rows mode) or every 12th card (flat mode),
+  // so the number of ads grows with how far the visitor scrolls. Slots are lazy like every other slot.
+  function rowSlot() {
+    var d = slot('horizontal');
+    d.className = 'ad-slot ad-slot-row';
+    return d;
+  }
+  function decorateGrid() {
+    var grid = document.getElementById('vault-grid');
+    if (!grid) return;
+    var rows = grid.querySelectorAll(':scope > .vault-cat-row');
+    if (rows.length) {
+      Array.prototype.forEach.call(rows, function (row, i) {
+        var next = row.nextElementSibling;
+        if (i % 2 === 1 && !(next && next.classList.contains('ad-slot-row'))) row.parentNode.insertBefore(rowSlot(), row.nextSibling);
+      });
+    } else {
+      var kids = Array.prototype.filter.call(grid.children, function (c) {
+        return !c.classList.contains('ad-slot-row') && !c.classList.contains('vault-grid-sentinel');
+      });
+      kids.forEach(function (c, i) {
+        var next = c.nextElementSibling;
+        if ((i + 1) % 12 === 0 && !(next && next.classList.contains('ad-slot-row'))) c.parentNode.insertBefore(rowSlot(), c.nextSibling);
+      });
+    }
+    watchStatic();
+  }
+
   function init() {
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); mount(e.target); } });
+      }, { rootMargin: '350px 0px' });
+    }
     nativeBanner();
-    var boxes = place();
-    if (!('IntersectionObserver' in window)) { boxes.forEach(mount); return; }
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); mount(e.target); } });
-    }, { rootMargin: '350px 0px' });
-    boxes.forEach(function (b) { io.observe(b); });
+    place().forEach(observe);
+    watchStatic();
+    decorateGrid();
+    var grid = document.getElementById('vault-grid');
+    if (grid && 'MutationObserver' in window) {
+      new MutationObserver(function () { requestAnimationFrame(decorateGrid); }).observe(grid, { childList: true });
+    }
   }
 
   if (document.readyState === 'complete') setTimeout(init, 0);
