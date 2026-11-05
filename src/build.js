@@ -20,7 +20,7 @@ const YEAR = new Date().getFullYear();
 const BUILD_DATE = new Date().toISOString().slice(0, 10);
 // Bumped whenever the CSS or JS changes, so returning visitors are not served
 // a stale copy from cache.
-const ASSET_V = '9';
+const ASSET_V = '10';
 
 // GitHub Pages serves /tools as a 301 to /tools/, so every URL this file emits
 // (canonical, schema, sitemap) uses the trailing-slash form that is actually

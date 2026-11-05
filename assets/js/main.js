@@ -784,6 +784,8 @@ function _playPrerollThen(callback) {
   // No SDK (blocked, offline, still loading) or no container - skip straight
   // to the game rather than making the visitor wait on something broken.
   if (!ima || !container) { callback(); return; }
+  // Project I.G.I. is ad-free inside the vault.
+  if (_pendingGame && _pendingGame.code === '5232') { callback(); return; }
 
   // Frequency cap (already shown an ad within the window) - skip the ad
   // entirely, no request, no wait, and launch the game instantly.
@@ -1327,6 +1329,24 @@ function _trackPlay(code) {
 }
 
 function openVaultPlay(game, fromGrid) {
+  // Project I.G.I. needs a cross-origin-isolated page. GitHub Pages cannot send those headers, so a small
+  // service worker (igi-sw.js) adds them to the next load of "/" only; there the vault opens into the game screen.
+  var _IGI = '5232';
+  if (game && game.code === _IGI && !window.crossOriginIsolated) {
+    if (typeof _trackPlay === 'function') _trackPlay(game.code);
+    if (!('serviceWorker' in navigator)) { alert('This game needs a newer browser.'); return; }
+    navigator.serviceWorker.register('/igi-sw.js').then(function () { return navigator.serviceWorker.ready; }).then(function (reg) {
+      return new Promise(function (res, rej) {
+        var ch = new MessageChannel(); ch.port1.onmessage = function () { res(); };
+        (reg.active || navigator.serviceWorker.controller).postMessage({ igi: 'arm' }, [ch.port2]);
+        setTimeout(rej, 4000);
+      });
+    }).then(function () {
+      document.cookie = 'sc_igi=1; Max-Age=60; Path=/; SameSite=Lax';
+      window.location.assign('/');
+    }).catch(function () { alert('Could not start Project I.G.I. in this browser.'); });
+    return;
+  }
   // Switching straight from one game to another (side-card click) while the
   // previous game still has an ad or preload in flight left that state
   // dangling - the new game had to contend with an orphaned _adTimer /
@@ -1378,6 +1398,10 @@ function openVaultPlay(game, fromGrid) {
   // is playing (preloaded early only when the pre-roll is suppressed, otherwise
   // loaded after the ad finishes) - see _preloadGameFrame / _prerollSuppressed.
   newFrame.allow = 'autoplay; fullscreen; gamepad; pointer-lock';
+  if (game && game.code === _IGI) {
+    newFrame.allow += '; cross-origin-isolated; accelerometer; gyroscope';
+    newFrame.removeAttribute('credentialless'); try { newFrame.credentialless = false; } catch (e) {}
+  }
   newFrame.style.display = 'none';
   oldFrame.parentNode.replaceChild(newFrame, oldFrame);
   vaultIframe = newFrame;
@@ -1410,6 +1434,7 @@ function _restorePlaySidebars() {
 }
 
 function closeVault() {
+  if (window.__igiSession) { window.location.replace('/'); return; }
   if (typeof _abortAd === 'function') _abortAd();
   if (window.EJS_emulator) {
     try { window.EJS_emulator.pause(); } catch(e) {}
@@ -2756,4 +2781,21 @@ function filterItems(q) {
   head.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
   });
+})();
+
+// Project I.G.I. session (home page served isolated for one load by igi-sw.js): open the vault straight into the game screen.
+(function () {
+  if (!window.crossOriginIsolated || !window.__IGI_SESSION) return;
+  function go() {
+    loadVaultData(function () {
+      var g = (window.VAULT_DATA || []).find(function (x) { return x.code === '5232'; });
+      if (!g) return;
+      openVaultGrid();
+      openVaultPlay(g, true);
+      window.__igiSession = true;
+      document.documentElement.classList.remove('igi-boot');
+      setTimeout(function () { var b = document.getElementById('vault-splash-play-btn'); if (b) b.click(); }, 350);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
