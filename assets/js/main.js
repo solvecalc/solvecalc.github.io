@@ -2794,7 +2794,7 @@ function filterItems(q) {
       openVaultPlay(g, true);
       window.__igiSession = true;
       document.documentElement.classList.remove('igi-boot');
-      setTimeout(function () { var b = document.getElementById('vault-splash-play-btn'); if (b) b.click(); }, 350);
+      // The vault's normal splash screen (with its Start button) stays up, exactly like every other game.
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
