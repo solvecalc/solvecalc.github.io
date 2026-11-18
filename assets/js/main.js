@@ -1896,7 +1896,7 @@ if (fsBtn) fsBtn.addEventListener('click', () => {
   } else if (frame && frame.requestFullscreen) {
     // Focus the iframe afterwards: going fullscreen leaves keyboard focus on
     // this button, so key presses never reach the game until the player clicks.
-    frame.requestFullscreen().then(function(){ _focusFrame(frame); }, function(){});
+    frame.requestFullscreen().then(function(){ _focusFrame(frame); _escKeyLock(); }, function(){});
   } else if (frame && frame.webkitRequestFullscreen) {
     frame.webkitRequestFullscreen();
     setTimeout(function(){ _focusFrame(frame); }, 80);
@@ -2799,3 +2799,19 @@ function filterItems(q) {
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
+
+/* Esc in fullscreen: claim the Escape key (Keyboard Lock API, Chrome/Edge/Opera, top page only) so a short
+   Esc press reaches the game's own pause/settings menu instead of dropping out of fullscreen.
+   Holding Esc still exits fullscreen (the browser shows that hint). Other browsers keep normal Esc. */
+function _escKeyLock() {
+  try { if (navigator.keyboard && navigator.keyboard.lock) navigator.keyboard.lock(['Escape']).then(function () { _escKeyLock.on = true; }, function () {}); } catch (e) {}
+}
+document.addEventListener('fullscreenchange', function () {
+  if (!document.fullscreenElement && _escKeyLock.on) { _escKeyLock.on = false; try { navigator.keyboard.unlock(); } catch (e) {} }
+});
+window.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape' || !_escKeyLock.on || !document.fullscreenElement) return;
+  e.preventDefault(); e.stopImmediatePropagation();      // page had focus: hand focus back to the game, stay fullscreen
+  var f = document.fullscreenElement;
+  if (f && f.tagName === 'IFRAME') { try { f.focus(); f.contentWindow.focus(); } catch (err) {} }
+}, true);
